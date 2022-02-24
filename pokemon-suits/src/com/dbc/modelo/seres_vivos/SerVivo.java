@@ -1,4 +1,6 @@
 package com.dbc.modelo.seres_vivos;
 
-public class SerVivo {
+public abstract class SerVivo {
+    private String nome;
+
 }
