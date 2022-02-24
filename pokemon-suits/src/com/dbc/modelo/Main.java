@@ -1,4 +1,4 @@
-package com.dbc;
+package com.dbc.modelo;
 
 public class Main {
 
