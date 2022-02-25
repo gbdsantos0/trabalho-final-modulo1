@@ -3,13 +3,14 @@ package com.dbc.modelo.entidades;
 import com.dbc.modelo.enums.Utils;
 import com.dbc.modelo.interfaces.Impressao;
 import com.dbc.modelo.interfaces.Pokebola;
+import com.dbc.modelo.objetos.Mochila;
+import com.dbc.modelo.objetos.Pokedex;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Treinador extends Entidade implements Impressao {
 
-    private ArrayList<Pokemon> bag = new ArrayList<>();
+    private final Mochila mochila = new Mochila();
     private final Pokedex pokedex;
 
 
@@ -21,7 +22,7 @@ public class Treinador extends Entidade implements Impressao {
 
     public boolean capturar(Pokebola pokebola, Pokemon pokemon, Random r){
         if(r.nextInt(100) <= pokebola.calcularChance(pokemon)){
-            this.bag.add(pokemon);
+            this.mochila.bag.add(pokemon);
             return true;
         }else {
             return false;
@@ -30,7 +31,7 @@ public class Treinador extends Entidade implements Impressao {
 
     @Override
     public void imprimir() {
-       bag.forEach(p -> System.out.println("======================\n" + p + "============================\n"));
+        mochila.bag.forEach(p -> System.out.println("======================\n" + p + "============================\n"));
     }
 
         //getter e setter

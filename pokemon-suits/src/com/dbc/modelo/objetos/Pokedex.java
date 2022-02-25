@@ -1,28 +1,17 @@
-package com.dbc.modelo.entidades;
+package com.dbc.modelo.objetos;
+
+import com.dbc.modelo.entidades.Pokemon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Pokedex {
-   private static Map<String, String> pokedexCompleta = new HashMap<>();
-   private ArrayList pokemonsCapturados = new ArrayList();
+    private static Map<Integer, Pokemon> pokedexCompleta;
 
-public Pokedex(Pokemom pokemom){
-pokedexCompleta.put(pokemom);
-}
-
-// C Criar objeto (pokemom)
-
-
-//  R  leitura
-
-
-// U   atualizar objeto (pokemom)
-
-
-// D   Remoção (remover pokemom)
-
+    public Pokedex(Map pokedexCompleta){
+        this.pokedexCompleta = new HashMap<>();
+    }
 
 }
 
