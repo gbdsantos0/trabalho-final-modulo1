@@ -4,6 +4,6 @@ import com.dbc.modelo.entidades.*;
 
 public abstract class Pokebola {
     public Double calcularChance(Pokemon pokemon){
-        return 1.0;
+        return 1.0 * pokemon.getDificuldade().getChance();
     }
 }

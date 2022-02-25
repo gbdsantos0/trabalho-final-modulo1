@@ -7,18 +7,17 @@ public class HeavyBall extends Pokebola{
         public Double calcularChance(Pokemon pokemon){
             switch ((int)(pokemon.getPeso()/102.35)){
                 case 0:
-                    break;
+                    return 0.75 * pokemon.getDificuldade().getChance();
                 case 1:
-                    break;
+                    return 0.75 * pokemon.getDificuldade().getChance();
                 case 2:
-                    break;
+                    return 1.0 * pokemon.getDificuldade().getChance();
                 case 3:
-                    break;
+                    return 1.5 * pokemon.getDificuldade().getChance();
                 case 4:
-                    break;
+                    return 2.0 * pokemon.getDificuldade().getChance();
                 default:
                     throw new IllegalStateException("Unexpected value: " + pokemon.getPeso());
             }
-            return 1.0;
         }
 }
