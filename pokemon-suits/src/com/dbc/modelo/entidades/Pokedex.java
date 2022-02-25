@@ -5,11 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Pokedex {
-    Map<String, String> pokedexCompleta = new HashMap<>();
-    ArrayList pokemonsCapturados = new ArrayList();
+   private static Map<String, String> pokedexCompleta = new HashMap<>();
+   private ArrayList pokemonsCapturados = new ArrayList();
 
-
-
+public Pokedex(Pokemom pokemom){
+pokedexCompleta.put(pokemom);
+}
 
 // C Criar objeto (pokemom)
 
