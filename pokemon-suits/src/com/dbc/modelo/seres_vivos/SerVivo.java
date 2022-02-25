@@ -1,15 +1,23 @@
 package com.dbc.modelo.seres_vivos;
 
+import com.dbc.modelo.enums.Utils;
+
 public abstract class SerVivo {
 
     private String nome;
     private int idade;
     private double peso;
-//    private Utils sexo;
-    private String sexo;
+    private final Utils sexo;
 
+    public SerVivo(String nome, int idade, double peso, Utils sexo) {
+        this.nome = nome;
+        this.idade = idade;
+        this.peso = peso;
+        this.sexo = sexo;
+    }
 
     //getters e setters
+
     public String getNome() {return nome;}
 
     public void setNome(String nome) {this.nome = nome;}
@@ -22,7 +30,6 @@ public abstract class SerVivo {
 
     public void setPeso(double peso) {this.peso = peso;}
 
-    public String getSexo() {return sexo;}
+    public Utils getSexo() {return sexo;}
 
-    public void setSexo(String sexo) {this.sexo = sexo;}
 }
