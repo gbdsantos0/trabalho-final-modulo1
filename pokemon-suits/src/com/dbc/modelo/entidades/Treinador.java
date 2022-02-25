@@ -13,8 +13,6 @@ public class Treinador extends Entidade implements Impressao {
     private final Mochila mochila = new Mochila();
     private final Pokedex pokedex;
 
-
-
     public Treinador(String nome, int idade, double peso, Utils sexo, Pokedex pokedex) {
         super(nome, idade, peso, sexo);
         this.pokedex = pokedex;
@@ -34,6 +32,6 @@ public class Treinador extends Entidade implements Impressao {
         mochila.bag.forEach(p -> System.out.println("======================\n" + p + "============================\n"));
     }
 
-        //getter e setter
+    //getter
     public Pokedex getPokedex() {return pokedex;}
 }
