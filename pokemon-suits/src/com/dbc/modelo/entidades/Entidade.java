@@ -1,15 +1,15 @@
-package com.dbc.modelo.seres_vivos;
+package com.dbc.modelo.entidades;
 
 import com.dbc.modelo.enums.Utils;
 
-public abstract class SerVivo {
+public abstract class Entidade {
 
     private String nome;
     private int idade;
     private double peso;
     private final Utils sexo;
 
-    public SerVivo(String nome, int idade, double peso, Utils sexo) {
+    public Entidade(String nome, int idade, double peso, Utils sexo) {
         this.nome = nome;
         this.idade = idade;
         this.peso = peso;

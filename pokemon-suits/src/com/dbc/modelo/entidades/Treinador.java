@@ -1,10 +1,10 @@
-package com.dbc.modelo.seres_vivos;
+package com.dbc.modelo.entidades;
 
 import com.dbc.modelo.enums.Utils;
 import com.dbc.modelo.pokebolas.Pokebola;
 
-public class Treinador extends SerVivo {
-    //substituir objects por PokeDex
+public class Treinador extends Entidade {
+
     private Pokedex pokedex;
 
 

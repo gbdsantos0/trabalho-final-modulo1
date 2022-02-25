@@ -1,6 +1,6 @@
 package com.dbc.modelo.pokebolas;
 
-import com.dbc.modelo.seres_vivos.Pokemon;
+import com.dbc.modelo.entidades.Pokemon;
 
 public class PokeBall extends Pokebola{
     @Override
