@@ -1,5 +1,11 @@
 package com.dbc.modelo.pokebolas;
 
-public class PokeBall extends Pokebola{
+import com.dbc.modelo.entidades.Pokemon;
+import com.dbc.modelo.interfaces.Pokebola;
 
+public class PokeBall implements Pokebola {
+    @Override
+    public Double calcularChance(Pokemon pokemon){
+        return 1.5 * pokemon.getDificuldade().getChance();
+    }
 }

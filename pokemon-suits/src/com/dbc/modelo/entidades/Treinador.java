@@ -2,9 +2,9 @@ package com.dbc.modelo.entidades;
 
 import com.dbc.modelo.enums.Utils;
 import com.dbc.modelo.interfaces.Impressao;
+import com.dbc.modelo.interfaces.Pokebola;
 import com.dbc.modelo.objetos.Mochila;
 import com.dbc.modelo.objetos.Pokedex;
-import com.dbc.modelo.pokebolas.Pokebola;
 
 import java.util.Random;
 
