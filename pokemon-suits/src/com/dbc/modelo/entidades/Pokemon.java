@@ -1,11 +1,11 @@
-package com.dbc.modelo.seres_vivos;
+package com.dbc.modelo.entidades;
 
 import com.dbc.modelo.enums.Dificuldades;
 import com.dbc.modelo.enums.Raridades;
 import com.dbc.modelo.enums.TipoPokemon;
 import com.dbc.modelo.enums.Utils;
 
-public class Pokemon extends SerVivo {
+public class Pokemon extends Entidade {
 
     private final Dificuldades dificuldade;
     private int level;
