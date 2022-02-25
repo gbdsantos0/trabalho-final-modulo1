@@ -1,8 +1,7 @@
-package com.dbc.modelo.seres_vivos;
+package com.dbc.modelo.entidades;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Pokedex {
@@ -12,7 +11,6 @@ public class Pokedex {
 public Pokedex(Pokemom pokemom){
 pokedexCompleta.put(pokemom);
 }
-
 
 // C Criar objeto (pokemom)
 
