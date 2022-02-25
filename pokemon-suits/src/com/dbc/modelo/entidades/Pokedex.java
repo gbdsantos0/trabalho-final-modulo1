@@ -10,7 +10,6 @@ public class Pokedex {
 
 
 
-
 // C Criar objeto (pokemom)
 
 
