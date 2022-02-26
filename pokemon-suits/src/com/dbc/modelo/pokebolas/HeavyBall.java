@@ -4,6 +4,7 @@ import com.dbc.modelo.entidades.Pokemon;
 import com.dbc.modelo.interfaces.Pokebola;
 
 public class HeavyBall implements Pokebola {
+        //Retorna multiplicadores conforme o peso do pokemon
         @Override
         public Double calcularChance(Pokemon pokemon){
             if(pokemon.getDificuldade().getChance()<0){
