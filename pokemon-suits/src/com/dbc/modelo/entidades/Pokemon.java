@@ -8,8 +8,9 @@ import com.dbc.modelo.interfaces.Impressao;
 
 public class Pokemon extends Entidade implements Impressao {
 
-    private final Dificuldades dificuldade;
     private Integer level;
+    //Usamos Enumerations para Padronizar os atributos que influenciam na captura
+    private final Dificuldades dificuldade;
     private final TipoPokemon[] tipo;
     private final Raridades raridade;
 
@@ -19,6 +20,7 @@ public class Pokemon extends Entidade implements Impressao {
         super(nome, idade, peso, sexo);
         this.dificuldade = dificuldade;
         this.level = level;
+        //checa se o Pokemon tem somente um atributo ou se ele tem dois
         this.tipo = (tipo2 == null) ? new TipoPokemon[]{tipo1} : new TipoPokemon[]{tipo1, tipo2};
         this.raridade = raridade;
     }

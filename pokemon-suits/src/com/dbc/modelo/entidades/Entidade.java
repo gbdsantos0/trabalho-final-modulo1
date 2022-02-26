@@ -4,7 +4,7 @@ import com.dbc.modelo.enums.Utils;
 
 public abstract class Entidade {
 
-    private String nome;
+    private String nome;//nome+ " " + s.nextLine;
     private Integer idade;
     private Double peso;
     private final Utils sexo;
