@@ -7,6 +7,7 @@ import com.dbc.modelo.exeptions.InvalidCenarioExeption;
 import org.junit.Assert;
 import org.junit.Test;
 
+
 import java.util.Arrays;
 import java.util.List;
 

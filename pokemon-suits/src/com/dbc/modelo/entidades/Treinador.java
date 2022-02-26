@@ -15,17 +15,17 @@ public class Treinador extends Entidade implements Impressao {
     //Instancia da PokeDex, que guarda todos os Pokemons do Jogo
     private final Pokedex pokedex;
 
-    public Treinador(String nome, int idade, double peso, Utils sexo, Pokedex pokedex) {
+    public Treinador(String nome, Integer idade, Double peso, Utils sexo, Mochila mochila, Pokedex pokedex) {
         super(nome, idade, peso, sexo);
+        this.mochila = mochila;
         this.pokedex = pokedex;
-        this.mochila = new Mochila();
     }
 
     //Metodo que retorna um boolean se o pokemon for capturado(a chance de captura é delegada para a pokebola)
     public boolean capturar(Pokebola pokebola, Pokemon pokemon, Random r){
         if(r.nextInt(100) <= pokebola.calcularChance(pokemon)){
             //trocar futuramente pelo metodo adiciona do CRUD
-            this.mochila.getBag().add(pokemon);
+            this.mochila.adicionarPokemom(pokemon);
             return true;
         }else {
             return false;
@@ -34,7 +34,15 @@ public class Treinador extends Entidade implements Impressao {
 
     @Override
     public void imprimir() {
-        this.mochila.getBag().forEach(p -> System.out.println("======================\n" + p + "============================\n"));
+        System.out.println(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Treinador{" +
+                "mochila=" + mochila +
+                ", pokedex=" + pokedex +
+                '}';
     }
 
     //getter

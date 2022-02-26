@@ -2,78 +2,65 @@ package com.dbc.modelo.objetos;
 
 import com.dbc.modelo.entidades.Pokemon;
 import com.dbc.modelo.enums.Utils;
+import com.dbc.modelo.interfaces.Impressao;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
-public class Mochila {
+public class Mochila implements Impressao {
     Scanner scanner = new Scanner(System.in);
     private ArrayList<Pokemon> bag = new ArrayList<>();
 
 
-    public ArrayList<Pokemon> getBag() {
-        return bag;
+    private Optional<Pokemon> pesquisarPorNome(String nomePokemon){
+        return this.bag.stream().filter( p -> p.getNome().equalsIgnoreCase(nomePokemon)).findFirst();
+    
+    }
+    //CIRAR
+    public void adicionarPokemom(Pokemon p){
+        this.bag.add(p);
     }
 
+    //ATUALIZAR
+    public void atualizarNomePokemon(Scanner scanner){
+        System.out.println("Qual pokemom deseja renomear:");
+        this.imprimir();
+        System.out.println();
+        Optional<Pokemon> pokemon = this.pesquisarPorNome(scanner.nextLine());
 
-
-    public void criarPokemom(){
-
-    }
-
-    public void consultarPokedex(){
-        bag.forEach(pokemom -> System.out.println(pokemom));
-    }
-
-    public void editarPokemon(Scanner scanner){
-        int atualizar = 0;
-        System.out.println("digite 1 para mudar o nome: ");
-        System.out.println("Digite 2 para mudar a idade: ");
-        System.out.println("Digite 3 para mudar o peso: ");
-        System.out.println("Digite 4 para mudar o level: ");
-        switch (atualizar) {
-            case 1:
-                System.out.println("Qual pokemom deseja renomear:");
-                this.bag.forEach(pokemom -> System.out.println(pokemom));
-                int idPokemomRenomeado = scanner.nextInt();
-                scanner.nextLine();
-
-                Pokemon pokemonRenomeado = new Pokemon(null, null, null, null, null, null, null, null, null);
-                System.out.println("Digite o novo nome: ");
-                pokemonRenomeado.setNome(scanner.nextLine());
-                break;
-
-            case 2:
-                System.out.println("Qual pokemom deseja mudar idade: ");
-                this.bag.forEach(pokemom -> System.out.println(pokemom));
-                int idPokemomNovaIdade = scanner.nextInt();
-                scanner.nextLine();
-
-                Pokemon pokemonNovaIdade = new Pokemon(null, null, null, null, null, null, null, null, null);
-                System.out.println("Digite uma nova idade: ");
-                pokemonNovaIdade.setIdade(scanner.nextInt());
-                break;
-
-            case 3:
-                System.out.println("Qual pokemom deseja mudar peso: ");
-                this.bag.forEach(pokemom -> System.out.println(pokemom));
-                int idPokemomPeso = scanner.nextInt();
-                scanner.nextLine();
-
-                Pokemon pokemonNovoPeso = new Pokemon(null, null, null, null, null, null, null, null, null);
-                System.out.println("Digite um novo peso: ");
-                pokemonNovoPeso.setPeso(scanner.nextDouble());
-                break;
+        if(pokemon.isPresent()){
+            System.out.println("Digite um novo Nome: ");
+            Pokemon p = pokemon.get();
+            this.bag.remove(p);
+            p.setNome(scanner.nextLine());
+            this.bag.add(p);
+        }else{
+            System.out.println("Este pokemon não existe!! ");
         }
     }
 
+    //REMOVER
     public void removerPokemom(){
         System.out.println("qual pokemom você deseja assassinar friamente: ");
-        this.bag.forEach(pokemom -> System.out.println(pokemom));
-        int pokemomId = scanner.nextInt();
-        this.bag.remove(pokemomId);
+        this.imprimir();
+        System.out.println();
+        Optional<Pokemon> pokemon = this.pesquisarPorNome(scanner.nextLine());
+
+        if(pokemon.isPresent()){
+            System.out.println("Digite um novo Nome: ");
+            this.bag.remove(pokemon.get());
+        }else{
+            System.out.println("Este pokemon não existe!! ");
+        }
+    }
+    //MOSTRAR
+    public void imprimir() {
+        this.bag.forEach(p -> System.out.println("======================\n" + p + "============================\n"));
+    }
+
+    //getter
+    public List<Pokemon> getBag() {
+        //retorna uma lista não modificavel;
+        return Collections.unmodifiableList(this.bag);
     }
 }
 

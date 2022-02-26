@@ -7,12 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Pokedex {
-    private static Map<Integer, Pokemon> pokedexCompleta;
+    private final static Map<Integer, Pokemon> pokedexCompleta = new HashMap<>();
 
-    public Pokedex(Map pokedexCompleta){
-        this.pokedexCompleta = new HashMap<>();
+    public static Map<Integer, Pokemon> getPokedexCompleta() {
+        return pokedexCompleta;
     }
-
 }
 
 //        #001
