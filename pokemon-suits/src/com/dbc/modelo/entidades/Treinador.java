@@ -9,6 +9,7 @@ import com.dbc.modelo.objetos.Pokedex;
 import java.util.Random;
 
 public class Treinador extends Entidade implements Impressao {
+
     //Instacia da mochila que guarda todos os poquemons do treinador
     private Mochila mochila;
     //Instancia da PokeDex, que guarda todos os Pokemons do Jogo

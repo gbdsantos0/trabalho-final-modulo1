@@ -9,6 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+
         Random r = new Random();
         Treinador ash = new Treinador("ash",10,80.0, Utils.MASCULINO, null);
 
