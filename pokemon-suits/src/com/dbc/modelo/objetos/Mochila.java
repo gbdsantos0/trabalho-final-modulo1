@@ -1,25 +1,30 @@
 package com.dbc.modelo.objetos;
 
 import com.dbc.modelo.entidades.Pokemon;
+import com.dbc.modelo.enums.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Mochila {
-    public ArrayList<Pokemon> bag = new ArrayList<Pokemon>();
+    Scanner scanner = new Scanner(System.in);
+    private ArrayList<Pokemon> bag = new ArrayList<>();
 
-    public Mochila() {
 
+
+
+
+    public ArrayList<Pokemon> getBag() {
+        return bag;
     }
-
-    // C Criar objeto (pokemom)
-
-
-    //  R  leitura
-
-
-    // U   atualizar objeto (pokemom)
-
-
-    // D   Remoção (remover pokemom)
+}
 
 }
+
+
+
+
+
+
