@@ -6,6 +6,7 @@ import com.dbc.modelo.exeptions.InvalidCenarioExeption;
 import com.dbc.modelo.interfaces.Impressao;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -39,6 +40,8 @@ public class Cenario implements Impressao {
         //peso = 0.8~1.2 * peso base
         //sexo = random 0 ou 1 para o sexo do pokemon
         //level = level minimo = base level ou o level gerado aleatoriamente
+
+
         return new Pokemon(pokemonBase.getNome()
                 ,r.nextInt(pokemonBase.getIdade())+pokemonBase.getLevel()
                 ,((double)(r.nextInt(40)/10)+0.8)*pokemonBase.getPeso()
@@ -46,7 +49,7 @@ public class Cenario implements Impressao {
                 ,pokemonBase.getDificuldade()
                 ,Math.max(pokemonBase.getLevel(),randLevel)
                 ,pokemonBase.getTipo()[0]
-                ,pokemonBase.getTipo()[1]
+                ,(pokemonBase.getTipo().length>1?pokemonBase.getTipo()[1]:null)
                 ,pokemonBase.getRaridade());
     }
 
@@ -130,6 +133,18 @@ public class Cenario implements Impressao {
         }
     }
 
+    public TiposTerreno getTerreno() {
+        return terreno;
+    }
+
+    public int getLevelMedio() {
+        return levelMedio;
+    }
+
+    public List<Pokemon> getPokemonsDisponiveis() {
+        //retorna uma lista nao modificavel
+        return Collections.unmodifiableList(pokemonsDisponiveis);
+    }
 
     @Override
     public void imprimir() {
@@ -165,7 +180,6 @@ public class Cenario implements Impressao {
         cenario.imprimir();
 
     }
-    //tipos está imprimindo memoria
 
 
 
