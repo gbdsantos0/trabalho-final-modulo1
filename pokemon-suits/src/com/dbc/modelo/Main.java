@@ -15,6 +15,7 @@ public class Main {
         Treinador ash = new Treinador("ash", 10, 80.0, Utils.MASCULINO, null);
 
         int escolha = 0;
+
         while (escolha != 8) {
             System.out.println("Digite 1 para criar pokemom");
             System.out.println("Digite 2 para listar pokemom");
