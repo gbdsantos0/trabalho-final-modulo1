@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Random r = new Random();
-        Treinador ash = new Treinador("ash",10,80.0, Utils.MASCULINO, null);
+        Treinador ash = new Treinador("ash", 10, 80.0, Utils.MASCULINO, null);
 
         int escolha = 0;
         while (escolha != 8) {
@@ -24,13 +24,13 @@ public class Main {
             escolha = scanner.nextInt();
             scanner.nextLine();
             int atualizar = 0;
-            switch(escolha){
+            switch (escolha) {
                 case 1:
-                   ash.getMochila().getBag().add(new Pokemon(null,null,null,null,null,null,null,null,null));
+                    ash.getMochila().getBag().add(new Pokemon(null, null, null, null, null, null, null, null, null));
                     break;
 
                 case 2:
-                    ash.getMochila().getBag().forEach(pokemom-> System.out.println(pokemom));
+                    ash.getMochila().getBag().forEach(pokemom -> System.out.println(pokemom));
                     break;
 
                 case 3:
@@ -38,46 +38,47 @@ public class Main {
                     System.out.println("Digite 2 para mudar a idade: ");
                     System.out.println("Digite 3 para mudar o peso: ");
                     System.out.println("Digite 4 para mudar o level: ");
-                    switch (atualizar){
+                    switch (atualizar) {
                         case 1:
                             System.out.println("Qual pokemom deseja renomear:");
-                            ash.getMochila().getBag().forEach(pokemom-> System.out.println(pokemom));
+                            ash.getMochila().getBag().forEach(pokemom -> System.out.println(pokemom));
                             int idPokemomRenomeado = scanner.nextInt();
                             scanner.nextLine();
 
-                            Pokemon pokemonRenomeado = new Pokemon(null,null,null,null,null,null,null,null,null);
+                            Pokemon pokemonRenomeado = new Pokemon(null, null, null, null, null, null, null, null, null);
                             System.out.println("Digite o novo nome: ");
                             pokemonRenomeado.setNome(scanner.nextLine());
-                            break;;
+                            break;
 
                         case 2:
                             System.out.println("Qual pokemom deseja mudar idade: ");
-                            ash.getMochila().getBag().forEach(pokemom-> System.out.println(pokemom));
+                            ash.getMochila().getBag().forEach(pokemom -> System.out.println(pokemom));
                             int idPokemomNovaIdade = scanner.nextInt();
                             scanner.nextLine();
 
-                            Pokemon pokemonNovaIdade = new Pokemon(null,null,null,null,null,null,null,null,null);
+                            Pokemon pokemonNovaIdade = new Pokemon(null, null, null, null, null, null, null, null, null);
                             System.out.println("Digite uma nova idade: ");
                             pokemonNovaIdade.setIdade(scanner.nextInt());
                             break;
 
                         case 3:
                             System.out.println("Qual pokemom deseja mudar peso: ");
-                            ash.getMochila().getBag().forEach(pokemom-> System.out.println(pokemom));
+                            ash.getMochila().getBag().forEach(pokemom -> System.out.println(pokemom));
                             int idPokemomPeso = scanner.nextInt();
                             scanner.nextLine();
 
-                            Pokemon pokemonNovoPeso = new Pokemon(null,null,null,null,null,null,null,null,null);
+                            Pokemon pokemonNovoPeso = new Pokemon(null, null, null, null, null, null, null, null, null);
                             System.out.println("Digite um novo peso: ");
                             pokemonNovoPeso.setPeso(scanner.nextDouble());
                             break;
 
-                        case 4:System.out.println("Qual pokemom deseja mudar level: ");
-                            ash.getMochila().getBag().forEach(pokemom-> System.out.println(pokemom));
+                        case 4:
+                            System.out.println("Qual pokemom deseja mudar level: ");
+                            ash.getMochila().getBag().forEach(pokemom -> System.out.println(pokemom));
                             int idPokemomLevel = scanner.nextInt();
                             scanner.nextLine();
 
-                            Pokemon pokemonNovoLevel = new Pokemon(null,null,null,null,null,null,null,null,null);
+                            Pokemon pokemonNovoLevel = new Pokemon(null, null, null, null, null, null, null, null, null);
                             System.out.println("Digite um novo level: ");
                             pokemonNovoLevel.setLevel(scanner.nextInt());
                             break;
@@ -85,13 +86,11 @@ public class Main {
                         default:
                             System.out.println("opção invalida!");
                             break;
-
-                        break;
                     }
 
                 case 4:
                     System.out.println("qual pokemom você deseja assassinar friamente: ");
-                    ash.getMochila().getBag().forEach(pokemom-> System.out.println(pokemom));
+                    ash.getMochila().getBag().forEach(pokemom -> System.out.println(pokemom));
                     int pokemomId = scanner.nextInt();
                     ash.getMochila().getBag().remove(pokemomId);
                     break;
@@ -107,7 +106,6 @@ public class Main {
             }
 
 
-
-
+        }
     }
 }

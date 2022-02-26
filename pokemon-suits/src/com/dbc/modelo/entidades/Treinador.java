@@ -25,7 +25,7 @@ public class Treinador extends Entidade implements Impressao {
     public boolean capturar(Pokebola pokebola, Pokemon pokemon, Random r){
         if(r.nextInt(100) <= pokebola.calcularChance(pokemon)){
             //trocar futuramente pelo metodo adiciona do CRUD
-            this.mochila.bag.add(pokemon);
+            this.mochila.getBag().add(pokemon);
             return true;
         }else {
             return false;
@@ -34,7 +34,7 @@ public class Treinador extends Entidade implements Impressao {
 
     @Override
     public void imprimir() {
-        this.mochila.bag.forEach(p -> System.out.println("======================\n" + p + "============================\n"));
+        this.mochila.getBag().forEach(p -> System.out.println("======================\n" + p + "============================\n"));
     }
 
     //getter
