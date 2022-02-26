@@ -2,6 +2,7 @@ package com.dbc.modelo.cenario;
 
 import com.dbc.modelo.entidades.Pokemon;
 import com.dbc.modelo.enums.*;
+import com.dbc.modelo.exeptions.InvalidCenarioExeption;
 import com.dbc.modelo.interfaces.Impressao;
 
 import java.util.Arrays;
@@ -21,9 +22,15 @@ public class Cenario implements Impressao {
 
 
     //metodo para gerar um pokemon em um encontro de pokemon
-    public Pokemon gerarPokemon(){
+    public Pokemon gerarPokemon() throws InvalidCenarioExeption {
         Random r = new Random();
-        Pokemon pokemonBase = this.selecionarPokemon();
+
+        Pokemon pokemonBase;
+        try {
+            pokemonBase = this.selecionarPokemon();
+        }catch (InvalidCenarioExeption ex){
+            throw new InvalidCenarioExeption("Lista de pokemons vazia, não é possível gerar pokemons");
+        }
 
 
         int randLevel = r.nextInt(levelMedio);
@@ -46,7 +53,12 @@ public class Cenario implements Impressao {
     //metodo para selecionar um pokemon da lista conforme a raridade
     //seleciona por raridade, um dos pokemons disponiveis para aquela raridade
     //5% - super raros, 20% raros, 75% comuns
-    private Pokemon selecionarPokemon(){
+    private Pokemon selecionarPokemon() throws InvalidCenarioExeption {
+
+        if(pokemonsDisponiveis.isEmpty()){
+            throw new InvalidCenarioExeption("Lista de pokemons vazia, não é possível selecionar pokemons");
+        }
+
         List<Pokemon> superRaros = pokemonsDisponiveis.stream()
                 .filter(pokemon -> pokemon.getRaridade() == Raridades.DIFICIL)
                 .toList();
@@ -59,14 +71,62 @@ public class Cenario implements Impressao {
 
         Random r = new Random();
 
-        int valorAleatorio = r.nextInt(100);
+        int valorAleatorio;
 
-        if(valorAleatorio<5 && !superRaros.isEmpty()){
-            return superRaros.get(r.nextInt(superRaros.size()));
-        }else if(valorAleatorio<25 && !raros.isEmpty()){
-            return raros.get(r.nextInt(raros.size()));
-        }else{
-            return comuns.get(r.nextInt(comuns.size()));
+        if(comuns.isEmpty()){
+            //somente super raros = retorna um super raro
+            if(raros.isEmpty()){
+                return superRaros.get(r.nextInt(superRaros.size()));
+            }
+            //somente raros = retorna um raro
+            else if(superRaros.isEmpty()){
+                return raros.get(r.nextInt(raros.size()));
+            }
+            //raros e super raros = calcula probabilidade proporcional
+            else{
+                valorAleatorio = r.nextInt(25);
+
+                if(valorAleatorio<5){
+                    return superRaros.get(r.nextInt(superRaros.size()));
+                }else{
+                    return raros.get(r.nextInt(raros.size()));
+                }
+            }
+        }else if(raros.isEmpty()){
+            //somente comuns
+            if(superRaros.isEmpty()){
+                return comuns.get(r.nextInt(comuns.size()));
+            }
+            //comuns e super raros = calcula probabilidade proporcional
+            else{
+                valorAleatorio = r.nextInt(80);
+                if(valorAleatorio<5){
+                    return superRaros.get(r.nextInt(superRaros.size()));
+                }else{
+                    return comuns.get(r.nextInt(comuns.size()));
+                }
+            }
+        }
+        //comuns e raros = calcula probabilidade proporcional
+        else if(superRaros.isEmpty()){
+            valorAleatorio = r.nextInt(95);
+            if(valorAleatorio<20){
+                return raros.get(r.nextInt(raros.size()));
+            }else{
+                return comuns.get(r.nextInt(comuns.size()));
+            }
+        }
+        //todos disponiveis
+        else{
+            valorAleatorio = r.nextInt(100);
+
+            if(valorAleatorio<5){
+                return superRaros.get(r.nextInt(superRaros.size()));
+            }else if(valorAleatorio<25){
+                return raros.get(r.nextInt(raros.size()));
+            }else{
+                return comuns.get(r.nextInt(comuns.size()));
+            }
         }
     }
 
@@ -95,10 +155,15 @@ public class Cenario implements Impressao {
                 , TipoPokemon.GRASS
                 , TipoPokemon.POISON
                 , Raridades.FACIL)));
-        cenario.gerarPokemon().imprimir();
+        try {
+            cenario.gerarPokemon().imprimir();
+        }catch (InvalidCenarioExeption ex){
+            System.err.println("Não é possível gerar pokemons em cenários sem lista de pokemons");
+        }
         System.out.println("####################################################################################################"+
                 "####################################################################################################");
         cenario.imprimir();
+
     }
     //tipos está imprimindo memoria
 
