@@ -6,6 +6,10 @@ import com.dbc.modelo.interfaces.Pokebola;
 public class HeavyBall implements Pokebola {
         @Override
         public Double calcularChance(Pokemon pokemon){
+            if(pokemon.getDificuldade().getChance()<0){
+                throw new IllegalStateException("Peso negativo: " + pokemon.getPeso());
+            }
+
             switch ((int)(pokemon.getPeso()/102.35)){
                 case 0:
                     return 0.75 * pokemon.getDificuldade().getChance();
@@ -18,7 +22,7 @@ public class HeavyBall implements Pokebola {
                 case 4:
                     return 2.0 * pokemon.getDificuldade().getChance();
                 default:
-                    throw new IllegalStateException("Unexpected value: " + pokemon.getPeso());
+                    return 2.0 * pokemon.getDificuldade().getChance();
             }
         }
 }

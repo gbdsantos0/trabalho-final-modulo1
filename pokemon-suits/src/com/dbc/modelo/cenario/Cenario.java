@@ -1,20 +1,17 @@
 package com.dbc.modelo.cenario;
 
 import com.dbc.modelo.entidades.Pokemon;
-import com.dbc.modelo.enums.Raridades;
-import com.dbc.modelo.enums.TiposTerreno;
-import com.dbc.modelo.enums.Utils;
+import com.dbc.modelo.enums.*;
+import com.dbc.modelo.interfaces.Impressao;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
-public class Cenario {
-    private TiposTerreno terreno;
-    private int levelMedio;
-    private List<Pokemon> pokemonsDisponiveis;
+public class Cenario implements Impressao {
+    private final TiposTerreno terreno;
+    private final int levelMedio;
+    private final List<Pokemon> pokemonsDisponiveis;
 
     public Cenario(TiposTerreno terreno, int levelMedio, List<Pokemon> pokemonsDisponiveis) {
         this.terreno = terreno;
@@ -64,18 +61,48 @@ public class Cenario {
 
         int valorAleatorio = r.nextInt(100);
 
-        if(valorAleatorio<5){
-            return superRaros.get(r.nextInt(superRaros.size()-1));
-        }else if(valorAleatorio<25){
-            return raros.get(r.nextInt(raros.size()-1));
+        if(valorAleatorio<5 && !superRaros.isEmpty()){
+            return superRaros.get(r.nextInt(superRaros.size()));
+        }else if(valorAleatorio<25 && !raros.isEmpty()){
+            return raros.get(r.nextInt(raros.size()));
         }else{
-            return comuns.get(r.nextInt(comuns.size()-1));
+            return comuns.get(r.nextInt(comuns.size()));
         }
     }
 
-    public static void main(String[] args) {
 
+    @Override
+    public void imprimir() {
+        System.out.println(this);
     }
-    //
+
+    @Override
+    public String toString() {
+        return "Cenario: " +
+                "\nTipo de terreno: " + terreno +
+                "\nNível médio do local: " + levelMedio +
+                "\nLista de Pokemons disponíveis na região: " + pokemonsDisponiveis;
+    }
+
+    //teste rapido
+    public static void main(String[] args) {
+        Cenario cenario = new Cenario(TiposTerreno.GRAMA,20,Arrays.asList(new Pokemon("Bulbassalto"
+                , 20
+                , 6.7
+                , Utils.MASCULINO
+                , Dificuldades.MEDIO
+                ,5
+                , TipoPokemon.GRASS
+                , TipoPokemon.POISON
+                , Raridades.FACIL)));
+        cenario.gerarPokemon().imprimir();
+        System.out.println("####################################################################################################"+
+                "####################################################################################################");
+        cenario.imprimir();
+    }
+    //tipos está imprimindo memoria
+
+
+
 
 }
