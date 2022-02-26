@@ -36,4 +36,9 @@ public class Treinador extends Entidade implements Impressao {
 
         //getter e setter
     public Pokedex getPokedex() {return pokedex;}
+
+    public Mochila getMochila() {
+        return mochila;
+    }
 }
+
