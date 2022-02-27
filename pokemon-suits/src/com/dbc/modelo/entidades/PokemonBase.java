@@ -4,8 +4,11 @@ import com.dbc.modelo.enums.Dificuldades;
 import com.dbc.modelo.enums.Raridades;
 import com.dbc.modelo.enums.TipoPokemon;
 import com.dbc.modelo.enums.Utils;
+import com.dbc.modelo.interfaces.Impressao;
 
-public class PokemonBase{
+import java.util.Arrays;
+
+public class PokemonBase implements Impressao {
     private final String raca;
     private final Integer idadeMinima;
     private final Double pesoMinimo;
@@ -27,6 +30,25 @@ public class PokemonBase{
         this.dificuldade = dificuldade;
         this.tipo = (tipo2 == null) ? new TipoPokemon[]{tipo1} : new TipoPokemon[]{tipo1, tipo2};
         this.raridade = raridade;
+    }
+
+    @Override
+    public void imprimir() {
+        System.out.println(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Informações da espécie de Pokemon" +
+                "Raça: " + raca +
+                "\nIdade Minima: " + idadeMinima +
+                "\npesoMinimo: " + pesoMinimo +
+                "\npesoMaximo: " + pesoMaximo +
+                "\nPorcentagem Macho: " + porcentagemMacho +
+                "\nLevel Minimo: " + levelMinimo +
+                "\nDificuldade: " + dificuldade +
+                "\nTipo: " + Arrays.toString(tipo) +
+                "\nRaridade=" + raridade;
     }
 
     public String getRaca() {

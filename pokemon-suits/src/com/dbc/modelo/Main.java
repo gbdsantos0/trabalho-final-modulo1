@@ -2,6 +2,7 @@ package com.dbc.modelo;
 
 import com.dbc.modelo.cenario.Cenario;
 import com.dbc.modelo.entidades.Pokemon;
+import com.dbc.modelo.entidades.PokemonBase;
 import com.dbc.modelo.entidades.Treinador;
 import com.dbc.modelo.enums.*;
 import com.dbc.modelo.exeptions.InvalidCenarioExeption;
@@ -106,59 +107,65 @@ public class Main {
 
     public static List<Cenario> popularCenarios(){
         List<Cenario> cenarios = new ArrayList<>();
-        cenarios.add(new Cenario(TiposTerreno.GRAMA,4, Arrays.asList(new Pokemon("Bulbasaur"
+        cenarios.add(new Cenario(TiposTerreno.GRAMA,4, Arrays.asList(new PokemonBase("Bulbasaur"
                 , 20
                 , 6.7
-                , Utils.MASCULINO
-                , Dificuldades.FACIL
+                , 11.0
+                , 85.0
                 ,5
+                , Dificuldades.FACIL
                 , TipoPokemon.GRASS
                 , TipoPokemon.POISON
                 , Raridades.FACIL),
-                new Pokemon("Ivysaur"
+                new PokemonBase("Ivysaur"
                         , 20
                         , 13.0
-                        , Utils.MASCULINO
-                        , Dificuldades.MEDIO
+                        , 20.0
+                        , 87.5
                         ,16
+                        , Dificuldades.MEDIO
                         , TipoPokemon.GRASS
                         , TipoPokemon.POISON
                         , Raridades.MEDIO),
-                new Pokemon("Venusaur"
+                new PokemonBase("Venusaur"
                         , 20
                         , 100.0
-                        , Utils.MASCULINO
-                        , Dificuldades.DIFICIL
+                        , 150.0
+                        , 87.5
                         ,32
+                        , Dificuldades.DIFICIL
                         , TipoPokemon.GRASS
                         , TipoPokemon.POISON
                         , Raridades.DIFICIL)
                 )));
 
-        cenarios.add(new Cenario(TiposTerreno.AGUA,9, Arrays.asList(new Pokemon("Squirtle"
+        cenarios.add(new Cenario(TiposTerreno.AGUA,9, Arrays.asList(new PokemonBase("Squirtle"
                         , 20
                         , 9.0
-                        , Utils.MASCULINO
-                        , Dificuldades.FACIL
-                        ,5
+                        , 17.0
+                        , 87.5
+                        , 5
+                        ,Dificuldades.FACIL
                         , TipoPokemon.WATER
                         , null
                         , Raridades.FACIL),
-                new Pokemon("Wartortle"
+                new PokemonBase("Wartortle"
                         , 20
                         , 22.5
-                        , Utils.MASCULINO
-                        , Dificuldades.MEDIO
-                        ,16
+                        , 37.5
+                        , 87.5
+                        , 16
+                        ,Dificuldades.MEDIO
                         , TipoPokemon.WATER
                         , null
                         , Raridades.MEDIO),
-                new Pokemon("Blastoise"
+                new PokemonBase("Blastoise"
                         , 20
                         , 85.5
-                        , Utils.MASCULINO
-                        , Dificuldades.DIFICIL
-                        ,32
+                        , 120.0
+                        , 87.5
+                        , 32
+                        ,Dificuldades.DIFICIL
                         , TipoPokemon.WATER
                         , null
                         , Raridades.DIFICIL)

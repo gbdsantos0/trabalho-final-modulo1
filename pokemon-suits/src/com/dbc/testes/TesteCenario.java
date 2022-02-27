@@ -2,6 +2,7 @@ package com.dbc.testes;
 
 import com.dbc.modelo.cenario.Cenario;
 import com.dbc.modelo.entidades.Pokemon;
+import com.dbc.modelo.entidades.PokemonBase;
 import com.dbc.modelo.enums.*;
 import com.dbc.modelo.exeptions.InvalidCenarioExeption;
 import org.junit.Assert;
@@ -36,12 +37,13 @@ public class TesteCenario {
     @Test
     public void gerarPokemonListaComUmNormal(){
         //SETUP
-        Cenario cenario = new Cenario(TiposTerreno.GRAMA,20, Arrays.asList(new Pokemon("Bulbassalto"
-                , 20
+        Cenario cenario = new Cenario(TiposTerreno.GRAMA,20,Arrays.asList(new PokemonBase("Bulbassalto"
+                , 0
                 , 6.7
-                , Utils.MASCULINO
+                ,10.0
+                , 85.0
+                , 1
                 , Dificuldades.MEDIO
-                ,5
                 , TipoPokemon.GRASS
                 , TipoPokemon.POISON
                 , Raridades.FACIL)));
@@ -64,12 +66,13 @@ public class TesteCenario {
     @Test
     public void gerarPokemonListaComUmRaro(){
         //SETUP
-        Cenario cenario = new Cenario(TiposTerreno.GRAMA,20, Arrays.asList(new Pokemon("Bulbassalto Grande"
-                , 20
+        Cenario cenario = new Cenario(TiposTerreno.GRAMA,20,Arrays.asList(new PokemonBase("Bulbassalto"
+                , 0
                 , 6.7
-                , Utils.MASCULINO
+                ,10.0
+                , 85.0
+                , 1
                 , Dificuldades.MEDIO
-                ,5
                 , TipoPokemon.GRASS
                 , TipoPokemon.POISON
                 , Raridades.MEDIO)));
@@ -92,12 +95,13 @@ public class TesteCenario {
     @Test
     public void gerarPokemonListaComUmSuperRaro(){
         //SETUP
-        Cenario cenario = new Cenario(TiposTerreno.GRAMA,20, Arrays.asList(new Pokemon("Bulbassalto Maior Ainda"
-                , 20
+        Cenario cenario = new Cenario(TiposTerreno.GRAMA,20,Arrays.asList(new PokemonBase("Bulbassalto"
+                , 0
                 , 6.7
-                , Utils.MASCULINO
+                ,10.0
+                , 85.0
+                , 1
                 , Dificuldades.MEDIO
-                ,5
                 , TipoPokemon.GRASS
                 , TipoPokemon.POISON
                 , Raridades.DIFICIL)));

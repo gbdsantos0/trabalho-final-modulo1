@@ -1,6 +1,7 @@
 package com.dbc.modelo.cenario;
 
 import com.dbc.modelo.entidades.Pokemon;
+import com.dbc.modelo.entidades.PokemonBase;
 import com.dbc.modelo.enums.*;
 import com.dbc.modelo.exeptions.InvalidCenarioExeption;
 import com.dbc.modelo.interfaces.Impressao;
@@ -13,9 +14,9 @@ import java.util.Random;
 public class Cenario implements Impressao {
     private final TiposTerreno terreno;
     private final int levelMedio;
-    private final List<Pokemon> pokemonsDisponiveis;
+    private final List<PokemonBase> pokemonsDisponiveis;
 
-    public Cenario(TiposTerreno terreno, int levelMedio, List<Pokemon> pokemonsDisponiveis) {
+    public Cenario(TiposTerreno terreno, int levelMedio, List<PokemonBase> pokemonsDisponiveis) {
         this.terreno = terreno;
         this.levelMedio = levelMedio;
         this.pokemonsDisponiveis = pokemonsDisponiveis;
@@ -26,7 +27,7 @@ public class Cenario implements Impressao {
     public Pokemon gerarPokemon() throws InvalidCenarioExeption {
         Random r = new Random();
 
-        Pokemon pokemonBase;
+        PokemonBase pokemonBase;
         try {
             pokemonBase = this.selecionarPokemon();
         }catch (InvalidCenarioExeption ex){
@@ -34,7 +35,11 @@ public class Cenario implements Impressao {
         }
 
 
-        int randLevel = r.nextInt(levelMedio);
+        int randLevel = r.nextInt(8)+this.levelMedio-4;//variacao de 4 levels pra cima ou pra baixo
+        //garantir que não ha niveis nogativos
+        if(randLevel<1){
+            randLevel=1;
+        }
 
         //idade: idade maxima = level base + idade base
         //peso = 0.8~1.2 * peso base
@@ -42,12 +47,12 @@ public class Cenario implements Impressao {
         //level = level minimo = base level ou o level gerado aleatoriamente
 
 
-        return new Pokemon(pokemonBase.getNome()
-                ,r.nextInt(pokemonBase.getIdade())+pokemonBase.getLevel()
-                ,((double)(r.nextInt(40)/10)+0.8)*pokemonBase.getPeso()
-                , (r.nextInt(2)==1?Utils.MASCULINO:Utils.FEMININO)
+        return new Pokemon(pokemonBase.getRaca()
+                ,r.nextInt(this.levelMedio)+pokemonBase.getIdadeMinima() //idade em pokemons nao parece fazer tanto sentido
+                ,((double)(r.nextDouble(pokemonBase.getPesoMaximo()-pokemonBase.getPesoMinimo())+pokemonBase.getPesoMinimo()))
+                , (r.nextInt(100)<=pokemonBase.getPorcentagemMacho()?Utils.MASCULINO:Utils.FEMININO)//calcula o sexo de acordo com a chance de ser masculino
                 ,pokemonBase.getDificuldade()
-                ,Math.max(pokemonBase.getLevel(),randLevel)
+                ,Math.max(pokemonBase.getLevelMinimo(),randLevel)
                 ,pokemonBase.getTipo()[0]
                 ,(pokemonBase.getTipo().length>1?pokemonBase.getTipo()[1]:null)
                 ,pokemonBase.getRaridade());
@@ -56,19 +61,19 @@ public class Cenario implements Impressao {
     //metodo para selecionar um pokemon da lista conforme a raridade
     //seleciona por raridade, um dos pokemons disponiveis para aquela raridade
     //5% - super raros, 20% raros, 75% comuns
-    private Pokemon selecionarPokemon() throws InvalidCenarioExeption {
+    private PokemonBase selecionarPokemon() throws InvalidCenarioExeption {
 
         if(pokemonsDisponiveis.isEmpty()){
             throw new InvalidCenarioExeption("Lista de pokemons vazia, não é possível selecionar pokemons");
         }
 
-        List<Pokemon> superRaros = pokemonsDisponiveis.stream()
+        List<PokemonBase> superRaros = pokemonsDisponiveis.stream()
                 .filter(pokemon -> pokemon.getRaridade() == Raridades.DIFICIL)
                 .toList();
-        List<Pokemon> raros = pokemonsDisponiveis.stream()
+        List<PokemonBase> raros = pokemonsDisponiveis.stream()
                 .filter(pokemon -> pokemon.getRaridade() == Raridades.MEDIO)
                 .toList();
-        List<Pokemon> comuns = pokemonsDisponiveis.stream()
+        List<PokemonBase> comuns = pokemonsDisponiveis.stream()
                 .filter(pokemon -> pokemon.getRaridade() == Raridades.FACIL)
                 .toList();
 
@@ -141,7 +146,7 @@ public class Cenario implements Impressao {
         return levelMedio;
     }
 
-    public List<Pokemon> getPokemonsDisponiveis() {
+    public List<PokemonBase> getPokemonsDisponiveis() {
         //retorna uma lista nao modificavel
         return Collections.unmodifiableList(pokemonsDisponiveis);
     }
@@ -161,12 +166,13 @@ public class Cenario implements Impressao {
 
     //teste rapido
     public static void main(String[] args) {
-        Cenario cenario = new Cenario(TiposTerreno.GRAMA,20,Arrays.asList(new Pokemon("Bulbassalto"
-                , 20
+        Cenario cenario = new Cenario(TiposTerreno.GRAMA,20,Arrays.asList(new PokemonBase("Bulbassalto"
+                , 0
                 , 6.7
-                , Utils.MASCULINO
+                ,10.0
+                , 85.0
+                , 1
                 , Dificuldades.MEDIO
-                ,5
                 , TipoPokemon.GRASS
                 , TipoPokemon.POISON
                 , Raridades.FACIL)));
