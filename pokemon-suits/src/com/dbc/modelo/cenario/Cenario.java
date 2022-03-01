@@ -164,27 +164,4 @@ public class Cenario implements Impressao {
                 "\nLista de Pokemons disponíveis na região: " + pokemonsDisponiveis;
     }
 
-    /*//teste rapido
-    public static void main(String[] args) {
-        Cenario cenario = new Cenario(TiposTerreno.GRAMA,20,Arrays.asList(new PokemonBase("Bulbassalto"
-                , 0
-                , 6.7
-                ,10.0
-                , 85.0
-                , 1
-                , Dificuldades.MEDIO
-                , TipoPokemon.GRASS
-                , TipoPokemon.POISON
-                , Raridades.COMUM)));
-        try {
-            cenario.gerarPokemon().imprimir();
-        }catch (InvalidCenarioExeption ex){
-            System.err.println("Não é possível gerar pokemons em cenários sem lista de pokemons");
-        }
-        System.out.println("####################################################################################################"+
-                "####################################################################################################");
-        cenario.imprimir();
-
-    }*/
-    
 }

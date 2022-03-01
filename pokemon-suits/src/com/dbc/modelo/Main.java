@@ -22,7 +22,7 @@ public class Main {
 
         Pokedex pokedex = popularPokedex();
 
-        List<Cenario> cenarios = popularCenarios();
+        List<Cenario> cenarios = popularCenarios(pokedex);
         Cenario cenarioAtual = cenarios.get(0);
 
         Treinador ash = new Treinador("ash", 40, 80.0, Utils.MASCULINO, new Mochila());
@@ -255,86 +255,16 @@ public class Main {
         return pokedex;
     }
 
-    private static List<Cenario> popularCenarios() {
+    private static List<Cenario> popularCenarios(Pokedex pokedex) {
         List<Cenario> cenarios = new ArrayList<>();
 
-        cenarios.add(new Cenario(TiposTerreno.GRAMA, 4, Arrays.asList(Pokedex.getPokedexCompleta().get(1), Pokedex.getPokedexCompleta().get(2), Pokedex.getPokedexCompleta().get(3))));
-        cenarios.add(new Cenario(TiposTerreno.AGUA, 10, Arrays.asList(Pokedex.getPokedexCompleta().get(7), Pokedex.getPokedexCompleta().get(8), Pokedex.getPokedexCompleta().get(9))));
-        cenarios.add(new Cenario(TiposTerreno.CAVERNA, 30, Arrays.asList(Pokedex.getPokedexCompleta().get(4), Pokedex.getPokedexCompleta().get(5), Pokedex.getPokedexCompleta().get(6),
-                Pokedex.getPokedexCompleta().get(74), Pokedex.getPokedexCompleta().get(75), Pokedex.getPokedexCompleta().get(76))));
+        cenarios.add(new Cenario(TiposTerreno.GRAMA, 4, Arrays.asList(pokedex.getPokedexCompleta().get(1), pokedex.getPokedexCompleta().get(2), pokedex.getPokedexCompleta().get(3))));
+        cenarios.add(new Cenario(TiposTerreno.AGUA, 10, Arrays.asList(pokedex.getPokedexCompleta().get(7), pokedex.getPokedexCompleta().get(8), pokedex.getPokedexCompleta().get(9))));
+        cenarios.add(new Cenario(TiposTerreno.CAVERNA, 30, Arrays.asList(pokedex.getPokedexCompleta().get(4), pokedex.getPokedexCompleta().get(5), pokedex.getPokedexCompleta().get(6),
+                pokedex.getPokedexCompleta().get(74), pokedex.getPokedexCompleta().get(75), pokedex.getPokedexCompleta().get(76))));
         cenarios.add(new Cenario(TiposTerreno.CHAO, 4, List.of()));
 
         return cenarios;
     }
-
-
-/*    public static List<Cenario> popularCenarios(){
-        List<Cenario> cenarios = new ArrayList<>();
-        cenarios.add(new Cenario(TiposTerreno.GRAMA,4, Arrays.asList(new PokemonBase("Bulbasaur"
-                , 20
-                , 6.7
-                , 11.0
-                , 85.0
-                ,5
-                , Dificuldades.COMUM
-                , TipoPokemon.GRASS
-                , TipoPokemon.POISON
-                , Raridades.COMUM),
-                new PokemonBase("Ivysaur"
-                        , 20
-                        , 13.0
-                        , 20.0
-                        , 87.5
-                        ,16
-                        , Dificuldades.RARO
-                        , TipoPokemon.GRASS
-                        , TipoPokemon.POISON
-                        , Raridades.RARO),
-                new PokemonBase("Venusaur"
-                        , 20
-                        , 100.0
-                        , 150.0
-                        , 87.5
-                        ,32
-                        , Dificuldades.SUPER_RARO
-                        , TipoPokemon.GRASS
-                        , TipoPokemon.POISON
-                        , Raridades.SUPER_RARO)
-                )));
-
-        cenarios.add(new Cenario(TiposTerreno.AGUA,9, Arrays.asList(new PokemonBase("Squirtle"
-                        , 20
-                        , 9.0
-                        , 17.0
-                        , 87.5
-                        , 5
-                        ,Dificuldades.COMUM
-                        , TipoPokemon.WATER
-                        , null
-                        , Raridades.COMUM),
-                new PokemonBase("Wartortle"
-                        , 20
-                        , 22.5
-                        , 37.5
-                        , 87.5
-                        , 16
-                        ,Dificuldades.RARO
-                        , TipoPokemon.WATER
-                        , null
-                        , Raridades.RARO),
-                new PokemonBase("Blastoise"
-                        , 20
-                        , 85.5
-                        , 120.0
-                        , 87.5
-                        , 32
-                        ,Dificuldades.SUPER_RARO
-                        , TipoPokemon.WATER
-                        , null
-                        , Raridades.SUPER_RARO)
-        )));
-
-        return cenarios;
-    }*/
 
 }
