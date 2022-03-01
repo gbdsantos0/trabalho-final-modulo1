@@ -164,7 +164,7 @@ public class Cenario implements Impressao {
                 "\nLista de Pokemons disponíveis na região: " + pokemonsDisponiveis;
     }
 
-    //teste rapido
+    /*//teste rapido
     public static void main(String[] args) {
         Cenario cenario = new Cenario(TiposTerreno.GRAMA,20,Arrays.asList(new PokemonBase("Bulbassalto"
                 , 0
@@ -185,9 +185,6 @@ public class Cenario implements Impressao {
                 "####################################################################################################");
         cenario.imprimir();
 
-    }
-
-
-
-
+    }*/
+    
 }
