@@ -65,6 +65,10 @@ public class Main {
                                 case 3 -> pokebola = new NetBall();
                                 case 4 -> pokebola = new HeavyBall();
                                 case 5 -> pokebola = new MasterBall();
+                                default -> {
+                                    pokebola = new PokeBall();
+                                    System.out.println("Nenhuma pokebola válida selecionada. Usando PokeBall normal!");
+                                }
                             }
 
                             if(ash.capturar(pokebola,pokemonEncontro,r)){
@@ -99,6 +103,7 @@ public class Main {
                         case 2 -> cenarioAtual = cenarios.get(1);
                         case 3 -> cenarioAtual = cenarios.get(2);
                         case 4 -> cenarioAtual = cenarios.get(3);
+                        default -> System.out.println("Não existe essa opção! Favor selecionar um local válido.");
                     }
 
                     escolha = 0;
