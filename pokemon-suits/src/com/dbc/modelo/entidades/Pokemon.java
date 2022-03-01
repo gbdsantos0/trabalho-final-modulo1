@@ -6,6 +6,9 @@ import com.dbc.modelo.enums.TipoPokemon;
 import com.dbc.modelo.enums.Utils;
 import com.dbc.modelo.interfaces.Impressao;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Pokemon extends Entidade implements Impressao {
 
     private Integer level;
@@ -31,6 +34,15 @@ public class Pokemon extends Entidade implements Impressao {
     public void setLevel(int level) {this.level = level;}
     public Dificuldades getDificuldade() {return dificuldade;}
     public TipoPokemon[] getTipo() {return tipo;}
+    public String getStringTipos() {
+        List<TipoPokemon> n = Arrays.stream(this.getTipo()).toList();
+        TipoPokemon a = n.get(0);
+        if(n.size() > 1){
+            TipoPokemon b = n.get(1);
+            return a.toString() + " " + b.toString();
+        }
+        return a.toString();
+    }
     public Raridades getRaridade() {return raridade;}
 
     @Override
@@ -40,11 +52,11 @@ public class Pokemon extends Entidade implements Impressao {
 
     @Override
     public String toString() {
-        return  "        nome: \n"+ super.getNome() +
-                "        idade: \n" + super.getIdade() +
-                "        peso: \n" + super.getPeso() +
-                "        sexo: \n" + ((super.getSexo() == Utils.MASCULINO)?"Masculino":"Feminino") +
-                "        Tipo de Pokemon: \n" + this.getTipo() +
-                "        raridade: " + this.getRaridade();
+        return  "nome:"+ super.getNome() +
+                "\nidade: " + super.getIdade() +
+                "\npeso: " + super.getPeso() +
+                "\nsexo: " + ((super.getSexo() == Utils.MASCULINO)?"Masculino":"Feminino") +
+                "\nTipo de Pokemon: " + this.getStringTipos() +
+                " \nraridade: " + this.getRaridade();
     }
 }
