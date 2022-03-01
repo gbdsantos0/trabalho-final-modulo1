@@ -5,6 +5,7 @@ import com.dbc.modelo.entidades.Pokemon;
 import com.dbc.modelo.entidades.PokemonBase;
 import com.dbc.modelo.enums.*;
 import com.dbc.modelo.exeptions.InvalidCenarioExeption;
+import junit.framework.AssertionFailedError;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -24,9 +25,7 @@ public class TesteCenario {
         try {
             pokemonGerado = cenario.gerarPokemon();
 
-        }catch (InvalidCenarioExeption ex){
-            System.err.println("Não é possível gerar pokemons em cenários sem lista de pokemons");
-        }
+        }catch (InvalidCenarioExeption e){}
 
         //ASSERT
         Assert.assertNull(pokemonGerado);

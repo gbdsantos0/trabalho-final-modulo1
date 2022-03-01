@@ -28,11 +28,9 @@ public class Cenario implements Impressao {
         Random r = new Random();
 
         PokemonBase pokemonBase;
-        try {
-            pokemonBase = this.selecionarPokemon();
-        }catch (InvalidCenarioExeption ex){
-            throw new InvalidCenarioExeption("Lista de pokemons vazia, não é possível gerar pokemons");
-        }
+
+        pokemonBase = this.selecionarPokemon();
+
 
 
         int randLevel = r.nextInt(8)+this.levelMedio-4;//variacao de 4 levels pra cima ou pra baixo
