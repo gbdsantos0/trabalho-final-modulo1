@@ -68,13 +68,13 @@ public class Cenario implements Impressao {
         }
 
         List<PokemonBase> superRaros = pokemonsDisponiveis.stream()
-                .filter(pokemon -> pokemon.getRaridade() == Raridades.DIFICIL)
+                .filter(pokemon -> pokemon.getRaridade() == Raridades.SUPER_RARO)
                 .toList();
         List<PokemonBase> raros = pokemonsDisponiveis.stream()
-                .filter(pokemon -> pokemon.getRaridade() == Raridades.MEDIO)
+                .filter(pokemon -> pokemon.getRaridade() == Raridades.RARO)
                 .toList();
         List<PokemonBase> comuns = pokemonsDisponiveis.stream()
-                .filter(pokemon -> pokemon.getRaridade() == Raridades.FACIL)
+                .filter(pokemon -> pokemon.getRaridade() == Raridades.COMUM)
                 .toList();
 
         Random r = new Random();
@@ -175,7 +175,7 @@ public class Cenario implements Impressao {
                 , Dificuldades.MEDIO
                 , TipoPokemon.GRASS
                 , TipoPokemon.POISON
-                , Raridades.FACIL)));
+                , Raridades.COMUM)));
         try {
             cenario.gerarPokemon().imprimir();
         }catch (InvalidCenarioExeption ex){

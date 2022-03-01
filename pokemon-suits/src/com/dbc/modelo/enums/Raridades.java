@@ -2,9 +2,9 @@ package com.dbc.modelo.enums;
 
 public enum Raridades {
 
-    FACIL(30),
-    MEDIO(15),
-    DIFICIL(5);
+    COMUM(30),
+    RARO(15),
+    SUPER_RARO(5);
 
     public int chance;
 

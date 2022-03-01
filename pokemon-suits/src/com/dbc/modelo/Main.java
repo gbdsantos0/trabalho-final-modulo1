@@ -123,7 +123,7 @@ public class Main {
                 , Dificuldades.FACIL
                 , TipoPokemon.GRASS
                 , TipoPokemon.POISON
-                , Raridades.FACIL));
+                , Raridades.COMUM));
         mapPokemons.put(2,new PokemonBase("Ivysoro"
                         , 20
                         , 13.0
@@ -133,7 +133,7 @@ public class Main {
                         , Dificuldades.MEDIO
                         , TipoPokemon.GRASS
                         , TipoPokemon.POISON
-                        , Raridades.MEDIO));
+                        , Raridades.RARO));
         mapPokemons.put(3
                 ,new PokemonBase("Venusoro"
                         , 20
@@ -144,7 +144,7 @@ public class Main {
                         , Dificuldades.DIFICIL
                         , TipoPokemon.GRASS
                         , TipoPokemon.POISON
-                        , Raridades.DIFICIL));
+                        , Raridades.SUPER_RARO));
         mapPokemons.put(4
                 ,new PokemonBase("Charmandoro"
                         , 20
@@ -155,7 +155,7 @@ public class Main {
                         , Dificuldades.FACIL
                         , TipoPokemon.FIRE
                         , null
-                        , Raridades.FACIL));
+                        , Raridades.COMUM));
         mapPokemons.put(5
                 ,new PokemonBase("Charmeleoro"
                         , 20
@@ -166,7 +166,7 @@ public class Main {
                         , Dificuldades.MEDIO
                         , TipoPokemon.FIRE
                         , null
-                        , Raridades.MEDIO));
+                        , Raridades.RARO));
         mapPokemons.put(6
                 ,new PokemonBase("Charizoro"
                         , 20
@@ -177,7 +177,7 @@ public class Main {
                         , Dificuldades.DIFICIL
                         , TipoPokemon.FIRE
                         , TipoPokemon.DRAGON
-                        , Raridades.DIFICIL));
+                        , Raridades.SUPER_RARO));
         mapPokemons.put(7
                 ,new PokemonBase("Squirsoro"
                         , 20
@@ -188,7 +188,7 @@ public class Main {
                         ,Dificuldades.FACIL
                         , TipoPokemon.WATER
                         , null
-                        , Raridades.FACIL));
+                        , Raridades.COMUM));
         mapPokemons.put(8
                 ,new PokemonBase("Wartosoro"
                         , 20
@@ -199,7 +199,7 @@ public class Main {
                         ,Dificuldades.MEDIO
                         , TipoPokemon.WATER
                         , null
-                        , Raridades.MEDIO));
+                        , Raridades.RARO));
         mapPokemons.put(9
                 ,new PokemonBase("Blastoro"
                         , 20
@@ -210,7 +210,7 @@ public class Main {
                         ,Dificuldades.DIFICIL
                         , TipoPokemon.WATER
                         , null
-                        , Raridades.DIFICIL));
+                        , Raridades.SUPER_RARO));
         mapPokemons.put(74
                 ,new PokemonBase("Geodoro"
                         , 20
@@ -221,7 +221,7 @@ public class Main {
                         ,Dificuldades.FACIL
                         , TipoPokemon.ROCK
                         , TipoPokemon.GROUND
-                        , Raridades.FACIL));
+                        , Raridades.COMUM));
         mapPokemons.put(75
                 ,new PokemonBase("Gravoro"
                         , 20
@@ -232,7 +232,7 @@ public class Main {
                         ,Dificuldades.MEDIO
                         , TipoPokemon.ROCK
                         , TipoPokemon.GROUND
-                        , Raridades.MEDIO));
+                        , Raridades.RARO));
         mapPokemons.put(76
                 ,new PokemonBase("Goloro"
                         , 20
@@ -243,7 +243,7 @@ public class Main {
                         ,Dificuldades.DIFICIL
                         , TipoPokemon.ROCK
                         , TipoPokemon.GROUND
-                        , Raridades.DIFICIL));
+                        , Raridades.SUPER_RARO));
 
         Pokedex pokedex = new Pokedex(mapPokemons);
 
@@ -271,30 +271,30 @@ public class Main {
                 , 11.0
                 , 85.0
                 ,5
-                , Dificuldades.FACIL
+                , Dificuldades.COMUM
                 , TipoPokemon.GRASS
                 , TipoPokemon.POISON
-                , Raridades.FACIL),
+                , Raridades.COMUM),
                 new PokemonBase("Ivysaur"
                         , 20
                         , 13.0
                         , 20.0
                         , 87.5
                         ,16
-                        , Dificuldades.MEDIO
+                        , Dificuldades.RARO
                         , TipoPokemon.GRASS
                         , TipoPokemon.POISON
-                        , Raridades.MEDIO),
+                        , Raridades.RARO),
                 new PokemonBase("Venusaur"
                         , 20
                         , 100.0
                         , 150.0
                         , 87.5
                         ,32
-                        , Dificuldades.DIFICIL
+                        , Dificuldades.SUPER_RARO
                         , TipoPokemon.GRASS
                         , TipoPokemon.POISON
-                        , Raridades.DIFICIL)
+                        , Raridades.SUPER_RARO)
                 )));
 
         cenarios.add(new Cenario(TiposTerreno.AGUA,9, Arrays.asList(new PokemonBase("Squirtle"
@@ -303,30 +303,30 @@ public class Main {
                         , 17.0
                         , 87.5
                         , 5
-                        ,Dificuldades.FACIL
+                        ,Dificuldades.COMUM
                         , TipoPokemon.WATER
                         , null
-                        , Raridades.FACIL),
+                        , Raridades.COMUM),
                 new PokemonBase("Wartortle"
                         , 20
                         , 22.5
                         , 37.5
                         , 87.5
                         , 16
-                        ,Dificuldades.MEDIO
+                        ,Dificuldades.RARO
                         , TipoPokemon.WATER
                         , null
-                        , Raridades.MEDIO),
+                        , Raridades.RARO),
                 new PokemonBase("Blastoise"
                         , 20
                         , 85.5
                         , 120.0
                         , 87.5
                         , 32
-                        ,Dificuldades.DIFICIL
+                        ,Dificuldades.SUPER_RARO
                         , TipoPokemon.WATER
                         , null
-                        , Raridades.DIFICIL)
+                        , Raridades.SUPER_RARO)
         )));
 
         return cenarios;

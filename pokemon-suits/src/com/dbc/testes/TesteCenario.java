@@ -12,8 +12,6 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class TesteCenario {
     @Test
     public void gerarPokemonListaVazia(){
@@ -46,7 +44,7 @@ public class TesteCenario {
                 , Dificuldades.MEDIO
                 , TipoPokemon.GRASS
                 , TipoPokemon.POISON
-                , Raridades.FACIL)));
+                , Raridades.COMUM)));
         Pokemon pokemonGerado = null;
 
 
@@ -60,7 +58,7 @@ public class TesteCenario {
 
         //ASSERT
         Assert.assertNotNull(pokemonGerado);
-        Assert.assertEquals(pokemonGerado.getRaridade(),Raridades.FACIL);
+        Assert.assertEquals(pokemonGerado.getRaridade(),Raridades.COMUM);
     }
 
     @Test
@@ -75,7 +73,7 @@ public class TesteCenario {
                 , Dificuldades.MEDIO
                 , TipoPokemon.GRASS
                 , TipoPokemon.POISON
-                , Raridades.MEDIO)));
+                , Raridades.RARO)));
         Pokemon pokemonGerado = null;
 
 
@@ -89,7 +87,7 @@ public class TesteCenario {
 
         //ASSERT
         Assert.assertNotNull(pokemonGerado);
-        Assert.assertEquals(pokemonGerado.getRaridade(),Raridades.MEDIO);
+        Assert.assertEquals(pokemonGerado.getRaridade(),Raridades.RARO);
     }
 
     @Test
@@ -104,7 +102,7 @@ public class TesteCenario {
                 , Dificuldades.MEDIO
                 , TipoPokemon.GRASS
                 , TipoPokemon.POISON
-                , Raridades.DIFICIL)));
+                , Raridades.SUPER_RARO)));
         Pokemon pokemonGerado = null;
 
 
@@ -118,7 +116,7 @@ public class TesteCenario {
 
         //ASSERT
         Assert.assertNotNull(pokemonGerado);
-        Assert.assertEquals(pokemonGerado.getRaridade(),Raridades.DIFICIL);
+        Assert.assertEquals(pokemonGerado.getRaridade(),Raridades.SUPER_RARO);
     }
 
 }

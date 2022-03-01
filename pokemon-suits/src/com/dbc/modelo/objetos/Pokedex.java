@@ -22,120 +22,120 @@ public class Pokedex {
                  , 11.0
                  , 87.5
                  ,5
-                 , Dificuldades.FACIL
+                 , Dificuldades.COMUM
                  , TipoPokemon.GRASS
                  , TipoPokemon.POISON
-                 , Raridades.FACIL)
+                 , Raridades.COMUM)
             ,2,new PokemonBase("Ivysoro"
                  , 20
                  , 13.0
                  , 20.0
                  , 87.5
                  ,16
-                 , Dificuldades.MEDIO
+                 , Dificuldades.RARO
                  , TipoPokemon.GRASS
                  , TipoPokemon.POISON
-                 , Raridades.MEDIO)
+                 , Raridades.RARO)
             ,3,new PokemonBase("Venusoro"
                  , 20
                  , 100.0
                  , 150.0
                  , 87.5
                  ,32
-                 , Dificuldades.DIFICIL
+                 , Dificuldades.SUPER_RARO
                  , TipoPokemon.GRASS
                  , TipoPokemon.POISON
-                 , Raridades.DIFICIL)
+                 , Raridades.SUPER_RARO)
             ,4,new PokemonBase("Charmandoro"
                  , 20
                  , 8.5
                  , 15.5
                  , 87.5
                  ,5
-                 , Dificuldades.FACIL
+                 , Dificuldades.COMUM
                  , TipoPokemon.GRASS
                  , TipoPokemon.POISON
-                 , Raridades.FACIL)
+                 , Raridades.COMUM)
             ,5,new PokemonBase("Charmeleoro"
                  , 20
                  , 19.0
                  , 36.0
                  , 87.5
                  ,16
-                 , Dificuldades.MEDIO
+                 , Dificuldades.RARO
                  , TipoPokemon.GRASS
                  , TipoPokemon.POISON
-                 , Raridades.MEDIO)
+                 , Raridades.RARO)
             ,6,new PokemonBase("Venusoro"
                  , 20
                  , 90.5
                  , 142.5
                  , 87.5
                  ,36
-                 , Dificuldades.DIFICIL
+                 , Dificuldades.SUPER_RARO
                  , TipoPokemon.GRASS
                  , TipoPokemon.POISON
-                 , Raridades.DIFICIL)
+                 , Raridades.SUPER_RARO)
             ,7,new PokemonBase("Squirsoro"
                  , 20
                  , 9.0
                  , 17.0
                  , 87.5
                  , 5
-                 ,Dificuldades.FACIL
+                 ,Dificuldades.COMUM
                  , TipoPokemon.WATER
                  , null
-                 , Raridades.FACIL)
+                 , Raridades.COMUM)
             ,8,new PokemonBase("Wartosoro"
                  , 20
                  , 22.5
                  , 37.5
                  , 87.5
                  , 16
-                 ,Dificuldades.MEDIO
+                 ,Dificuldades.RARO
                  , TipoPokemon.WATER
                  , null
-                 , Raridades.MEDIO)
+                 , Raridades.RARO)
             ,9,new PokemonBase("Blastoro"
              , 20
              , 85.5
              , 120.0
              , 87.5
              , 36
-             ,Dificuldades.DIFICIL
+             ,Dificuldades.SUPER_RARO
              , TipoPokemon.WATER
              , null
-             , Raridades.DIFICIL)
+             , Raridades.SUPER_RARO)
             ,74,new PokemonBase("Geodoro"
                  , 20
                  , 20.0
                  , 38.0
                  , 50.0
                  , 5
-                 ,Dificuldades.FACIL
+                 ,Dificuldades.COMUM
                  , TipoPokemon.ROCK
                  , TipoPokemon.GROUND
-                 , Raridades.FACIL)
+                 , Raridades.COMUM)
             ,75,new PokemonBase("Gravoro"
                  , 20
                  , 105.0
                  , 170.0
                  , 50.0
                  , 16
-                 ,Dificuldades.MEDIO
+                 ,Dificuldades.RARO
                  , TipoPokemon.ROCK
                  , TipoPokemon.GROUND
-                 , Raridades.MEDIO)
+                 , Raridades.RARO)
             ,76,new PokemonBase("Goloro"
                  , 20
                  , 300.0
                  , 420.0
                  , 50.0
                  , 36
-                 ,Dificuldades.DIFICIL
+                 ,Dificuldades.SUPER_RARO
                  , TipoPokemon.ROCK
                  , TipoPokemon.GROUND
-                 , Raridades.DIFICIL)
+                 , Raridades.SUPER_RARO)
     )
     );*/
 
