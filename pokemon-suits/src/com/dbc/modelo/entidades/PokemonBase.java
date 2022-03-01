@@ -6,6 +6,7 @@ import com.dbc.modelo.enums.TipoPokemon;
 import com.dbc.modelo.enums.Utils;
 import com.dbc.modelo.interfaces.Impressao;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class PokemonBase implements Impressao {
     private final Double pesoMinimo;
     private final Double pesoMaximo;
     private final Double porcentagemMacho;
-    private Integer levelMinimo;
+    private final Integer levelMinimo;
     private final Dificuldades dificuldade;
     private final TipoPokemon[] tipo;
     private final Raridades raridade;
@@ -40,11 +41,12 @@ public class PokemonBase implements Impressao {
 
     @Override
     public String toString() {
+        DecimalFormat df = new DecimalFormat("#0.00");
         return "Informações da espécie de Pokemon\n" +
                 "Raça: " + raca +
                 "\nIdade Minima: " + idadeMinima +
-                "\npesoMinimo: " + pesoMinimo +
-                "\npesoMaximo: " + pesoMaximo +
+                "\npesoMinimo: " + df.format(pesoMinimo) +
+                "\npesoMaximo: " + df.format(pesoMaximo) +
                 "\nPorcentagem Macho: " + porcentagemMacho +
                 "\nLevel Minimo: " + levelMinimo +
                 "\nDificuldade: " + dificuldade +

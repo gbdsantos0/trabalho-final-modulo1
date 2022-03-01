@@ -6,6 +6,7 @@ import com.dbc.modelo.enums.TipoPokemon;
 import com.dbc.modelo.enums.Utils;
 import com.dbc.modelo.interfaces.Impressao;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,9 +53,10 @@ public class Pokemon extends Entidade implements Impressao {
 
     @Override
     public String toString() {
+        DecimalFormat df = new DecimalFormat("#0.00");
         return  "nome:"+ super.getNome() +
                 "\nidade: " + super.getIdade() +
-                "\npeso: " + super.getPeso() +
+                "\npeso: " + df.format(super.getPeso() )+
                 "\nsexo: " + ((super.getSexo() == Utils.MASCULINO)?"Masculino":"Feminino") +
                 "\nTipo de Pokemon: " + this.getStringTipos() +
                 " \nraridade: " + this.getRaridade();
