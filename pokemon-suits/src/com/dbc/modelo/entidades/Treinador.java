@@ -12,13 +12,10 @@ public class Treinador extends Entidade implements Impressao {
 
     //Instacia da mochila que guarda todos os poquemons do treinador
     private Mochila mochila;
-    //Instancia da PokeDex, que guarda todos os Pokemons do Jogo
-    private final Pokedex pokedex;
 
-    public Treinador(String nome, Integer idade, Double peso, Utils sexo, Mochila mochila, Pokedex pokedex) {
+    public Treinador(String nome, Integer idade, Double peso, Utils sexo, Mochila mochila) {
         super(nome, idade, peso, sexo);
         this.mochila = mochila;
-        this.pokedex = pokedex;
     }
 
     //Metodo que retorna um boolean se o pokemon for capturado(a chance de captura é delegada para a pokebola)
@@ -41,13 +38,10 @@ public class Treinador extends Entidade implements Impressao {
     public String toString() {
         return "Treinador{" +
                 "mochila=" + mochila +
-                ", pokedex=" + pokedex +
                 '}';
     }
 
     //getter
-    public Pokedex getPokedex() {return pokedex;}
-
     public Mochila getMochila() {
         return mochila;
     }

@@ -25,9 +25,9 @@ public class Main {
         List<Cenario> cenarios = popularCenarios();
         Cenario cenarioAtual = cenarios.get(0);
 
-        Treinador ash = new Treinador("ash", 40, 80.0, Utils.MASCULINO, new Mochila(), pokedex);
+        Treinador ash = new Treinador("ash", 40, 80.0, Utils.MASCULINO, new Mochila());
 
-        Pokebola pokebola = null;
+        Pokebola pokebola;
 
         //contador para chance do pokemon fugir
         int contador = 0;
@@ -110,7 +110,7 @@ public class Main {
                 }
                 case 3 -> ash.getMochila().imprimir();
                 case 4 -> ash.getMochila().atualizarNomePokemon(scanner);
-                case 5 -> ash.getMochila().removerPokemom();
+                case 5 -> ash.getMochila().removerPokemom(scanner);
                 case 8 -> System.out.println("Obrigado por jogar!");
                 default -> System.out.println("Você não pode fazer isso");
             }

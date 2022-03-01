@@ -7,7 +7,6 @@ import com.dbc.modelo.interfaces.Impressao;
 import java.util.*;
 
 public class Mochila implements Impressao {
-    Scanner scanner = new Scanner(System.in);
     private ArrayList<Pokemon> bag = new ArrayList<>();
 
 
@@ -39,7 +38,7 @@ public class Mochila implements Impressao {
     }
 
     //REMOVER
-    public void removerPokemom(){
+    public void removerPokemom(Scanner scanner){
         System.out.println("qual pokemom você deseja assassinar friamente: ");
         this.imprimir();
         System.out.println();
