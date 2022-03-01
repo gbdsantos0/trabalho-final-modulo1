@@ -18,10 +18,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Random r = new Random();
-        Treinador ash = new Treinador("ash", 40, 80.0, Utils.MASCULINO, new Mochila(), new Pokedex());
+
+
+        Pokedex pokedex = popularPokedex();
 
         List<Cenario> cenarios = popularCenarios();
         Cenario cenarioAtual = cenarios.get(0);
+
+        Treinador ash = new Treinador("ash", 40, 80.0, Utils.MASCULINO, new Mochila(), pokedex);
 
         Pokebola pokebola = null;
 
@@ -84,14 +88,17 @@ public class Main {
                         escolha = 0;
                     } catch(InvalidCenarioExeption ex){
                         System.out.println("Esta área não possui pokemons. Mude de área para procurar pokemons.");
+                        escolha = 0;
                     }
                 }
                 case 2 -> {
-                    System.out.println("1 - Grama\n2 - Água");
+                    System.out.println("1 - Grama\n2 - Água\n3 - Caverna\n4 - Chão");
                     escolha = scanner.nextInt();
                     switch (escolha){
                         case 1 -> cenarioAtual = cenarios.get(0);
                         case 2 -> cenarioAtual = cenarios.get(1);
+                        case 3 -> cenarioAtual = cenarios.get(2);
+                        case 4 -> cenarioAtual = cenarios.get(3);
                     }
 
                     escolha = 0;
@@ -99,13 +106,164 @@ public class Main {
                 case 3 -> ash.getMochila().imprimir();
                 case 4 -> ash.getMochila().atualizarNomePokemon(scanner);
                 case 5 -> ash.getMochila().removerPokemom();
+                case 8 -> System.out.println("Obrigado por jogar!");
                 default -> System.out.println("Você não pode fazer isso");
             }
         }while(escolha != 8);
     }
 
+    private static Pokedex popularPokedex() {
+        Map<Integer,PokemonBase> mapPokemons = new HashMap<>();
+        mapPokemons.put(1,new PokemonBase("Bulbasoro"
+                , 20
+                , 6.7
+                , 11.0
+                , 87.5
+                ,5
+                , Dificuldades.FACIL
+                , TipoPokemon.GRASS
+                , TipoPokemon.POISON
+                , Raridades.FACIL));
+        mapPokemons.put(2,new PokemonBase("Ivysoro"
+                        , 20
+                        , 13.0
+                        , 20.0
+                        , 87.5
+                        ,16
+                        , Dificuldades.MEDIO
+                        , TipoPokemon.GRASS
+                        , TipoPokemon.POISON
+                        , Raridades.MEDIO));
+        mapPokemons.put(3
+                ,new PokemonBase("Venusoro"
+                        , 20
+                        , 100.0
+                        , 150.0
+                        , 87.5
+                        ,32
+                        , Dificuldades.DIFICIL
+                        , TipoPokemon.GRASS
+                        , TipoPokemon.POISON
+                        , Raridades.DIFICIL));
+        mapPokemons.put(4
+                ,new PokemonBase("Charmandoro"
+                        , 20
+                        , 8.5
+                        , 15.5
+                        , 87.5
+                        ,5
+                        , Dificuldades.FACIL
+                        , TipoPokemon.FIRE
+                        , null
+                        , Raridades.FACIL));
+        mapPokemons.put(5
+                ,new PokemonBase("Charmeleoro"
+                        , 20
+                        , 19.0
+                        , 36.0
+                        , 87.5
+                        ,16
+                        , Dificuldades.MEDIO
+                        , TipoPokemon.FIRE
+                        , null
+                        , Raridades.MEDIO));
+        mapPokemons.put(6
+                ,new PokemonBase("Charizoro"
+                        , 20
+                        , 90.5
+                        , 142.5
+                        , 87.5
+                        ,36
+                        , Dificuldades.DIFICIL
+                        , TipoPokemon.FIRE
+                        , TipoPokemon.DRAGON
+                        , Raridades.DIFICIL));
+        mapPokemons.put(7
+                ,new PokemonBase("Squirsoro"
+                        , 20
+                        , 9.0
+                        , 17.0
+                        , 87.5
+                        , 5
+                        ,Dificuldades.FACIL
+                        , TipoPokemon.WATER
+                        , null
+                        , Raridades.FACIL));
+        mapPokemons.put(8
+                ,new PokemonBase("Wartosoro"
+                        , 20
+                        , 22.5
+                        , 37.5
+                        , 87.5
+                        , 16
+                        ,Dificuldades.MEDIO
+                        , TipoPokemon.WATER
+                        , null
+                        , Raridades.MEDIO));
+        mapPokemons.put(9
+                ,new PokemonBase("Blastoro"
+                        , 20
+                        , 85.5
+                        , 120.0
+                        , 87.5
+                        , 36
+                        ,Dificuldades.DIFICIL
+                        , TipoPokemon.WATER
+                        , null
+                        , Raridades.DIFICIL));
+        mapPokemons.put(74
+                ,new PokemonBase("Geodoro"
+                        , 20
+                        , 20.0
+                        , 38.0
+                        , 50.0
+                        , 5
+                        ,Dificuldades.FACIL
+                        , TipoPokemon.ROCK
+                        , TipoPokemon.GROUND
+                        , Raridades.FACIL));
+        mapPokemons.put(75
+                ,new PokemonBase("Gravoro"
+                        , 20
+                        , 105.0
+                        , 170.0
+                        , 50.0
+                        , 16
+                        ,Dificuldades.MEDIO
+                        , TipoPokemon.ROCK
+                        , TipoPokemon.GROUND
+                        , Raridades.MEDIO));
+        mapPokemons.put(76
+                ,new PokemonBase("Goloro"
+                        , 20
+                        , 300.0
+                        , 420.0
+                        , 50.0
+                        , 36
+                        ,Dificuldades.DIFICIL
+                        , TipoPokemon.ROCK
+                        , TipoPokemon.GROUND
+                        , Raridades.DIFICIL));
 
-    public static List<Cenario> popularCenarios(){
+        Pokedex pokedex = new Pokedex(mapPokemons);
+
+        return pokedex;
+    }
+
+    private static List<Cenario> popularCenarios() {
+        List<Cenario> cenarios = new ArrayList<>();
+
+        cenarios.add(new Cenario(TiposTerreno.GRAMA, 4, Arrays.asList(Pokedex.getPokedexCompleta().get(1), Pokedex.getPokedexCompleta().get(2), Pokedex.getPokedexCompleta().get(3))));
+        cenarios.add(new Cenario(TiposTerreno.AGUA, 10, Arrays.asList(Pokedex.getPokedexCompleta().get(7), Pokedex.getPokedexCompleta().get(8), Pokedex.getPokedexCompleta().get(9))));
+        cenarios.add(new Cenario(TiposTerreno.CAVERNA, 30, Arrays.asList(Pokedex.getPokedexCompleta().get(4), Pokedex.getPokedexCompleta().get(5), Pokedex.getPokedexCompleta().get(6),
+                Pokedex.getPokedexCompleta().get(74), Pokedex.getPokedexCompleta().get(75), Pokedex.getPokedexCompleta().get(76))));
+        cenarios.add(new Cenario(TiposTerreno.CHAO, 4, List.of()));
+
+        return cenarios;
+    }
+
+
+/*    public static List<Cenario> popularCenarios(){
         List<Cenario> cenarios = new ArrayList<>();
         cenarios.add(new Cenario(TiposTerreno.GRAMA,4, Arrays.asList(new PokemonBase("Bulbasaur"
                 , 20
@@ -172,6 +330,6 @@ public class Main {
         )));
 
         return cenarios;
-    }
+    }*/
 
 }
