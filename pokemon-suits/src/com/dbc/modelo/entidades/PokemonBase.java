@@ -7,6 +7,7 @@ import com.dbc.modelo.enums.Utils;
 import com.dbc.modelo.interfaces.Impressao;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class PokemonBase implements Impressao {
     private final String raca;
@@ -39,7 +40,7 @@ public class PokemonBase implements Impressao {
 
     @Override
     public String toString() {
-        return "Informações da espécie de Pokemon" +
+        return "Informações da espécie de Pokemon\n" +
                 "Raça: " + raca +
                 "\nIdade Minima: " + idadeMinima +
                 "\npesoMinimo: " + pesoMinimo +
@@ -47,8 +48,18 @@ public class PokemonBase implements Impressao {
                 "\nPorcentagem Macho: " + porcentagemMacho +
                 "\nLevel Minimo: " + levelMinimo +
                 "\nDificuldade: " + dificuldade +
-                "\nTipo: " + Arrays.toString(tipo) +
-                "\nRaridade=" + raridade;
+                "\nTipo: " + this.getStringTipos() +
+                "\nRaridade: " + raridade;
+    }
+
+    public String getStringTipos() {
+        List<TipoPokemon> n = Arrays.stream(this.getTipo()).toList();
+        TipoPokemon a = n.get(0);
+        if(n.size() > 1){
+            TipoPokemon b = n.get(1);
+            return a.toString() + " " + b.toString();
+        }
+        return a.toString();
     }
 
     public String getRaca() {
