@@ -5,7 +5,7 @@ import com.dbc.modelo.entidades.Pokemon;
 import com.dbc.modelo.entidades.PokemonBase;
 import com.dbc.modelo.entidades.Treinador;
 import com.dbc.modelo.enums.*;
-import com.dbc.modelo.exeptions.InvalidCenarioExeption;
+import com.dbc.modelo.exeptions.InvalidCenarioException;
 import com.dbc.modelo.interfaces.Pokebola;
 import com.dbc.modelo.objetos.Mochila;
 import com.dbc.modelo.objetos.Pokedex;
@@ -92,7 +92,7 @@ public class Main {
                         };
 
                         escolha = 0;
-                    } catch(InvalidCenarioExeption ex){
+                    } catch(InvalidCenarioException ex){
                         System.out.println("Esta área não possui pokemons. Mude de área para procurar pokemons.");
                         escolha = 0;
                     }

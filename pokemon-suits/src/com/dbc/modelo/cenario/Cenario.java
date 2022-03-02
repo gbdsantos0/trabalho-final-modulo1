@@ -3,10 +3,9 @@ package com.dbc.modelo.cenario;
 import com.dbc.modelo.entidades.Pokemon;
 import com.dbc.modelo.entidades.PokemonBase;
 import com.dbc.modelo.enums.*;
-import com.dbc.modelo.exeptions.InvalidCenarioExeption;
+import com.dbc.modelo.exeptions.InvalidCenarioException;
 import com.dbc.modelo.interfaces.Impressao;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -24,7 +23,7 @@ public class Cenario implements Impressao {
 
 
     //metodo para gerar um pokemon em um encontro de pokemon
-    public Pokemon gerarPokemon() throws InvalidCenarioExeption {
+    public Pokemon gerarPokemon() throws InvalidCenarioException {
         Random r = new Random();
 
         PokemonBase pokemonBase;
@@ -59,10 +58,10 @@ public class Cenario implements Impressao {
     //metodo para selecionar um pokemon da lista conforme a raridade
     //seleciona por raridade, um dos pokemons disponiveis para aquela raridade
     //5% - super raros, 20% raros, 75% comuns
-    private PokemonBase selecionarPokemon() throws InvalidCenarioExeption {
+    private PokemonBase selecionarPokemon() throws InvalidCenarioException {
 
         if(pokemonsDisponiveis.isEmpty()){
-            throw new InvalidCenarioExeption("Lista de pokemons vazia, não é possível selecionar pokemons");
+            throw new InvalidCenarioException("Lista de pokemons vazia, não é possível selecionar pokemons");
         }
 
         List<PokemonBase> superRaros = pokemonsDisponiveis.stream()

@@ -21,15 +21,4 @@ public class TesteMochila {
         Assert.assertNotNull(ash.getMochila().getBag().get(0));
     }
 
-    @Test
-    public void receberAMochilaPorMetodo(){
-            Treinador ash = new Treinador("ash", 40, 80.0, Utils.MASCULINO, new Mochila());
-
-            ash.getMochila().adicionarPokemom(new Pokemon("tupi",null,null,null,null
-                    ,null, TipoPokemon.POISON, null, null));
-
-
-        Assert.assertFalse(ash.getMochila().getBag().isEmpty());
-    }
-
 }

@@ -4,8 +4,7 @@ import com.dbc.modelo.cenario.Cenario;
 import com.dbc.modelo.entidades.Pokemon;
 import com.dbc.modelo.entidades.PokemonBase;
 import com.dbc.modelo.enums.*;
-import com.dbc.modelo.exeptions.InvalidCenarioExeption;
-import junit.framework.AssertionFailedError;
+import com.dbc.modelo.exeptions.InvalidCenarioException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -25,7 +24,7 @@ public class TesteCenario {
         try {
             pokemonGerado = cenario.gerarPokemon();
 
-        }catch (InvalidCenarioExeption e){}
+        }catch (InvalidCenarioException e){}
 
         //ASSERT
         Assert.assertNull(pokemonGerado);
@@ -51,7 +50,7 @@ public class TesteCenario {
         try {
             pokemonGerado = cenario.gerarPokemon();
 
-        }catch (InvalidCenarioExeption ex){
+        }catch (InvalidCenarioException ex){
             System.err.println("Não é possível gerar pokemons em cenários sem lista de pokemons");
         }
 
@@ -80,7 +79,7 @@ public class TesteCenario {
         try {
             pokemonGerado = cenario.gerarPokemon();
 
-        }catch (InvalidCenarioExeption ex){
+        }catch (InvalidCenarioException ex){
             System.err.println("Não é possível gerar pokemons em cenários sem lista de pokemons");
         }
 
@@ -109,7 +108,7 @@ public class TesteCenario {
         try {
             pokemonGerado = cenario.gerarPokemon();
 
-        }catch (InvalidCenarioExeption ex){
+        }catch (InvalidCenarioException ex){
             System.err.println("Não é possível gerar pokemons em cenários sem lista de pokemons");
         }
 
