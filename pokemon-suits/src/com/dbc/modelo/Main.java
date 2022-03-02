@@ -23,7 +23,7 @@ public class Main {
         Pokedex pokedex = popularPokedex();
 
         List<Cenario> cenarios = popularCenarios(pokedex);
-        Cenario cenarioAtual = cenarios.get(0);
+        Cenario cenarioAtual = cenarios.get(3);
 
         Treinador ash = new Treinador("ash", 40, 80.0, Utils.MASCULINO, new Mochila());
 
