@@ -89,6 +89,7 @@ public class TesteCenario {
     }
 
     @Test
+
     public void gerarPokemonListaComUmSuperRaro(){
         //SETUP
         Cenario cenario = new Cenario(TiposTerreno.GRAMA,20,Arrays.asList(new PokemonBase("Bulbassalto"
