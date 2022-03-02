@@ -53,7 +53,7 @@ public class Mochila implements Impressao {
     }
     //MOSTRAR
     public void imprimir() {
-        this.bag.forEach(p -> System.out.println("======================\n" + p + "============================\n"));
+        this.bag.forEach(p -> System.out.println("======================\n" + p + "\n============================\n"));
     }
 
     //getter

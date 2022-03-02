@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class Treinador extends Entidade implements Impressao {
 
-    //Instacia da mochila que guarda todos os poquemons do treinador
+    //a mochila guarda todos os pokemons do treinador
     private Mochila mochila;
 
     public Treinador(String nome, Integer idade, Double peso, Utils sexo, Mochila mochila) {
@@ -21,7 +21,6 @@ public class Treinador extends Entidade implements Impressao {
     //Metodo que retorna um boolean se o pokemon for capturado(a chance de captura é delegada para a pokebola)
     public boolean capturar(Pokebola pokebola, Pokemon pokemon, Random r){
         if(r.nextInt(100) <= pokebola.calcularChance(pokemon)){
-            //trocar futuramente pelo metodo adiciona do CRUD
             this.mochila.adicionarPokemom(pokemon);
             return true;
         }else {
