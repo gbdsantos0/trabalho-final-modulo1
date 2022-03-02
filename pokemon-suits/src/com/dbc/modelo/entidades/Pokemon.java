@@ -12,6 +12,7 @@ import java.util.List;
 
 public class Pokemon extends Entidade implements Impressao {
 
+    private String apelido;
     private Integer level;
     //Usamos Enumerations para Padronizar os atributos que influenciam na captura
     private final Dificuldades dificuldade;
@@ -31,6 +32,12 @@ public class Pokemon extends Entidade implements Impressao {
 
 
     //getter e setters
+    public void setApelido(String apelido){
+        this.apelido = apelido;
+    }
+    public String getApelido() {
+        return apelido;
+    }
     public int getLevel() {return level;}
     public void setLevel(int level) {this.level = level;}
     public Dificuldades getDificuldade() {return dificuldade;}
@@ -55,6 +62,7 @@ public class Pokemon extends Entidade implements Impressao {
     public String toString() {
         DecimalFormat df = new DecimalFormat("#0.00");
         return  "nome:"+ super.getNome() +
+                "\nApelido:"+ this.getApelido() +
                 "\nidade: " + super.getIdade() +
                 "\npeso: " + df.format(super.getPeso() )+
                 "\nsexo: " + ((super.getSexo() == Utils.MASCULINO)?"Masculino":"Feminino") +

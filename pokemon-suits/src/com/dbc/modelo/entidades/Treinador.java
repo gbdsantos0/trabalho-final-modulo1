@@ -4,9 +4,9 @@ import com.dbc.modelo.enums.Utils;
 import com.dbc.modelo.interfaces.Impressao;
 import com.dbc.modelo.interfaces.Pokebola;
 import com.dbc.modelo.objetos.Mochila;
-import com.dbc.modelo.objetos.Pokedex;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Treinador extends Entidade implements Impressao {
 
@@ -19,8 +19,10 @@ public class Treinador extends Entidade implements Impressao {
     }
 
     //Metodo que retorna um boolean se o pokemon for capturado(a chance de captura é delegada para a pokebola)
-    public boolean capturar(Pokebola pokebola, Pokemon pokemon, Random r){
+    public boolean capturar(Pokebola pokebola, Pokemon pokemon, Random r, Scanner scanner){
         if(r.nextInt(100) <= pokebola.calcularChance(pokemon)){
+            System.out.println("Digite um apelido para o seu Pokemon: ");
+            pokemon.setApelido(scanner.nextLine());
             this.mochila.adicionarPokemom(pokemon);
             return true;
         }else {

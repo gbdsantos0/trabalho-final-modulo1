@@ -39,7 +39,7 @@ public class Main {
             System.out.println("Digite 1 Procurar Pokemon");
             System.out.println("Digite 2 para mudar de local");
             System.out.println("Digite 3 para listar pokemom ");
-            System.out.println("Digite 4 para editar o nome de um pokemom");
+            System.out.println("Digite 4 para editar o apelido de um pokemom");
             System.out.println("Digite 5 para assassinar um pokemom");
             System.out.println("Digite 8 para sair");
             escolha = scanner.nextInt();
@@ -54,11 +54,12 @@ public class Main {
                         System.out.println("Digite 1 para jogar a pokebola");
                         System.out.println("Digite 2 para fugir");
                         escolha = scanner.nextInt();
+                        scanner.nextLine();
                         while(escolha!=2){
                             System.out.println("Qual pokebola você quer escolher?");
                             System.out.println("1 - Pokeball\n2 - GreatBall\n3 - NetBall\n4 - HeavyBall\n5 - MasterBall");
                             escolha = scanner.nextInt();
-
+                            scanner.nextLine();
                             switch (escolha){
                                 case 1 -> pokebola = new PokeBall();
                                 case 2 -> pokebola = new GreatBall();
@@ -71,7 +72,7 @@ public class Main {
                                 }
                             }
 
-                            if(ash.capturar(pokebola,pokemonEncontro,r)){
+                            if(ash.capturar(pokebola,pokemonEncontro,r,scanner)){
                                 System.out.println("Parabéns, você conseguiu capturar "+ pokemonEncontro.getNome());
                                 escolha = 2;
                             }else{
@@ -81,6 +82,7 @@ public class Main {
                                     System.out.println("Digite 2 para fugir");
                                     contador++;
                                     escolha = scanner.nextInt();
+                                    scanner.nextLine();
                                 }else{
                                     System.out.println("O pokemon escapou, capturá-lo era seu único trabalho. Tu é ruim!\n");
                                     escolha = 2;
@@ -98,6 +100,7 @@ public class Main {
                 case 2 -> {
                     System.out.println("1 - Grama\n2 - Água\n3 - Caverna\n4 - Chão");
                     escolha = scanner.nextInt();
+                    scanner.nextLine();
                     switch (escolha){
                         case 1 -> cenarioAtual = cenarios.get(0);
                         case 2 -> cenarioAtual = cenarios.get(1);
@@ -109,7 +112,7 @@ public class Main {
                     escolha = 0;
                 }
                 case 3 -> ash.getMochila().imprimir();
-                case 4 -> ash.getMochila().atualizarNomePokemon(scanner);
+                case 4 -> ash.getMochila().atualizarApelidoPokemon(scanner);
                 case 5 -> ash.getMochila().removerPokemom(scanner);
                 case 8 -> System.out.println("Obrigado por jogar!");
                 default -> System.out.println("Você não pode fazer isso");

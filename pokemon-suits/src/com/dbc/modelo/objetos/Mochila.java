@@ -1,7 +1,6 @@
 package com.dbc.modelo.objetos;
 
 import com.dbc.modelo.entidades.Pokemon;
-import com.dbc.modelo.enums.Utils;
 import com.dbc.modelo.interfaces.Impressao;
 
 import java.util.*;
@@ -10,8 +9,8 @@ public class Mochila implements Impressao {
     private ArrayList<Pokemon> bag = new ArrayList<>();
 
 
-    private Optional<Pokemon> pesquisarPorNome(String nomePokemon){
-        return this.bag.stream().filter( p -> p.getNome().equalsIgnoreCase(nomePokemon)).findFirst();
+    private Optional<Pokemon> pesquisarPorApelido(String nomePokemon){
+        return this.bag.stream().filter( p -> p.getApelido().equalsIgnoreCase(nomePokemon)).findFirst();
     
     }
     //CIRAR
@@ -20,17 +19,17 @@ public class Mochila implements Impressao {
     }
 
     //ATUALIZAR
-    public void atualizarNomePokemon(Scanner scanner){
+    public void atualizarApelidoPokemon(Scanner scanner){
         System.out.println("Qual pokemom deseja renomear:");
         this.imprimir();
         System.out.println();
-        Optional<Pokemon> pokemon = this.pesquisarPorNome(scanner.nextLine());
+        Optional<Pokemon> pokemon = this.pesquisarPorApelido(scanner.nextLine());
 
         if(pokemon.isPresent()){
             System.out.println("Digite um novo Nome: ");
             Pokemon p = pokemon.get();
             this.bag.remove(p);
-            p.setNome(scanner.nextLine());
+            p.setApelido(scanner.nextLine());
             this.bag.add(p);
         }else{
             System.out.println("Este pokemon não existe!! ");
@@ -42,11 +41,11 @@ public class Mochila implements Impressao {
         System.out.println("qual pokemom você deseja assassinar friamente: ");
         this.imprimir();
         System.out.println();
-        Optional<Pokemon> pokemon = this.pesquisarPorNome(scanner.nextLine());
+        Optional<Pokemon> pokemon = this.pesquisarPorApelido(scanner.nextLine());
 
         if(pokemon.isPresent()){
-            System.out.println("Digite um novo Nome: ");
             this.bag.remove(pokemon.get());
+            System.out.println("Este pokemon \"retirado\"!! ");
         }else{
             System.out.println("Este pokemon não existe!! ");
         }
