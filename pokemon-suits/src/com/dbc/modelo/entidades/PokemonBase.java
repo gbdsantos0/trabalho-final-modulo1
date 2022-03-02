@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 
-public class PokemonBase implements Impressao {
+public class PokemonBase {
     private final String raca;
     private final Integer idadeMinima;
     private final Double pesoMinimo;
@@ -32,36 +32,6 @@ public class PokemonBase implements Impressao {
         this.dificuldade = dificuldade;
         this.tipo = (tipo2 == null) ? new TipoPokemon[]{tipo1} : new TipoPokemon[]{tipo1, tipo2};
         this.raridade = raridade;
-    }
-
-    @Override
-    public void imprimir() {
-        System.out.println(this);
-    }
-
-    @Override
-    public String toString() {
-        DecimalFormat df = new DecimalFormat("#0.00");
-        return "Informações da espécie de Pokemon\n" +
-                "Raça: " + raca +
-                "\nIdade Minima: " + idadeMinima +
-                "\npesoMinimo: " + df.format(pesoMinimo) +
-                "\npesoMaximo: " + df.format(pesoMaximo) +
-                "\nPorcentagem Macho: " + porcentagemMacho +
-                "\nLevel Minimo: " + levelMinimo +
-                "\nDificuldade: " + dificuldade +
-                "\nTipo: " + this.getStringTipos() +
-                "\nRaridade: " + raridade;
-    }
-
-    public String getStringTipos() {
-        List<TipoPokemon> n = Arrays.stream(this.getTipo()).toList();
-        TipoPokemon a = n.get(0);
-        if(n.size() > 1){
-            TipoPokemon b = n.get(1);
-            return a.toString() + " " + b.toString();
-        }
-        return a.toString();
     }
 
     public String getRaca() {

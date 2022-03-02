@@ -25,29 +25,25 @@ public class Cenario implements Impressao {
     //metodo para gerar um pokemon em um encontro de pokemon
     public Pokemon gerarPokemon() throws InvalidCenarioException {
         Random r = new Random();
-
         PokemonBase pokemonBase;
-
         pokemonBase = this.selecionarPokemon();
-
-
-
         int randLevel = r.nextInt(8)+this.levelMedio-4;//variacao de 4 levels pra cima ou pra baixo
         //garantir que não ha niveis nogativos
         if(randLevel<1){
             randLevel=1;
         }
-
         //idade: idade maxima = level base + idade base
         //peso = 0.8~1.2 * peso base
         //sexo = random 0 ou 1 para o sexo do pokemon
         //level = level minimo = base level ou o level gerado aleatoriamente
-
-
         return new Pokemon(pokemonBase.getRaca()
-                ,r.nextInt(this.levelMedio)+pokemonBase.getIdadeMinima() //idade em pokemons nao parece fazer tanto sentido
-                ,((double)(r.nextDouble(pokemonBase.getPesoMaximo()-pokemonBase.getPesoMinimo())+pokemonBase.getPesoMinimo()))
-                , (r.nextInt(100)<=pokemonBase.getPorcentagemMacho()?Utils.MASCULINO:Utils.FEMININO)//calcula o sexo de acordo com a chance de ser masculino
+                //idade em pokemons nao parece fazer tanto sentido
+                ,r.nextInt(this.levelMedio)+pokemonBase.getIdadeMinima()
+                ,((double)(r.nextDouble(
+                        pokemonBase.getPesoMaximo() - pokemonBase.getPesoMinimo()
+                        ) + pokemonBase.getPesoMinimo()))
+                    //calcula o sexo de acordo com a chance de ser masculino
+                , (r.nextInt(100)<=pokemonBase.getPorcentagemMacho()?Utils.MASCULINO:Utils.FEMININO)
                 ,pokemonBase.getDificuldade()
                 ,Math.max(pokemonBase.getLevelMinimo(),randLevel)
                 ,pokemonBase.getTipo()[0]
@@ -77,7 +73,6 @@ public class Cenario implements Impressao {
         Random r = new Random();
 
         int valorAleatorio;
-
         if(comuns.isEmpty()){
             //somente super raros = retorna um super raro
             if(raros.isEmpty()){
@@ -97,7 +92,8 @@ public class Cenario implements Impressao {
                     return raros.get(r.nextInt(raros.size()));
                 }
             }
-        }else if(raros.isEmpty()){
+        }
+        else if(raros.isEmpty()){
             //somente comuns
             if(superRaros.isEmpty()){
                 return comuns.get(r.nextInt(comuns.size()));

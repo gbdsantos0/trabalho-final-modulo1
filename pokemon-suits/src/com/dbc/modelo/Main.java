@@ -19,7 +19,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Random r = new Random();
 
-
         Pokedex pokedex = popularPokedex();
 
         List<Cenario> cenarios = popularCenarios(pokedex);
