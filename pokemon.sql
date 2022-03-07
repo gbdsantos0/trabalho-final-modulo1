@@ -62,6 +62,18 @@ CREATE TABLE "Pokemon" (
   		REFERENCES "Mochila"("id_mochila")
 );
 
+CREATE TABLE "Cenario_X_PokemonBase" (
+  "id_cenario" NUMBER NOT NULL,
+  "id_pokemonBase" NUMBER NOT NULL,
+  PRIMARY KEY ("id_cenario", "id_pokemonBase"),
+  CONSTRAINT "FK_Cenario_X_PB.id_cenario"
+  	FOREIGN KEY ("id_cenario")
+  		REFERENCES "Cenario"("id_cenario"),
+  CONSTRAINT "FK_Cenario_X_PB.id_pB"
+  	FOREIGN KEY ("id_pokemonBase")
+  		REFERENCES "PokemonBase"("id_pokemonBase")
+);
+
 CREATE SEQUENCE SEQ_POKEMON
  START WITH     1
  INCREMENT BY   1
