@@ -7,21 +7,21 @@ import java.sql.SQLException;
 public class BdConnection {
 
 	private static final String SERVER = "localhost";
-	private static final String PORT = "1521"; // Porta TCP padrão do Oracle
+	private static final String PORT = "1521"; // Porta TCP padrï¿½o do Oracle
 	private static final String DATABASE = "xe";
 
-	// Configuração dos parâmetros de autenticação
+	// Configuraï¿½ï¿½o dos parï¿½metros de autenticaï¿½ï¿½o
 	private static final String USER = "POKEMON";
 	private static final String PASS = "oracle";
 
 	public static Connection getConnection() throws SQLException {
 		String url = "jdbc:oracle:thin:@" + SERVER + ":" + PORT + ":" + DATABASE;
 
-		// Abre-se a conexão com o Banco de Dados
+		// Abre-se a conexï¿½o com o Banco de Dados
 		Connection con = DriverManager.getConnection(url, USER, PASS);
 
 		// sempre usar o schema vem_ser
-		con.createStatement().execute("alter session set current_schema=VEM_SER");
+		con.createStatement().execute("alter session set current_schema=POKEMON");
 
 		return con;
 	}

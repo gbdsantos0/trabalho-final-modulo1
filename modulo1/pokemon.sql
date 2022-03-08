@@ -49,6 +49,11 @@ CREATE TABLE "Treinador" (
 CREATE TABLE "Mochila" (
   "id_mochila" NUMBER NOT NULL,
   "id_treinador" NUMBER NOT NULL,
+  "quantidadeGreatBalls" NUMBER(3) NOT NULL,
+  "quantidadeHeavyBalls" NUMBER(3) NOT NULL,
+  "quantidadeMasterBalls" NUMBER(3) NOT NULL,
+  "quantidadeNetBalls" NUMBER(3) NOT NULL,
+  "quantidadePokeBalls" NUMBER(3) NOT NULL,
   PRIMARY KEY ("id_mochila"),
   CONSTRAINT "FK_Mochila.id_treinador"
   	FOREIGN KEY ("id_treinador")
@@ -160,3 +165,5 @@ INSERT INTO "Pokedex"
 VALUES (SEQ_POKEDEX.nextval);
 
 SELECT * FROM "Pokedex";
+
+SELECT p."nome" capeta FROM "Pokemon" p;
