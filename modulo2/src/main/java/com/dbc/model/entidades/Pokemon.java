@@ -12,36 +12,46 @@ import com.dbc.model.interfaces.Impressao;
 
 public class Pokemon extends Entidade implements Impressao {
 
-    private String apelido;
+	private Integer id;
+    private String pokemon;
     private Integer level;
     //Usamos Enumerations para Padronizar os atributos que influenciam na captura
     private final Dificuldades dificuldade;
     private final TipoPokemon[] tipo;
     private final Raridades raridade;
+    private final Integer idMochila;
 
     public Pokemon(String nome, Integer idade, Double peso, Utils sexo,
                    Dificuldades dificuldade, Integer level, TipoPokemon tipo1, TipoPokemon tipo2,
-                   Raridades raridade) {
+                   Raridades raridade, Integer idMochila) {
         super(nome, idade, peso, sexo);
         this.dificuldade = dificuldade;
         this.level = level;
         //checa se o Pokemon tem somente um atributo ou se ele tem dois
         this.tipo = (tipo2 == null) ? new TipoPokemon[]{tipo1} : new TipoPokemon[]{tipo1, tipo2};
         this.raridade = raridade;
+		this.idMochila = idMochila;
     }
 
 
     //getter e setters
-    public void setApelido(String apelido){
-        this.apelido = apelido;
-    }
-    public String getApelido() {
-        return apelido;
-    }
+	public Integer getIdMochila() {
+		return idMochila;
+	}
+    public String getPokemon() {
+		return this.pokemon;
+	}
+	public void setPokemon(String pokemon) {
+		this.pokemon = pokemon;
+	}
     public int getLevel() {return level;}
-    public void setLevel(int level) {this.level = level;}
+	public void setLevel(int level) {this.level = level;}
     public Dificuldades getDificuldade() {return dificuldade;}
     public TipoPokemon[] getTipo() {return tipo;}
+	public void setId(Integer id) {this.id = id;}
+	public Integer getId() {return id;}
+	public Raridades getRaridade() {return raridade;}
+	
     public String getStringTipos() {
         List<TipoPokemon> n = Arrays.stream(this.getTipo()).toList();
         TipoPokemon a = n.get(0);
@@ -51,8 +61,8 @@ public class Pokemon extends Entidade implements Impressao {
         }
         return a.toString();
     }
-    public Raridades getRaridade() {return raridade;}
-
+    
+    //talvez retirar
     @Override
     public void imprimir() {
         System.out.println(this);
@@ -61,8 +71,8 @@ public class Pokemon extends Entidade implements Impressao {
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat("#0.00");
-        return  "nome:"+ super.getNome() +
-                "\nApelido:"+ this.getApelido() +
+        return  "nome:"+ this.getPokemon() +
+                "\nApelido:"+ super.getNome() +
                 "\nidade: " + super.getIdade() +
                 "\npeso: " + df.format(super.getPeso() )+
                 "\nsexo: " + ((super.getSexo() == Utils.MASCULINO)?"Masculino":"Feminino") +

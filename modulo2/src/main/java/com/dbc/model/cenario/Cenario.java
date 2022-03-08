@@ -50,7 +50,8 @@ public class Cenario implements Impressao {
                 ,Math.max(pokemonBase.getLevelMinimo(),randLevel)
                 ,pokemonBase.getTipo()[0]
                 ,(pokemonBase.getTipo().length>1?pokemonBase.getTipo()[1]:null)
-                ,pokemonBase.getRaridade());
+                ,pokemonBase.getRaridade()
+                ,null);
     }
 
     //metodo para selecionar um pokemon da lista conforme a raridade

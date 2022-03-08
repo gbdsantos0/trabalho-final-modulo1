@@ -22,7 +22,7 @@ public class Treinador extends Entidade implements Impressao {
     public boolean capturar(Pokebola pokebola, Pokemon pokemon, Random r, Scanner scanner){
         if(r.nextInt(100) <= pokebola.calcularChance(pokemon)){
             System.out.println("Digite um apelido para o seu Pokemon: ");
-            pokemon.setApelido(scanner.nextLine());
+            pokemon.setNome(scanner.nextLine());
             this.mochila.adicionarPokemom(pokemon);
             return true;
         }else {
