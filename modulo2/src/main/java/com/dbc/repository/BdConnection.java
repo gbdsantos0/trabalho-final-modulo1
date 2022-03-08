@@ -11,7 +11,7 @@ public class BdConnection {
 	private static final String DATABASE = "xe";
 
 	// Configura��o dos par�metros de autentica��o
-	private static final String USER = "POKEMON";
+	private static final String USER = "SYSTEM";
 	private static final String PASS = "oracle";
 
 	public static Connection getConnection() throws SQLException {

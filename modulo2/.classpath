@@ -34,5 +34,17 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/vemserprojfinal/trabalho-final-modulo1/modulo2/src/main/resources/ojdbc11-full/ojdbc11.jar"/>
+	<classpathentry kind="lib" path="D:/vemserprojfinal/trabalho-final-modulo1/modulo2/src/main/resources/ojdbc11-full/ons.jar"/>
+	<classpathentry kind="lib" path="D:/vemserprojfinal/trabalho-final-modulo1/modulo2/src/main/resources/ojdbc11-full/oraclepki.jar"/>
+	<classpathentry kind="lib" path="D:/vemserprojfinal/trabalho-final-modulo1/modulo2/src/main/resources/ojdbc11-full/orai18n.jar"/>
+	<classpathentry kind="lib" path="D:/vemserprojfinal/trabalho-final-modulo1/modulo2/src/main/resources/ojdbc11-full/osdt_cert.jar"/>
+	<classpathentry kind="lib" path="D:/vemserprojfinal/trabalho-final-modulo1/modulo2/src/main/resources/ojdbc11-full/osdt_core.jar"/>
+	<classpathentry kind="lib" path="D:/vemserprojfinal/trabalho-final-modulo1/modulo2/src/main/resources/ojdbc11-full/rsi.jar"/>
+	<classpathentry kind="lib" path="D:/vemserprojfinal/trabalho-final-modulo1/modulo2/src/main/resources/ojdbc11-full/simplefan.jar"/>
+	<classpathentry kind="lib" path="D:/vemserprojfinal/trabalho-final-modulo1/modulo2/src/main/resources/ojdbc11-full/ucp11.jar"/>
+	<classpathentry kind="lib" path="D:/vemserprojfinal/trabalho-final-modulo1/modulo2/src/main/resources/ojdbc11-full/xdb.jar"/>
+	<classpathentry kind="lib" path="D:/vemserprojfinal/trabalho-final-modulo1/modulo2/src/main/resources/ojdbc11-full/xmlparserv2.jar"/>
+	<classpathentry kind="lib" path="D:/vemserprojfinal/trabalho-final-modulo1/modulo2/src/main/resources/ojdbc11-full/xmlparserv2_sans_jaxp_services.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

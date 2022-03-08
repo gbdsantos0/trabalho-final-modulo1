@@ -20,7 +20,7 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
 	
 	@Override
 	public Integer getProximoId(Connection connection) throws SQLException {
-		 String sql = "SELECT seq_pokemon.nextval mysequence from SEQ_POKEMON";
+		 String sql = "SELECT seq_pokemon.nextval mysequence from DUAL";
 
 	        Statement stmt = connection.createStatement();
 	        ResultSet res = stmt.executeQuery(sql);
@@ -40,7 +40,7 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
             Integer proximoId = this.getProximoId(con);
             pokemon.setId(proximoId);
 
-            String sql = "INSERT INTO POKEMON\n" +
+            String sql = "INSERT INTO \"PokemonBase\"\n" +
                     "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -79,7 +79,7 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
         try {
             con = BdConnection.getConnection();
 
-            String sql = "DELETE FROM POKEMON WHERE id_pokemon = ?";
+            String sql = "DELETE FROM \"Pokemon\" p  WHERE p.id_pokemon = ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -108,8 +108,8 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
             con = BdConnection.getConnection();
 
             StringBuilder sql = new StringBuilder();
-            sql.append("UPDATE POKEMON SET ");
-            sql.append(" nome = ?,");
+            sql.append("UPDATE \"Pokemon\" p SET ");
+            sql.append(" p.nome = ?,");
             sql.append(" WHERE id_pokemon = ? ");
 
             PreparedStatement stmt = con.prepareStatement(sql.toString());
@@ -132,7 +132,60 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
             }
         }
 	}
-
+	
+	public boolean editarTodosPokemons(List<Pokemon> pokemons) throws BancoDeDadosException {
+		Connection con = null;
+        try {
+            con = BdConnection.getConnection();
+            
+            for (Pokemon pokemon : pokemons) {
+            
+	            StringBuilder sql = new StringBuilder();
+	            sql.append("UPDATE \"Pokemon\" p SET ");
+	            sql.append(" p.nome = ?,");
+	            sql.append(" p.nome = ?,");
+	            sql.append(" p.nome = ?,");
+	            sql.append(" p.nome = ?,");
+	            sql.append(" p.nome = ?,");
+	            sql.append(" p.nome = ?,");
+	            sql.append(" p.nome = ?,");
+	            sql.append(" p.nome = ?,");
+	            sql.append(" p.nome = ?,");
+	            sql.append(" p.nome = ?,");
+	            sql.append(" p.nome = ?,");
+	            sql.append(" WHERE id_pokemon = ? ");
+	
+	            PreparedStatement stmt = con.prepareStatement(sql.toString());
+	
+	            stmt.setString(1, pokemon.getPokemon());
+	            stmt.setInt(2, pokemon.getIdade());
+	            stmt.setDouble(3, pokemon.getPeso());
+	            stmt.setString(4, (pokemon.getSexo()==Utils.MASCULINO)?"M":"F");
+	            stmt.setString(5, pokemon.getNome());
+	            stmt.setInt(6, (pokemon.getDificuldade()==Dificuldades.DIFICIL)?3:(pokemon.getDificuldade()==Dificuldades.MEDIO?2:1));
+	            stmt.setInt(7, pokemon.getLevel());
+	            stmt.setInt(8, pokemon.getTipo()[1].getValor());
+	            stmt.setInt(9, (pokemon.getTipo().length > 1)?pokemon.getTipo()[1].getValor():null);
+	            stmt.setInt(10, (pokemon.getRaridade()==Raridades.SUPER_RARO)?3:(pokemon.getRaridade()==Raridades.RARO?2:1));
+	            stmt.setInt(11, pokemon.getIdMochila());
+	            stmt.setInt(12, pokemon.getId());
+	            
+	            stmt.executeUpdate();
+            }
+            return true;
+        } catch (SQLException e) {
+            throw new BancoDeDadosException(e.getCause());
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+	}
+	
 	@Override
 	public List<Pokemon> listar() throws BancoDeDadosException {
 		 List<Pokemon> pokemons = new ArrayList<>();
@@ -141,7 +194,7 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
 	            con = BdConnection.getConnection();
 	            Statement stmt = con.createStatement();
 
-	            String sql = "SELECT * FROM POKEMON";
+	            String sql = "SELECT * FROM \"Pokemon\" p";
 
 	            // Executa-se a consulta
 	            ResultSet res = stmt.executeQuery(sql);
@@ -161,6 +214,7 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
 	            			(res.getInt("raridade")==3)?Raridades.SUPER_RARO:(res.getInt("raridade")==2)?Raridades.RARO:Raridades.COMUM,
 	            			res.getInt("id_mochila"));
 	            	pokemon.setId(res.getInt("id_pokemon"));
+	            	pokemon.setPokemon(res.getString("nome"));
 	            	pokemons.add(pokemon);
 	            }
 	        } catch (SQLException e) {

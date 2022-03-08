@@ -35,7 +35,12 @@ public class Mochila implements Impressao {
     public void adicionarPokemom(Pokemon p){
         this.bag.add(p);
     }
-
+    
+    //CIRAR VARIOS
+    public void adicionarPokemons(List<Pokemon> p){
+        this.bag.addAll(p);
+    }
+    
     //ATUALIZAR
     public void atualizarApelidoPokemon(Scanner scanner){
         System.out.println("Qual pokemon deseja renomear:");
@@ -55,7 +60,7 @@ public class Mochila implements Impressao {
     }
 
     //REMOVER
-    public void removerPokemom(Scanner scanner){
+    public Integer removerPokemom(Scanner scanner){
         System.out.println("qual pokemon você deseja assassinar friamente: ");
         this.imprimir();
         System.out.println();
@@ -64,9 +69,11 @@ public class Mochila implements Impressao {
         if(pokemon.isPresent()){
             this.bag.remove(pokemon.get());
             System.out.println("Este pokemon \"retirado\"!! ");
+            return pokemon.get().getId();
         }else{
             System.out.println("Este pokemon não existe!! ");
         }
+		return null;
     }
     //MOSTRAR
     public void imprimir() {

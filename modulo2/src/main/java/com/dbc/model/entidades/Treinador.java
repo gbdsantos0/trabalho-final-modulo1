@@ -19,7 +19,11 @@ public class Treinador extends Entidade implements Impressao {
         super(nome, idade, peso, sexo);
         this.mochila = mochila;
     }
-
+    
+    public void setMochila(Mochila mochila) {
+		this.mochila = mochila;
+	}
+    
     public int getIdTreinador() {
         return idTreinador;
     }

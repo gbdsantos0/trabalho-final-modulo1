@@ -190,18 +190,20 @@ public class TreinadorRepository implements Repository<Integer, Treinador> {
         Connection con = null;
         try{
             con = BdConnection.getConnection();
-            String sql = "SELECT * FROM \"Treinador\" WHERE \"id_treinador\" = ? ";
+            String sql = "SELECT * FROM \"Treinador\" t WHERE t.\"id_treinador\" = ? ";
+            
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1,id);
+            
             ResultSet res = stmt.executeQuery();
-            MochilaRepository mochilaRepository = new MochilaRepository();
+            
             res.next();
 
             treinador = new Treinador(res.getString("\"nome\""),
                     res.getInt("\"idade\""),
                     res.getDouble("\"peso\""),
                     res.getString("sexo").equalsIgnoreCase("M")?Utils.MASCULINO:Utils.FEMININO,
-                    mochilaRepository.getById(res.getInt("id_mochila")));
+                    null);
 
             treinador.setIdTreinador(res.getInt("\"id_treinador\""));
             treinador.setIdMochila(res.getInt("\"id_mochila\""));
