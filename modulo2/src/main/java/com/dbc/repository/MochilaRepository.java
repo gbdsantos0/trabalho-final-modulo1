@@ -174,4 +174,38 @@ public class MochilaRepository implements Repository<Integer, Mochila> {
         return mochilas;
     }
 
+    public Mochila getById(Integer id) throws BancoDeDadosException {
+        Mochila mochila = new Mochila();
+        Connection con = null;
+        try {
+            con = BdConnection.getConnection();
+            Statement stmt = con.createStatement();
+
+            String sql = "SELECT * FROM \"Mochila\"\nWHERE \"id_mochila\" = ?";
+
+            // Executa-se a consulta
+            ResultSet res = stmt.executeQuery(sql);
+
+            while (res.next()) {
+                mochila.setIdMochila(res.getInt("\"id_mochila\""));
+                mochila.setQuantidadeGreatBalls(res.getInt("\"quantidadeGreatBalls\""));
+                mochila.setQuantidadeHeavyBalls(res.getInt("\"quantidadeHeavyBalls\""));
+                mochila.setQuantidadeMasterBalls(res.getInt("\"quantidadeMasterBalls\""));
+                mochila.setQuantidadeNetBalls(res.getInt("\"quantidadeNetBalls\""));
+                mochila.setQuantidadePokeBalls(res.getInt("\"quantidadePokeBalls\""));
+            }
+        } catch (SQLException e) {
+            throw new BancoDeDadosException(e.getCause());
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return mochila;
+    }
+
 }
