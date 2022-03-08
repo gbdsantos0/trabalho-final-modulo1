@@ -37,27 +37,27 @@ CREATE TABLE "PokemonBase" (
   PRIMARY KEY ("id_pokemonBase")
 );
 
-CREATE TABLE "Treinador" (
-  "id_treinador" NUMBER NOT NULL,
-  "nome" VARCHAR2(50) NOT NULL,
-  "idade" NUMBER(3) NOT NULL,
-  "peso" DECIMAL(5,2) NOT NULL,
-  "sexo" CHAR(1) NOT NULL,
-  PRIMARY KEY ("id_treinador")
-);
-
 CREATE TABLE "Mochila" (
   "id_mochila" NUMBER NOT NULL,
-  "id_treinador" NUMBER NOT NULL,
   "quantidadeGreatBalls" NUMBER(3) NOT NULL,
   "quantidadeHeavyBalls" NUMBER(3) NOT NULL,
   "quantidadeMasterBalls" NUMBER(3) NOT NULL,
   "quantidadeNetBalls" NUMBER(3) NOT NULL,
   "quantidadePokeBalls" NUMBER(3) NOT NULL,
-  PRIMARY KEY ("id_mochila"),
-  CONSTRAINT "FK_Mochila.id_treinador"
-  	FOREIGN KEY ("id_treinador")
-  		REFERENCES "Treinador"("id_treinador")
+  PRIMARY KEY ("id_mochila")
+);
+
+CREATE TABLE "Treinador" (
+  "id_treinador" NUMBER NOT NULL,
+  "id_mochila" NUMBER NOT NULL,
+  "nome" VARCHAR2(50) NOT NULL,
+  "idade" NUMBER(3) NOT NULL,
+  "peso" DECIMAL(5,2) NOT NULL,
+  "sexo" CHAR(1) NOT NULL,
+  PRIMARY KEY ("id_treinador"),
+  CONSTRAINT "FK_Treinador.id_mochila"
+  	FOREIGN KEY ("id_mochila")
+  		REFERENCES "Mochila"("id_mochila")
 );
 
 CREATE TABLE "Pokemon" (
@@ -121,14 +121,15 @@ CREATE SEQUENCE SEQ_POKEDEX
  INCREMENT BY   1
  NOCACHE NOCYCLE;
  
-/*DROP TABLE "Cenario";
+/*DROP TABLE "Cenario_X_PokemonBase";
+DROP TABLE "Cenario";
 DROP TABLE "Pokedex";
 DROP TABLE "PokemonBase";
 DROP TABLE "Pokemon";
+DROP TABLE "Treinador";
 DROP TABLE "Mochila";
-DROP TABLE "Treinador";*/
   	
-/*DROP SEQUENCE SEQ_POKEMON;
+DROP SEQUENCE SEQ_POKEMON;
 DROP SEQUENCE SEQ_TREINADOR;
 DROP SEQUENCE SEQ_MOCHILA;
 DROP SEQUENCE SEQ_POKEMONBASE;
@@ -141,15 +142,15 @@ VALUES (SEQ_POKEMONBASE.nextval, 'Bulbasauro', 20, 6.7, 11.0, 87.5, 5, 0, 0, 0, 
 
 SELECT * FROM "PokemonBase";
 
-INSERT INTO "Treinador"
-VALUES (SEQ_TREINADOR.nextval, 'Nelson', 684, 45.0, 'M');
-
-SELECT * FROM "Treinador";
-
 INSERT INTO "Mochila"
-VALUES (SEQ_MOCHILA.nextval, 1);
+VALUES (SEQ_MOCHILA.nextval, 0, 0, 0, 0, 0);
 
 SELECT * FROM "Mochila";
+
+INSERT INTO "Treinador"
+VALUES (SEQ_TREINADOR.nextval, 1, 'Nelson', 684, 45.0, 'M');
+
+SELECT * FROM "Treinador";
 
 INSERT INTO "Pokemon"
 VALUES (SEQ_POKEMON.nextval, 'Bulbasauro', 20, 8.0, 'F', NULL, 0, 5, 0, 0, 0, 1);
@@ -165,5 +166,3 @@ INSERT INTO "Pokedex"
 VALUES (SEQ_POKEDEX.nextval);
 
 SELECT * FROM "Pokedex";
-
-SELECT p."nome" capeta FROM "Pokemon" p;
