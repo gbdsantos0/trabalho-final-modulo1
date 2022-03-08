@@ -11,6 +11,7 @@ import com.dbc.model.interfaces.Impressao;
 
 public class Mochila implements Impressao {
     private ArrayList<Pokemon> bag;
+    private int idMochila;
     private int quantidadeGreatBalls;
     private int quantidadeHeavyBalls;
     private int quantidadeMasterBalls;
@@ -78,6 +79,10 @@ public class Mochila implements Impressao {
         return Collections.unmodifiableList(this.bag);
     }
 
+    public int getIdMochila() {
+        return idMochila;
+    }
+
     public int getQuantidadeGreatBalls() {
         return quantidadeGreatBalls;
     }
@@ -99,6 +104,10 @@ public class Mochila implements Impressao {
     }
 
     //setters
+    public void setIdMochila(int idMochila) {
+        this.idMochila = idMochila;
+    }
+
     public void setQuantidadeGreatBalls(int quantidadeGreatBalls) {
         if(quantidadeGreatBalls>=0 && quantidadeGreatBalls<=99){
             this.quantidadeGreatBalls = quantidadeGreatBalls;

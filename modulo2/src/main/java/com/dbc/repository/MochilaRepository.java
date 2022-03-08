@@ -33,21 +33,20 @@ public class MochilaRepository implements Repository<Integer, Mochila> {
             con = BdConnection.getConnection();
 
             Integer proximoId = this.getProximoId(con);
-            //TODO mochila.setIdMochila(proximoId);
+            mochila.setIdMochila(proximoId);
 
             String sql = "INSERT INTO \"Mochila\"\n" +
                     "(id_mochila, id_treinador, quantidadeGreatBalls, quantidadeHeavyBalls, quantidadeMasterBalls, quantidadeNetBalls, quantidadePokeBalls)\n" +
-                    "VALUES(?, ?, ?, ?, ?, ?, ?)\n";
+                    "VALUES(?, ?, ?, ?, ?, ?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
-            stmt.setInt(1, proximoId);//TODO mochila.getIdMochila());
-            stmt.setInt(2, 0);//TODO mochila.getIdTreinador*/);
-            stmt.setInt(3, mochila.getQuantidadeGreatBalls());
-            stmt.setInt(4, mochila.getQuantidadeHeavyBalls());
-            stmt.setInt(5, mochila.getQuantidadeMasterBalls());
-            stmt.setInt(6, mochila.getQuantidadeNetBalls());
-            stmt.setInt(7, mochila.getQuantidadePokeBalls());
+            stmt.setInt(1, mochila.getIdMochila());
+            stmt.setInt(2, mochila.getQuantidadeGreatBalls());
+            stmt.setInt(3, mochila.getQuantidadeHeavyBalls());
+            stmt.setInt(4, mochila.getQuantidadeMasterBalls());
+            stmt.setInt(5, mochila.getQuantidadeNetBalls());
+            stmt.setInt(6, mochila.getQuantidadePokeBalls());
 
             int res = stmt.executeUpdate();
             System.out.println("adicionarMochila.res=" + res);
@@ -103,7 +102,6 @@ public class MochilaRepository implements Repository<Integer, Mochila> {
 
             StringBuilder sql = new StringBuilder();
             sql.append("UPDATE Mochila SET ");
-            sql.append(" \"id_treinador\" = ?,");
             sql.append(" \"quantidadeGreatBalls\" = ?,");
             sql.append(" \"quantidadeHeavyBalls\" = ?,");
             sql.append(" \"quantidadeMasterBalls\" = ?,");
@@ -114,13 +112,12 @@ public class MochilaRepository implements Repository<Integer, Mochila> {
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
 
-            stmt.setInt(2, 0);//TODO mochila.getIdTreinador*/);
-            stmt.setInt(3, mochila.getQuantidadeGreatBalls());
-            stmt.setInt(4, mochila.getQuantidadeHeavyBalls());
-            stmt.setInt(5, mochila.getQuantidadeMasterBalls());
-            stmt.setInt(6, mochila.getQuantidadeNetBalls());
-            stmt.setInt(7, mochila.getQuantidadePokeBalls());
-            stmt.setInt(1, 0);//TODO mochila.getIdMochila());
+            stmt.setInt(2, mochila.getQuantidadeGreatBalls());
+            stmt.setInt(3, mochila.getQuantidadeHeavyBalls());
+            stmt.setInt(4, mochila.getQuantidadeMasterBalls());
+            stmt.setInt(5, mochila.getQuantidadeNetBalls());
+            stmt.setInt(6, mochila.getQuantidadePokeBalls());
+            stmt.setInt(1, mochila.getIdMochila());
 
             // Executa-se a consulta
             int res = stmt.executeUpdate();
@@ -155,8 +152,7 @@ public class MochilaRepository implements Repository<Integer, Mochila> {
 
             while (res.next()) {
                 Mochila mochila = new Mochila();
-                //TODO mochila.setIdMochila(res.getInt("\"id_mochila\""));
-                //TODO mochila.setIdTreinador(res.getInt("\"id_treinador\""));
+                mochila.setIdMochila(res.getInt("\"id_mochila\""));
                 mochila.setQuantidadeGreatBalls(res.getInt("\"quantidadeGreatBalls\""));
                 mochila.setQuantidadeHeavyBalls(res.getInt("\"quantidadeHeavyBalls\""));
                 mochila.setQuantidadeMasterBalls(res.getInt("\"quantidadeMasterBalls\""));
