@@ -12,10 +12,28 @@ public class Treinador extends Entidade implements Impressao {
 
     //a mochila guarda todos os pokemons do treinador
     private Mochila mochila;
+    private int idTreinador;
+    private int idMochila;
 
     public Treinador(String nome, Integer idade, Double peso, Utils sexo, Mochila mochila) {
         super(nome, idade, peso, sexo);
         this.mochila = mochila;
+    }
+
+    public int getIdTreinador() {
+        return idTreinador;
+    }
+
+    public void setIdTreinador(int idTreinador) {
+        this.idTreinador = idTreinador;
+    }
+
+    public int getIdMochila() {
+        return idMochila;
+    }
+
+    public void setIdMochila(int idMochila) {
+        this.idMochila = idMochila;
     }
 
     //Metodo que retorna um boolean se o pokemon for capturado(a chance de captura é delegada para a pokebola)

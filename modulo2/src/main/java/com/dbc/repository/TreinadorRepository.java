@@ -23,6 +23,7 @@ public class TreinadorRepository implements Repository<Integer, Treinador> {
         return null;
     }
 
+
     @Override
     public Treinador adicionar(Treinador treinador) throws BancoDeDadosException {
         Connection con = null;
@@ -32,19 +33,21 @@ public class TreinadorRepository implements Repository<Integer, Treinador> {
             Integer proximoId = this.getProximoId(con);
             
             //criar o id_treinador na classe treindor no projeto java!
-            //TODO Treinador.setIdTreinador(proximoId);
+            treinador.setIdTreinador(proximoId);
 
-            String sql = "INSERT INTO \"Treinador\" \n" +
-                    "(\"id_treinador\", \"nome\", \"idade\",\" peso\", \"sexo\")\n" +
-                    "VALUES(?, ?, ?, ?, ?)\n";
+            String sql = "INSERT INTO \"Treinador\" t \n" +
+                    "(\"id_treinador\", \"nome\", \"idade\",\" peso\", \"sexo\", \"idMochila\")\n" +
+                    "VALUES(?, ?, ?, ?, ?, ?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setInt(1, treinador.getIdTreinador());
             stmt.setString(2, treinador.getNome());
-            stmt.setDate(3, treinador.getIdade()));
-            stmt.setString(4, treinador.getPeso());
+            stmt.setInt(3, treinador.getIdade());
+            stmt.setDouble(4, treinador.getPeso());
             stmt.setString(5, (treinador.getSexo()== Utils.MASCULINO)?"M":"F");
+            stmt.setInt(6, treinador.getIdMochila());
+
             
             
             int res = stmt.executeUpdate();
@@ -63,13 +66,14 @@ public class TreinadorRepository implements Repository<Integer, Treinador> {
         }
     }
 
+
     @Override
     public boolean remover(Integer id) throws BancoDeDadosException {
         Connection con = null;
         try {
             con = BdConnection.getConnection();
 
-            String sql = "DELETE FROM \"Treinador\" WHERE \"id_treinador\" = ?";
+            String sql = "DELETE FROM \"Treinador\" t WHERE t.\"id_treinador\" = ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -93,6 +97,7 @@ public class TreinadorRepository implements Repository<Integer, Treinador> {
         }
     }
 
+
     @Override
     public boolean editar(Integer id, Treinador treinador) throws BancoDeDadosException {
         Connection con = null;
@@ -100,20 +105,23 @@ public class TreinadorRepository implements Repository<Integer, Treinador> {
             con = BdConnection.getConnection();
 
             StringBuilder sql = new StringBuilder();
-            sql.append("UPDATE \"Treinador\" SET ");
+            sql.append("UPDATE \"Treinador\" t SET ");
             sql.append(" \"nome\" = ?,");
             sql.append(" \"idade\" = ?,");
-            sql.append(" \"peso\" = ? ");
-            sql.append(" \"sexo\" = ? ");
+            sql.append(" \"peso\" = ?, ");
+            sql.append(" \"sexo\" = ?, ");
+            sql.append("\"id_mochila\" = ? ");
             sql.append(" WHERE \"id_treinador\" = ? ");
+
 
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
             stmt.setString(1, treinador.getNome());
-            stmt.setString(2, treinador.getIdade());
-            stmt.setDate(3, treinador.getPeso());
-            stmt.setString(5, (pokemon.getSexo()==Utils.MASCULINO)?"M":"F");
+            stmt.setInt(2, treinador.getIdade());
+            stmt.setDouble(3, treinador.getPeso());
+            stmt.setString(4, (treinador.getSexo()==Utils.MASCULINO)?"M":"F");
             stmt.setInt(5, id);
+            stmt.setInt(6, treinador.getIdMochila());
 
             // Executa-se a consulta
             int res = stmt.executeUpdate();
@@ -133,6 +141,7 @@ public class TreinadorRepository implements Repository<Integer, Treinador> {
         }
     }
 
+
     @Override
     public List<Treinador> listar() throws BancoDeDadosException {
         List<Treinador> treinadores = new ArrayList<>();
@@ -140,6 +149,7 @@ public class TreinadorRepository implements Repository<Integer, Treinador> {
         try {
             con = BdConnection.getConnection();
             Statement stmt = con.createStatement();
+            MochilaRepository mochilaRepository = new MochilaRepository();
 
             String sql = "SELECT * FROM \"Treinador\"";
 
@@ -148,17 +158,16 @@ public class TreinadorRepository implements Repository<Integer, Treinador> {
 
             while (res.next()) {
                 Treinador treinador = new Treinador(res.getString("\"nome\""),
-                        res.getInt("\"idade\""),
-                        res.getDouble("\"peso\""),
-                        res.getString("sexo").equalsIgnoreCase("M")?Utils.MASCULINO:Utils.FEMININO)),
+                    res.getInt("\"idade\""),
+                    res.getDouble("\"peso\""),
+                    res.getString("sexo").equalsIgnoreCase("M")?Utils.MASCULINO:Utils.FEMININO,
+                    mochilaRepository.getById(res.getInt("id_mochila")));
+
 
 
 
                 treinador.setIdTreinador(res.getInt("\"id_treinador\""));
-                treinador.setNome(res.getString("\"nome\""));
-                treinador.setIdade(res.getInt("\"idade\""));
-                treinador.setPeso(res.getDouble("\"peso\""));
-                treinador.setSexo(res.getString("sexo").equalsIgnoreCase("M"))?Utils.MASCULINO:Utils.FEMININO);
+                treinador.setIdMochila(res.getInt("\"id_mochila\""));
                 treinadores.add(treinador);
             }
         } catch (SQLException e) {
@@ -173,5 +182,41 @@ public class TreinadorRepository implements Repository<Integer, Treinador> {
             }
         }
         return treinadores;
+    }
+
+
+    public Treinador getById(int id) throws BancoDeDadosException{
+        Treinador treinador;
+        Connection con = null;
+        try{
+            con = BdConnection.getConnection();
+            String sql = "SELECT * FROM \"Treinador\" WHERE \"id_treinador\" = ? ";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1,id);
+            ResultSet res = stmt.executeQuery();
+            MochilaRepository mochilaRepository = new MochilaRepository();
+            res.next();
+
+            treinador = new Treinador(res.getString("\"nome\""),
+                    res.getInt("\"idade\""),
+                    res.getDouble("\"peso\""),
+                    res.getString("sexo").equalsIgnoreCase("M")?Utils.MASCULINO:Utils.FEMININO,
+                    mochilaRepository.getById(res.getInt("id_mochila")));
+
+            treinador.setIdTreinador(res.getInt("\"id_treinador\""));
+            treinador.setIdMochila(res.getInt("\"id_mochila\""));
+
+        }catch(SQLException e){
+            throw new BancoDeDadosException(e.getCause());
+        }finally {
+            try{
+                if (con != null){
+                    con.close();
+                }
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return treinador;
     }
 }
