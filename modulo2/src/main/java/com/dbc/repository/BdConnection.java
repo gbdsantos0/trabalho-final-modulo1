@@ -20,7 +20,7 @@ public class BdConnection {
 		// Abre-se a conex�o com o Banco de Dados
 		Connection con = DriverManager.getConnection(url, USER, PASS);
 
-		// sempre usar o schema vem_ser
+		// sempre usar o schema POKEMON
 		con.createStatement().execute("alter session set current_schema=POKEMON");
 
 		return con;

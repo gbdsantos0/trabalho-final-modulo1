@@ -1,11 +1,15 @@
 package com.dbc.repository;
 
-import com.dbc.exeptions.BancoDeDadosException;
-import com.dbc.model.objetos.Mochila;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.dbc.exeptions.BancoDeDadosException;
+import com.dbc.model.objetos.Mochila;
 
 public class MochilaRepository implements Repository<Integer, Mochila> {
     @Override
@@ -49,7 +53,7 @@ public class MochilaRepository implements Repository<Integer, Mochila> {
             System.out.println("adicionarMochila.res=" + res);
             return mochila;
         } catch (SQLException e) {
-            throw new BancoDeDadosException(/*e.getCause()*/);//TODO HERDAR DE SQLEXPECTION?
+            throw new BancoDeDadosException(e.getCause());
         } finally {
             try {
                 if (con != null) {
@@ -79,7 +83,7 @@ public class MochilaRepository implements Repository<Integer, Mochila> {
 
             return res > 0;
         } catch (SQLException e) {
-            throw new BancoDeDadosException(/*e.getCause()*/);//TODO HERDAR DE SQLEXPECTION?
+            throw new BancoDeDadosException(e.getCause());
         } finally {
             try {
                 if (con != null) {
@@ -124,7 +128,7 @@ public class MochilaRepository implements Repository<Integer, Mochila> {
 
             return res > 0;
         } catch (SQLException e) {
-            throw new BancoDeDadosException(/*e.getCause()*/);//TODO HERDAR DE SQLEXPECTION?
+            throw new BancoDeDadosException(e.getCause());
         } finally {
             try {
                 if (con != null) {
@@ -161,7 +165,7 @@ public class MochilaRepository implements Repository<Integer, Mochila> {
                 mochilas.add(mochila);
             }
         } catch (SQLException e) {
-            throw new BancoDeDadosException(/*e.getCause()*/);//TODO HERDAR DE SQLEXPECTION?
+            throw new BancoDeDadosException(e.getCause());
         } finally {
             try {
                 if (con != null) {
