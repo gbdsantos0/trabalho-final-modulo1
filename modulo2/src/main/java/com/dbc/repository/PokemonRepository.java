@@ -30,7 +30,30 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
 	        }
 	        return null;
 	}
-
+	
+	public Integer getProximoId() throws SQLException {
+		Connection con = null;
+        try {
+            con = BdConnection.getConnection();
+			 String sql = "SELECT seq_pokemon.nextval mysequence from DUAL";
+			 	
+		        Statement stmt = con.createStatement();
+		        ResultSet res = stmt.executeQuery(sql);
+		        
+		        if (res.next()) {
+		            return res.getInt("mysequence");
+		        }
+		        return null;
+        }catch (Exception e) {
+			
+		}finally {
+			if(con != null) {
+				con.close();
+			}
+		}
+		return null;
+	}
+	
 	@Override
 	public Pokemon adicionar(Pokemon pokemon) throws BancoDeDadosException {
 		Connection con = null;
@@ -142,19 +165,21 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
             
 	            StringBuilder sql = new StringBuilder();
 	            sql.append("UPDATE \"Pokemon\" p SET ");
-	            sql.append(" p.nome = ?,");
-	            sql.append(" p.nome = ?,");
-	            sql.append(" p.nome = ?,");
-	            sql.append(" p.nome = ?,");
-	            sql.append(" p.nome = ?,");
-	            sql.append(" p.nome = ?,");
-	            sql.append(" p.nome = ?,");
-	            sql.append(" p.nome = ?,");
-	            sql.append(" p.nome = ?,");
-	            sql.append(" p.nome = ?,");
-	            sql.append(" p.nome = ?,");
-	            sql.append(" WHERE id_pokemon = ? ");
-	
+	            sql.append(" \"nome\" = ?,");
+	            sql.append(" \"idade\" = ?,");
+	            sql.append(" \"peso\" = ?,");
+	            sql.append(" \"sexo\" = ?,");
+	            sql.append(" \"apelido\" = ?,");
+	            sql.append(" \"dificuldade\" = ?,");
+	            sql.append(" \"level\" = ?,");
+	            sql.append(" \"tipo1\" = ?,");
+	            sql.append(" \"tipo2\" = ?,");
+	            sql.append(" \"raridade\" = ?,");
+	            sql.append(" \"id_mochila\" = ?");
+	            sql.append(" WHERE \"id_pokemon\" = ? ");
+	            
+	            
+	            
 	            PreparedStatement stmt = con.prepareStatement(sql.toString());
 	
 	            stmt.setString(1, pokemon.getPokemon());
@@ -204,6 +229,7 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
 	            	int b = res.getInt("tipo2");
 	            	Pokemon pokemon = new Pokemon(
 	            			res.getString("apelido"),
+	            			res.getString("nome"),
 	            			res.getInt("idade"),
 	            			res.getDouble("peso"),
 	            			(res.getString("sexo").equalsIgnoreCase("M"))?Utils.MASCULINO:Utils.FEMININO,
@@ -214,7 +240,6 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
 	            			(res.getInt("raridade")==3)?Raridades.SUPER_RARO:(res.getInt("raridade")==2)?Raridades.RARO:Raridades.COMUM,
 	            			res.getInt("id_mochila"));
 	            	pokemon.setId(res.getInt("id_pokemon"));
-	            	pokemon.setPokemon(res.getString("nome"));
 	            	pokemons.add(pokemon);
 	            }
 	        } catch (SQLException e) {

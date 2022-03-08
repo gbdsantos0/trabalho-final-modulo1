@@ -38,7 +38,8 @@ public class Cenario implements Impressao {
         //peso = 0.8~1.2 * peso base
         //sexo = random 0 ou 1 para o sexo do pokemon
         //level = level minimo = base level ou o level gerado aleatoriamente
-        return new Pokemon(pokemonBase.getRaca()
+        return new Pokemon(null
+        		,pokemonBase.getRaca()
                 //idade em pokemons nao parece fazer tanto sentido
                 ,r.nextInt(this.levelMedio)+pokemonBase.getIdadeMinima()
                 ,((double)(r.nextDouble(

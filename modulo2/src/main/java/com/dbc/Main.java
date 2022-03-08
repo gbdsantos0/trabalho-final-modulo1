@@ -93,6 +93,7 @@ public class Main {
 						System.out.println("1 - Pokeball\n2 - GreatBall\n3 - NetBall\n4 - HeavyBall\n5 - MasterBall");
 						escolha = scanner.nextInt();
 						scanner.nextLine();
+						//TODO revisar para controller
 						switch (escolha) {
 						case 1 -> {
 							if(treinador.getMochila().getQuantidadePokeBalls() > 0) {
@@ -129,8 +130,8 @@ public class Main {
 							System.out.println("Nenhuma pokebola válida selecionada. Usando PokeBall normal!");
 						}
 						}
-
-						if (treinador.capturar(pokebola, pokemonEncontro, r, scanner)) {
+						//TODO passar capturar para o controller
+						if (treinador.capturar(pokebola, pokemonEncontro, r, scanner, pokemonRepository)) {
 							System.out.println("Parabéns, você conseguiu capturar " + pokemonEncontro.getNome());
 							escolha = 2;
 						} else {
@@ -185,15 +186,6 @@ public class Main {
 			default -> System.out.println("Você não pode fazer isso");
 			}
 		} while (escolha != 8);
-		
-		try {
-			treinadorRepository.editar(treinador.getIdTreinador(), treinador);
-			mochilaRepository.editar(treinador.getMochila().getIdMochila(), treinador.getMochila());
-			
-		} catch (Exception e) {
-			
-		}
-		
 		
 	}
 

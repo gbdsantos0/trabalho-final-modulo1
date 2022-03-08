@@ -19,12 +19,13 @@ public class Pokemon extends Entidade implements Impressao {
     private final Dificuldades dificuldade;
     private final TipoPokemon[] tipo;
     private final Raridades raridade;
-    private final Integer idMochila;
+    private Integer idMochila;
 
-    public Pokemon(String nome, Integer idade, Double peso, Utils sexo,
+    public Pokemon(String nome, String pokemon, Integer idade, Double peso, Utils sexo,
                    Dificuldades dificuldade, Integer level, TipoPokemon tipo1, TipoPokemon tipo2,
                    Raridades raridade, Integer idMochila) {
-        super(nome, idade, peso, sexo);
+        super(null, idade, peso, sexo);
+        this.pokemon = pokemon;
         this.dificuldade = dificuldade;
         this.level = level;
         //checa se o Pokemon tem somente um atributo ou se ele tem dois
@@ -37,6 +38,9 @@ public class Pokemon extends Entidade implements Impressao {
     //getter e setters
 	public Integer getIdMochila() {
 		return idMochila;
+	}
+	public void setIdMochila(Integer idMochila) {
+		this.idMochila = idMochila;
 	}
     public String getPokemon() {
 		return this.pokemon;

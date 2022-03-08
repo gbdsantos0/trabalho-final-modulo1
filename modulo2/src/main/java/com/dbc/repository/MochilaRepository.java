@@ -101,14 +101,16 @@ public class MochilaRepository implements Repository<Integer, Mochila> {
             con = BdConnection.getConnection();
 
             StringBuilder sql = new StringBuilder();
-            sql.append("UPDATE Mochila SET ");
+            sql.append("UPDATE \"Mochila\" m SET ");
             sql.append(" \"quantidadeGreatBalls\" = ?,");
             sql.append(" \"quantidadeHeavyBalls\" = ?,");
             sql.append(" \"quantidadeMasterBalls\" = ?,");
             sql.append(" \"quantidadeNetBalls\" = ?,");
-            sql.append(" \"quantidadePokeBalls\" = ?,");
-            sql.append(" WHERE \"id_mochila\" = ? ");
-
+            sql.append(" \"quantidadePokeBalls\" = ?");
+            sql.append(" WHERE \"id_mochila\" = ?");
+            
+            
+            
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
 
@@ -117,7 +119,7 @@ public class MochilaRepository implements Repository<Integer, Mochila> {
             stmt.setInt(4, mochila.getQuantidadeMasterBalls());
             stmt.setInt(5, mochila.getQuantidadeNetBalls());
             stmt.setInt(6, mochila.getQuantidadePokeBalls());
-            stmt.setInt(1, mochila.getIdMochila());
+            stmt.setInt(1, id);
 
             // Executa-se a consulta
             int res = stmt.executeUpdate();
