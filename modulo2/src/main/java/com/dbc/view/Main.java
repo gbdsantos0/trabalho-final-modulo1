@@ -28,14 +28,9 @@ public class Main {
 		PokemonController pokemonController = new PokemonController();
 		TreinadorController treinadorController = new TreinadorController();
 		
-		TreinadorRepository tr = new TreinadorRepository();
-		Treinador treinador = null;
+		Treinador treinador = treinadorController.retornarTreinador(1);
 		Pokebola pokeboll = null;
-		try {
-			treinador = tr.getById(1);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		
 		
 		
 		do {
