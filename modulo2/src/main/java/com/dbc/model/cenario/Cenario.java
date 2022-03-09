@@ -24,7 +24,7 @@ public class Cenario implements Impressao {
     }
 
 
-    //metodo para gerar um pokemon em um encontro de pokemon
+    /*//metodo para gerar um pokemon em um encontro de pokemon
     public Pokemon gerarPokemon() throws InvalidCenarioException {
         Random r = new Random();
         PokemonBase pokemonBase;
@@ -133,7 +133,7 @@ public class Cenario implements Impressao {
                 return comuns.get(r.nextInt(comuns.size()));
             }
         }
-    }
+    }*/
 
     public TiposTerreno getTerreno() {
         return terreno;

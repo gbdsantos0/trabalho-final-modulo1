@@ -10,7 +10,7 @@ import com.dbc.model.entidades.Pokemon;
 import com.dbc.model.interfaces.Impressao;
 
 public class Mochila implements Impressao {
-    private ArrayList<Pokemon> bag;
+//    private ArrayList<Pokemon> bag;
     private int idMochila;
     private int quantidadeGreatBalls;
     private int quantidadeHeavyBalls;
@@ -19,7 +19,7 @@ public class Mochila implements Impressao {
     private int quantidadePokeBalls;
 
     public Mochila() {
-        this.bag = new ArrayList<>();
+//        this.bag = new ArrayList<>();
         this.quantidadeGreatBalls = 0;
         this.quantidadeHeavyBalls = 0;
         this.quantidadeMasterBalls = 0;
@@ -28,19 +28,19 @@ public class Mochila implements Impressao {
     }
 
 
-    private Optional<Pokemon> pesquisarPorNome(String nomePokemon){
+    /*private Optional<Pokemon> pesquisarPorNome(String nomePokemon){
         return this.bag.stream().filter( p -> p.getNome().equalsIgnoreCase(nomePokemon)).findFirst(); 
     }
     //CIRAR
     public void adicionarPokemom(Pokemon p){
         this.bag.add(p);
     }
-    
+
     //CIRAR VARIOS
     public void adicionarPokemons(List<Pokemon> p){
         this.bag.addAll(p);
     }
-    
+
     //ATUALIZAR
     public void atualizarApelidoPokemon(Scanner scanner){
         System.out.println("Qual pokemon deseja renomear:");
@@ -74,17 +74,17 @@ public class Mochila implements Impressao {
             System.out.println("Este pokemon não existe!! ");
         }
 		return null;
-    }
+    }*/
     //MOSTRAR
     public void imprimir() {
-        this.bag.forEach(p -> System.out.println("======================\n" + p + "\n============================\n"));
+//        this.bag.forEach(p -> System.out.println("======================\n" + p + "\n============================\n"));
     }
 
     //getter
-    public List<Pokemon> getBag() {
+    /*public List<Pokemon> getBag() {
         //retorna uma lista não modificavel;
         return Collections.unmodifiableList(this.bag);
-    }
+    }*/
 
     public int getIdMochila() {
         return idMochila;
@@ -115,45 +115,57 @@ public class Mochila implements Impressao {
         this.idMochila = idMochila;
     }
 
-    public void setQuantidadeGreatBalls(int quantidadeGreatBalls) {
+    public boolean setQuantidadeGreatBalls(int quantidadeGreatBalls) {
         if(quantidadeGreatBalls>=0 && quantidadeGreatBalls<=99){
             this.quantidadeGreatBalls = quantidadeGreatBalls;
+            return true;
         }else{
             System.out.println("Não é possível modificar a quantidade para valores negativos ou maiores que 99");
+            return false;
         }
     }
 
-    public void setQuantidadeHeavyBalls(int quantidadeHeavyBalls) {
+    public boolean setQuantidadeHeavyBalls(int quantidadeHeavyBalls) {
         if(quantidadeHeavyBalls>=0 && quantidadeHeavyBalls<=99){
             this.quantidadeHeavyBalls = quantidadeHeavyBalls;
+            return true;
         }else{
             System.out.println("Não é possível modificar a quantidade para valores negativos ou maiores que 99");
+            return false;
         }
     }
 
-    public void setQuantidadeMasterBalls(int quantidadeMasterBalls) {
+    public boolean setQuantidadeMasterBalls(int quantidadeMasterBalls) {
         if(quantidadeMasterBalls>=0 && quantidadeMasterBalls<=99){
             this.quantidadeMasterBalls = quantidadeMasterBalls;
+            return true;
         }else{
             System.out.println("Não é possível modificar a quantidade para valores negativos ou maiores que 99");
+            return false;
         }
     }
 
-    public void setQuantidadeNetBalls(int quantidadeNetBalls) {
+    public boolean setQuantidadeNetBalls(int quantidadeNetBalls) {
         if(quantidadeNetBalls>=0 && quantidadeNetBalls<=99){
             this.quantidadeNetBalls = quantidadeNetBalls;
+            return true;
         }else{
             System.out.println("Não é possível modificar a quantidade para valores negativos ou maiores que 99");
+            return false;
         }
     }
 
-    public void setQuantidadePokeBalls(int quantidadePokeBalls) {
+    public boolean setQuantidadePokeBalls(int quantidadePokeBalls) {
         if(quantidadePokeBalls>=0 && quantidadePokeBalls<=99){
             this.quantidadePokeBalls = quantidadePokeBalls;
+            return true;
         }else{
             System.out.println("Não é possível modificar a quantidade para valores negativos ou maiores que 99");
+            return false;
         }
     }
+
+
 }
 
 
