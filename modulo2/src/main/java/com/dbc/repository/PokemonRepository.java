@@ -63,7 +63,7 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
             Integer proximoId = this.getProximoId(con);
             pokemon.setId(proximoId);
 
-            String sql = "INSERT INTO \"PokemonBase\"\n" +
+            String sql = "INSERT INTO \"Pokemon\"\n" +
                     "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -76,7 +76,7 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
             stmt.setString(6, pokemon.getNome());
             stmt.setInt(7, (pokemon.getDificuldade()==Dificuldades.DIFICIL)?3:(pokemon.getDificuldade()==Dificuldades.MEDIO?2:1));
             stmt.setInt(8, pokemon.getLevel());
-            stmt.setInt(9, pokemon.getTipo()[1].getValor());
+            stmt.setInt(9, pokemon.getTipo()[0].getValor());
             stmt.setInt(10, (pokemon.getTipo().length > 1)?pokemon.getTipo()[1].getValor():null);
             stmt.setInt(11, (pokemon.getRaridade()==Raridades.SUPER_RARO)?3:(pokemon.getRaridade()==Raridades.RARO?2:1));
             stmt.setInt(12, pokemon.getIdMochila());
@@ -102,7 +102,7 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
         try {
             con = BdConnection.getConnection();
 
-            String sql = "DELETE FROM \"Pokemon\" p  WHERE p.id_pokemon = ?";
+            String sql = "DELETE FROM \"Pokemon\" p  WHERE p.\"id_pokemon\" = ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -218,20 +218,20 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
 
 			StringBuilder sql = new StringBuilder();
 			sql.append("UPDATE \"Pokemon\" p SET ");
-			if (nome != null)sql.append(" \"nome\" = ?,");
-			if (level != null)sql.append(" \"idade\" = ?,");
-			sql.append(" WHERE \"id_pokemon\" = ? ");
+			sql.append(" \"apelido\" = ?");
+			sql.append(" WHERE p.\"id_pokemon\" = ? ");
 
 			PreparedStatement stmt = con.prepareStatement(sql.toString());
 
-			if (level != null)stmt.setInt(1, level);
-			if (nome != null)stmt.setString(2, nome);
-			stmt.setInt(3, id);
+//			if (level != null)stmt.setInt(1, level);
+			stmt.setString(1, nome);
+			stmt.setInt(2, id);
 
 			stmt.executeUpdate();
 
 			return true;
         } catch (SQLException e) {
+        	e.printStackTrace();
             throw new BancoDeDadosException(e.getCause());
         } finally {
             try {

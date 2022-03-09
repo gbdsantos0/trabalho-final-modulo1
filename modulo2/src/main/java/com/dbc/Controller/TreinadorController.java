@@ -13,9 +13,9 @@ public class TreinadorController {
     PokemonRepository pokemonRepository = new PokemonRepository();
     TreinadorRepository treinadorRepository = new TreinadorRepository();
     Random r = new Random();
-    public boolean capturar(Pokebola pokebola, Pokemon pokemon, Mochila mochila){
+    public boolean capturar(Pokebola pokebola, Pokemon pokemon, int idMochila){
             if(r.nextInt(100) <= pokebola.calcularChance(pokemon)){
-            pokemon.setIdMochila(mochila.getIdMochila());
+            pokemon.setIdMochila(idMochila);
             try {
                 pokemonRepository.adicionar(pokemon);
             } catch (Exception e){

@@ -102,11 +102,11 @@ public class MochilaRepository implements Repository<Integer, Mochila> {
 
             StringBuilder sql = new StringBuilder();
             sql.append("UPDATE \"Mochila\" m SET ");
-            sql.append(" \"quantidadeGreatBalls\" = ?,");
-            sql.append(" \"quantidadeHeavyBalls\" = ?,");
-            sql.append(" \"quantidadeMasterBalls\" = ?,");
-            sql.append(" \"quantidadeNetBalls\" = ?,");
-            sql.append(" \"quantidadePokeBalls\" = ?");
+            sql.append(" m.\"quantidadeGreatBalls\" = ?,");
+            sql.append(" m.\"quantidadeHeavyBalls\" = ?,");
+            sql.append(" m.\"quantidadeMasterBalls\" = ?,");
+            sql.append(" m.\"quantidadeNetBalls\" = ?,");
+            sql.append(" m.\"quantidadePokeBalls\" = ?");
             sql.append(" WHERE \"id_mochila\" = ?");
             
             
@@ -114,18 +114,17 @@ public class MochilaRepository implements Repository<Integer, Mochila> {
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
 
-            stmt.setInt(2, mochila.getQuantidadeGreatBalls());
-            stmt.setInt(3, mochila.getQuantidadeHeavyBalls());
-            stmt.setInt(4, mochila.getQuantidadeMasterBalls());
-            stmt.setInt(5, mochila.getQuantidadeNetBalls());
-            stmt.setInt(6, mochila.getQuantidadePokeBalls());
-            stmt.setInt(1, id);
+            stmt.setInt(1, mochila.getQuantidadeGreatBalls());
+            stmt.setInt(2, mochila.getQuantidadeHeavyBalls());
+            stmt.setInt(3, mochila.getQuantidadeMasterBalls());
+            stmt.setInt(4, mochila.getQuantidadeNetBalls());
+            stmt.setInt(5, mochila.getQuantidadePokeBalls());
+            stmt.setInt(6, id);
 
             // Executa-se a consulta
-            int res = stmt.executeUpdate();
-            System.out.println("editarMochila.res=" + res);
+            stmt.executeUpdate();
 
-            return res > 0;
+            return true;
         } catch (SQLException e) {
             throw new BancoDeDadosException(e.getCause());
         } finally {

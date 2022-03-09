@@ -174,19 +174,19 @@ public class MochilaController {
         }
 
         if(mochila.getQuantidadePokeBalls()>0){
-            pokebolasDisponiveis+="PokeBalls = " + mochila.getQuantidadePokeBalls();
+            pokebolasDisponiveis+="PokeBalls = " + mochila.getQuantidadePokeBalls() + "\n";
         }
 
         if(mochila.getQuantidadeGreatBalls()>0){
-            pokebolasDisponiveis+="GreatBalls = " + mochila.getQuantidadeGreatBalls();
+            pokebolasDisponiveis+="GreatBalls = " + mochila.getQuantidadeGreatBalls() + "\n";
         }
 
         if(mochila.getQuantidadeHeavyBalls()>0){
-            pokebolasDisponiveis+="HeavyBalls = " + mochila.getQuantidadeHeavyBalls();
+            pokebolasDisponiveis+="HeavyBalls = " + mochila.getQuantidadeHeavyBalls() + "\n";
         }
 
         if(mochila.getQuantidadeNetBalls()>0){
-            pokebolasDisponiveis+="NetBalls = " + mochila.getQuantidadeNetBalls();
+            pokebolasDisponiveis+="NetBalls = " + mochila.getQuantidadeNetBalls() + "\n";
         }
 
         if(mochila.getQuantidadeMasterBalls()>0){

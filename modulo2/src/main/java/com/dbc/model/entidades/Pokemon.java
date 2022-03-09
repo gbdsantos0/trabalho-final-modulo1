@@ -24,7 +24,7 @@ public class Pokemon extends Entidade implements Impressao {
     public Pokemon(String nome, String pokemon, Integer idade, Double peso, Utils sexo,
                    Dificuldades dificuldade, Integer level, TipoPokemon tipo1, TipoPokemon tipo2,
                    Raridades raridade, Integer idMochila) {
-        super(null, idade, peso, sexo);
+        super(nome, idade, peso, sexo);
         this.pokemon = pokemon;
         this.dificuldade = dificuldade;
         this.level = level;
@@ -75,7 +75,8 @@ public class Pokemon extends Entidade implements Impressao {
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat("#0.00");
-        return  "nome:"+ this.getPokemon() +
+        return  "Id:"+ this.getId() +
+        		"\nnome:"+ this.getPokemon() +
                 "\nApelido:"+ super.getNome() +
                 "\nidade: " + super.getIdade() +
                 "\npeso: " + df.format(super.getPeso() )+

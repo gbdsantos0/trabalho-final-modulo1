@@ -17,21 +17,17 @@ public class CenarioController {
     public CenarioController(){
         this.pokedex = popularPokedex();
         this.cenarios = popularCenarios();
-        this.cenarioAtual = 0;
+        this.cenarioAtual = 3;
     }
 
-    public boolean alterarCenario(int posicao) throws InvalidCenarioException{
+    public boolean alterarCenario(int posicao){
         if(posicao<cenarios.size()){
             if(posicao>=0){
                 this.cenarioAtual = posicao;
                 return true;
-            }else{
-                throw new InvalidCenarioException("Não é possível modificar posição para valores negativos");
             }
-
-        }else{
-            throw new InvalidCenarioException("Cenário inválido");
         }
+        return false;
     }
 
     private Pokedex popularPokedex() {
