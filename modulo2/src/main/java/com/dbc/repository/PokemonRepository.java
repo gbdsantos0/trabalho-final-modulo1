@@ -77,7 +77,7 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
             stmt.setInt(7, (pokemon.getDificuldade()==Dificuldades.DIFICIL)?3:(pokemon.getDificuldade()==Dificuldades.MEDIO?2:1));
             stmt.setInt(8, pokemon.getLevel());
             stmt.setInt(9, pokemon.getTipo()[0].getValor());
-            stmt.setInt(10, (pokemon.getTipo().length > 1)?pokemon.getTipo()[1].getValor():null);
+            stmt.setInt(10, (pokemon.getTipo().length > 1)?pokemon.getTipo()[1].getValor():0);
             stmt.setInt(11, (pokemon.getRaridade()==Raridades.SUPER_RARO)?3:(pokemon.getRaridade()==Raridades.RARO?2:1));
             stmt.setInt(12, pokemon.getIdMochila());
             
