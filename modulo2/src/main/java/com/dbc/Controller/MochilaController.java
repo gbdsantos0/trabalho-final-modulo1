@@ -162,4 +162,42 @@ public class MochilaController {
         }
         return false;
     }
+
+    public String retornarPokebolas(int idMochila){
+        String pokebolasDisponiveis = "";
+        MochilaRepository mr = new MochilaRepository();
+        Mochila mochila;
+        try{
+            mochila = mr.getById(idMochila);
+        }catch (Exception e){
+            return pokebolasDisponiveis;
+        }
+
+        if(mochila.getQuantidadePokeBalls()>0){
+            pokebolasDisponiveis+="PokeBalls = " + mochila.getQuantidadePokeBalls();
+        }
+
+        if(mochila.getQuantidadeGreatBalls()>0){
+            pokebolasDisponiveis+="GreatBalls = " + mochila.getQuantidadeGreatBalls();
+        }
+
+        if(mochila.getQuantidadeHeavyBalls()>0){
+            pokebolasDisponiveis+="HeavyBalls = " + mochila.getQuantidadeHeavyBalls();
+        }
+
+        if(mochila.getQuantidadeNetBalls()>0){
+            pokebolasDisponiveis+="NetBalls = " + mochila.getQuantidadeNetBalls();
+        }
+
+        if(mochila.getQuantidadeMasterBalls()>0){
+            pokebolasDisponiveis+="MasterBalls = " + mochila.getQuantidadeMasterBalls();
+        }
+
+        if(pokebolasDisponiveis.equalsIgnoreCase("")){
+            pokebolasDisponiveis = "Nenhuma Pokebola disponível";
+        }
+
+        return pokebolasDisponiveis;
+    }
+    
 }

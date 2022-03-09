@@ -165,7 +165,17 @@ public class Mochila implements Impressao {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return "Mochila{" +
+                "idMochila=" + idMochila +
+                ", quantidadeGreatBalls=" + quantidadeGreatBalls +
+                ", quantidadeHeavyBalls=" + quantidadeHeavyBalls +
+                ", quantidadeMasterBalls=" + quantidadeMasterBalls +
+                ", quantidadeNetBalls=" + quantidadeNetBalls +
+                ", quantidadePokeBalls=" + quantidadePokeBalls +
+                '}';
+    }
 }
 
 
