@@ -173,8 +173,11 @@ public class Main {
 
 				escolha = 0;
 			}
+			//TODO passar para um controller
 			case 3 -> treinador.getMochila().imprimir();
+			//TODO passar para um controller
 			case 4 -> treinador.getMochila().atualizarApelidoPokemon(scanner);
+			//TODO passar para um controller
 			case 5 -> {
 				try {
 					pokemonRepository.remover(treinador.getMochila().removerPokemom(scanner));

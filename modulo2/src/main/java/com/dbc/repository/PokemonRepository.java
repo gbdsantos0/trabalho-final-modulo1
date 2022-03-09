@@ -211,6 +211,39 @@ public class PokemonRepository implements Repository<Integer, Pokemon> {
         }
 	}
 	
+	public boolean editarPokemonNomeLevel(String nome, Integer level, int id) throws BancoDeDadosException {
+		Connection con = null;
+        try {
+			con = BdConnection.getConnection();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE \"Pokemon\" p SET ");
+			if (nome != null)sql.append(" \"nome\" = ?,");
+			if (level != null)sql.append(" \"idade\" = ?,");
+			sql.append(" WHERE \"id_pokemon\" = ? ");
+
+			PreparedStatement stmt = con.prepareStatement(sql.toString());
+
+			if (level != null)stmt.setInt(1, level);
+			if (nome != null)stmt.setString(2, nome);
+			stmt.setInt(3, id);
+
+			stmt.executeUpdate();
+
+			return true;
+        } catch (SQLException e) {
+            throw new BancoDeDadosException(e.getCause());
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+	}
+	
 	@Override
 	public List<Pokemon> listar() throws BancoDeDadosException {
 		 List<Pokemon> pokemons = new ArrayList<>();
