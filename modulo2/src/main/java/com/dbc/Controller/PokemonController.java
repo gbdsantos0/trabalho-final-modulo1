@@ -10,9 +10,6 @@ public class PokemonController {
 	private PokemonRepository pokemonRepository = new PokemonRepository();
 	
 	public List<Pokemon> ListarPokemons(){
-<<<<<<< HEAD
-		return null;
-=======
 		List<Pokemon> p = null;
 		try {
 			p = pokemonRepository.listar();
@@ -55,7 +52,6 @@ public class PokemonController {
 			e.printStackTrace();
 		}
 		return true;
->>>>>>> 1b3a2a86314ecdababdb4c0203d01d233cb29828
 	}
 	
 }

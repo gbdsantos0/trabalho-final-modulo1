@@ -42,20 +42,20 @@ public class Treinador extends Entidade implements Impressao {
     }
 
     //Metodo que retorna um boolean se o pokemon for capturado(a chance de captura é delegada para a pokebola)
-    public boolean capturar(Pokebola pokebola, Pokemon pokemon, Random r, Scanner scanner, PokemonRepository pokemonRepository){
-        if(r.nextInt(100) <= pokebola.calcularChance(pokemon)){
-            System.out.println("Digite um apelido para o seu Pokemon: ");
-            pokemon.setNome(scanner.nextLine());
-            pokemon.setIdMochila(this.getIdMochila());
-            try {
-            	pokemonRepository.adicionar(pokemon);
-			} catch (Exception e){}
-            this.mochila.adicionarPokemom(pokemon);
-            return true;
-        }else {
-            return false;
-        }
-    }
+//    public boolean capturar(Pokebola pokebola, Pokemon pokemon, Random r, Scanner scanner, PokemonRepository pokemonRepository){
+//        if(r.nextInt(100) <= pokebola.calcularChance(pokemon)){
+//            System.out.println("Digite um apelido para o seu Pokemon: ");
+//            pokemon.setNome(scanner.nextLine());
+//            pokemon.setIdMochila(this.getIdMochila());
+//            try {
+//            	pokemonRepository.adicionar(pokemon);
+//			} catch (Exception e){}
+//            this.mochila.adicionarPokemom(pokemon);
+//            return true;
+//        }else {
+//            return false;
+//        }
+//    }
 
     @Override
     public void imprimir() {
