@@ -186,7 +186,7 @@ public class TreinadorRepository implements Repository<Integer, Treinador> {
 
 
     public Treinador getById(int id) throws BancoDeDadosException{
-        Treinador treinador;
+        Treinador treinador = null;
         Connection con = null;
         try{
             con = BdConnection.getConnection();
@@ -202,14 +202,15 @@ public class TreinadorRepository implements Repository<Integer, Treinador> {
             treinador = new Treinador(res.getString("\"nome\""),
                     res.getInt("\"idade\""),
                     res.getDouble("\"peso\""),
-                    res.getString("sexo").equalsIgnoreCase("M")?Utils.MASCULINO:Utils.FEMININO,
+                    res.getString("\"sexo\"").equalsIgnoreCase("M")?Utils.MASCULINO:Utils.FEMININO,
                     null);
 
             treinador.setIdTreinador(res.getInt("\"id_treinador\""));
             treinador.setIdMochila(res.getInt("\"id_mochila\""));
 
         }catch(SQLException e){
-            throw new BancoDeDadosException(e.getCause());
+//            throw new BancoDeDadosException(e.getCause());
+              e.printStackTrace();
         }finally {
             try{
                 if (con != null){

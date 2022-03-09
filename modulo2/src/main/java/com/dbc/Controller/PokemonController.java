@@ -8,7 +8,7 @@ public class PokemonController {
 	
 	
 	public List<Pokemon> ListarPokemons(){
-		
+		return null;
 	}
 	
 }
