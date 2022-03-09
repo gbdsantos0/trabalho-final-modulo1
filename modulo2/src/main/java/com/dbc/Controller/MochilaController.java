@@ -7,16 +7,6 @@ import com.dbc.repository.PokemonRepository;
 
 
 public class MochilaController {
-    public static void main(String[] args) {
-        PokemonRepository pr = new PokemonRepository();
-        try{
-            System.out.println("oi1");
-            pr.listar().forEach(System.out::println);
-            System.out.println("oi2");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
     public void adicionarGreatBall(int quantidade, int idMochila){
         MochilaRepository mochilaRepository = new MochilaRepository();

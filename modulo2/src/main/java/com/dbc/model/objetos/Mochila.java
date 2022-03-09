@@ -10,7 +10,7 @@ import com.dbc.model.entidades.Pokemon;
 import com.dbc.model.interfaces.Impressao;
 
 public class Mochila implements Impressao {
-    private ArrayList<Pokemon> bag;
+//    private ArrayList<Pokemon> bag;
     private int idMochila;
     private int quantidadeGreatBalls;
     private int quantidadeHeavyBalls;
@@ -19,7 +19,7 @@ public class Mochila implements Impressao {
     private int quantidadePokeBalls;
 
     public Mochila() {
-        this.bag = new ArrayList<>();
+//        this.bag = new ArrayList<>();
         this.quantidadeGreatBalls = 0;
         this.quantidadeHeavyBalls = 0;
         this.quantidadeMasterBalls = 0;
@@ -28,7 +28,7 @@ public class Mochila implements Impressao {
     }
 
 
-    private Optional<Pokemon> pesquisarPorNome(String nomePokemon){
+    /*private Optional<Pokemon> pesquisarPorNome(String nomePokemon){
         return this.bag.stream().filter( p -> p.getNome().equalsIgnoreCase(nomePokemon)).findFirst(); 
     }
     //CIRAR
@@ -74,17 +74,17 @@ public class Mochila implements Impressao {
             System.out.println("Este pokemon não existe!! ");
         }
 		return null;
-    }
+    }*/
     //MOSTRAR
     public void imprimir() {
-        this.bag.forEach(p -> System.out.println("======================\n" + p + "\n============================\n"));
+//        this.bag.forEach(p -> System.out.println("======================\n" + p + "\n============================\n"));
     }
 
     //getter
-    public List<Pokemon> getBag() {
+    /*public List<Pokemon> getBag() {
         //retorna uma lista não modificavel;
         return Collections.unmodifiableList(this.bag);
-    }
+    }*/
 
     public int getIdMochila() {
         return idMochila;
@@ -164,6 +164,8 @@ public class Mochila implements Impressao {
             return false;
         }
     }
+
+
 }
 
 
