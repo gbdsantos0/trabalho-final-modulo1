@@ -166,11 +166,11 @@ public class PokemonBaseRepository {
         return listaPokemonBase;
     }
 
-    public PokemonBase getById(Integer id) throws Exception{
+    public PokemonBase getById(Integer id){
         PokemonBase pokemonBase = listaPokemonBase.stream()
                 .filter(pb -> pb.getIdPokemonBase().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new InvalidCenarioException("Pokemon Base não consta na base de dados"));
+                .orElse(null);
         return pokemonBase;
     }
 }

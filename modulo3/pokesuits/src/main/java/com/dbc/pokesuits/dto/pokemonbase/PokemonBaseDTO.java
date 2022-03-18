@@ -1,4 +1,4 @@
-package com.dbc.pokesuits.dto;
+package com.dbc.pokesuits.dto.pokemonbase;
 
 import com.dbc.pokesuits.enums.Dificuldades;
 import com.dbc.pokesuits.enums.Raridades;

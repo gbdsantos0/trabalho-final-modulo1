@@ -41,9 +41,9 @@ public class CenarioRepository {
         return listaCenarios;
     }
 
-    public Cenario getById(Integer id) throws Exception{
+    public Cenario getById(Integer idCenario) throws Exception{
         Cenario cenario = listaCenarios.stream()
-                .filter(c -> c.getIdCenario().equals(id))
+                .filter(c -> c.getIdCenario().equals(idCenario))
                 .findFirst()
                 .orElseThrow(() -> new InvalidCenarioException("ID de cenário inválido"));
         return cenario;
@@ -54,6 +54,14 @@ public class CenarioRepository {
                 .filter(c-> c.getTerreno().equals(tipoTerreno))
                 .collect(Collectors.toList());
         return cenarioList;
+    }
+
+    public List<Integer> getIdPokemonsDisponiveis(Integer idCenario) throws Exception{
+        Cenario cenario = listaCenarios.stream()
+                .filter(c -> c.getIdCenario().equals(idCenario))
+                .findFirst()
+                .orElseThrow(() -> new InvalidCenarioException("ID de cenário inválido"));
+        return cenario.getIdPokemonsDisponiveis();
     }
 
 }

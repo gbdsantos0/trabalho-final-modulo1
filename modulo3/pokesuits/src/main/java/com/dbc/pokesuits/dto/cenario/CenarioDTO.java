@@ -1,4 +1,4 @@
-package com.dbc.pokesuits.dto;
+package com.dbc.pokesuits.dto.cenario;
 
 import com.dbc.pokesuits.enums.TiposTerreno;
 import io.swagger.annotations.ApiModelProperty;
