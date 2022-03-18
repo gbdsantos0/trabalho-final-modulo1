@@ -1,12 +1,12 @@
 package com.dbc.pokesuits.model.cenario;
 
+import java.util.List;
+
 import com.dbc.pokesuits.enums.TiposTerreno;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,4 +17,5 @@ public class Cenario{
     private TiposTerreno terreno;
     private Integer levelMedio;
     private List<Integer> idPokemonsDisponiveis;
+
 }
