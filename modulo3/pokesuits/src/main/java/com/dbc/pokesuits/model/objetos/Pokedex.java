@@ -1,5 +1,9 @@
 package com.dbc.pokesuits.model.objetos;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.dbc.pokesuits.model.entity.PokemonBase;
 
 public class Pokedex {
