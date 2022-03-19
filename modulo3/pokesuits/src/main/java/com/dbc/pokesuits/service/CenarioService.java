@@ -1,17 +1,22 @@
 package com.dbc.pokesuits.service;
 
+import com.dbc.pokesuits.dto.cenario.CenarioDTO;
 import com.dbc.pokesuits.dto.pokemon.PokemonCreateDTO;
 import com.dbc.pokesuits.dto.pokemon.PokemonDTO;
 import com.dbc.pokesuits.dto.pokemonbase.PokemonBaseDTO;
 import com.dbc.pokesuits.enums.Raridades;
 import com.dbc.pokesuits.enums.Utils;
 import com.dbc.pokesuits.exceptions.InvalidCenarioException;
+import com.dbc.pokesuits.model.entity.Treinador;
+import com.dbc.pokesuits.model.interfaces.Pokebola;
+import com.dbc.pokesuits.model.pokebolas.*;
 import com.dbc.pokesuits.repository.CenarioRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -29,9 +34,39 @@ public class CenarioService {
     private PokemonCreateDTO ultimoPokemonEncontrado;
     private Integer cenarioAtual=0;
 
-    public boolean capturar(PokemonCreateDTO pokemonCreateDTO){
+    public PokemonDTO capturar(PokemonCreateDTO pokemonCreateDTO, String tipoPokebola, Treinador treinador) throws Exception{
         //TODO CAPTurar pokemon
-        return false;
+        Random r = new Random();
+
+        Pokebola pokebola;
+
+        switch (tipoPokebola.toLowerCase(Locale.ROOT)){
+            case "greatball":
+                pokebola = new GreatBall();
+                break;
+            case "pokeball":
+                pokebola = new PokeBall();
+                break;
+            case "heavyball":
+                pokebola = new HeavyBall();
+                break;
+            case "masterball":
+                pokebola = new MasterBall();
+                break;
+            case "netball":
+                pokebola = new NetBall();
+                break;
+            default:
+                throw new InvalidCenarioException("Tipo de pokebola inválida, favor utilizar uma das disponíveis (PokeBall, GreatBall, NetBall, HeavyBall ou MasterBall)");
+        }
+
+
+        if(r.nextInt(100) <= pokebola.calcularChance(pokemonCreateDTO)){
+            //pokemonCreateDTO.setIdMochila(treinador.getIdMochila());//todo corrigir metodo
+            PokemonDTO pokemonDTO = pokemonService.AdicionarPokemon(pokemonCreateDTO);//todo corrigir nomes dos métodos(estão começando com uppercase)
+            return pokemonDTO;
+        }
+        throw new InvalidCenarioException("Pokemon não capturado");
     };
 
     public PokemonCreateDTO gerarPokemon() throws Exception{
@@ -141,10 +176,10 @@ public class CenarioService {
         }
     }
 
-    public boolean alterarCenario(Integer id) throws Exception{
-        cenarioRepository.getById(id);
+    public CenarioDTO alterarCenario(Integer id) throws Exception{
+        CenarioDTO cenarioDTO = objectMapper.convertValue(cenarioRepository.getById(id), CenarioDTO.class);
         cenarioAtual=id;
-        return true;
+        return cenarioDTO;
     }
 
 }

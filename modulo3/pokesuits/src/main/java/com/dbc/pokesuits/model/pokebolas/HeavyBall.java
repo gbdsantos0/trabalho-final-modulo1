@@ -1,12 +1,13 @@
 package com.dbc.pokesuits.model.pokebolas;
 
+import com.dbc.pokesuits.dto.pokemon.PokemonCreateDTO;
 import com.dbc.pokesuits.model.entity.Pokemon;
 import com.dbc.pokesuits.model.interfaces.Pokebola;
 
 public class HeavyBall implements Pokebola {
         //Retorna multiplicadores conforme o peso do pokemon
         @Override
-        public Double calcularChance(Pokemon pokemon){
+        public Double calcularChance(PokemonCreateDTO pokemon){
             if(pokemon.getDificuldade().getChance()<0){
                 throw new IllegalStateException("Peso negativo: " + pokemon.getPeso());
             }
