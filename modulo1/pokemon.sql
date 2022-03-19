@@ -61,7 +61,7 @@ CREATE TABLE "Treinador" (
 );
 
 CREATE TABLE "Pokemon" (
-  "id_pokemon" NUMBER NOT NULL,
+  "id" NUMBER NOT NULL,
   "nome" VARCHAR2(50) NOT NULL,
   "idade" NUMBER(3) NOT NULL,
   "peso" DECIMAL(5,2) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE "Pokemon" (
   "tipo2" NUMBER,
   "raridade" NUMBER NOT NULL,
   "id_mochila" NUMBER NOT NULL,
-  PRIMARY KEY ("id_pokemon"),
+  PRIMARY KEY ("id"),
   CONSTRAINT "FK_Pokemon.id_mochila"
   	FOREIGN KEY ("id_mochila")
   		REFERENCES "Mochila"("id_mochila")
