@@ -27,8 +27,8 @@ public class CenarioController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-    @PostMapping("/alterarCenario/${idCenario}")
-    public CenarioDTO alterarCenario(@PathVariable("idCenario") Integer idCenario) throws Exception{
+    @PostMapping("/alterarcenario/{idcenario}")
+    public CenarioDTO alterarCenario(@PathVariable("idcenario") Integer idCenario) throws Exception{
         CenarioDTO cenarioDTO = cenarioService.alterarCenario(idCenario);
         log.info("Cenário alterado");
         return cenarioDTO;
@@ -40,7 +40,7 @@ public class CenarioController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-    @GetMapping("/gerarPokemon")
+    @GetMapping("/gerarpokemon")
     public PokemonCreateDTO gerarPokemon() throws Exception{
         PokemonCreateDTO pokemonCreateDTO = cenarioService.gerarPokemon();
         log.info("Pokemon gerado com sucesso pelo cenário");
@@ -53,8 +53,8 @@ public class CenarioController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-    @PostMapping("/capturar/${nomePokebola}")//TODO ADICIONAR REQUESTINFO PARA CASO DE NAO CONSEGUIR CAPTURAR
-    public PokemonDTO capturarPokemon(@Valid @RequestBody PokemonCreateDTO pokemonCreateDTO, @PathVariable("nomePokebola") String nomePokebola) throws Exception{//todo adicionar o treinadorDTO
+    @PostMapping("/capturar/{nomepokebola}")//TODO ADICIONAR REQUESTINFO PARA CASO DE NAO CONSEGUIR CAPTURAR
+    public PokemonDTO capturarPokemon(@Valid @RequestBody PokemonCreateDTO pokemonCreateDTO, @PathVariable("nomepokebola") String nomePokebola) throws Exception{//todo adicionar o treinadorDTO
         PokemonDTO pokemonDTO = cenarioService.capturar(pokemonCreateDTO, nomePokebola, null);
         log.info("Pokemon Capturado com sucesso");
         return pokemonDTO;
