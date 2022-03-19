@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.dbc.pokesuits.dto.pokemon.PokemonCreateDTO;
 import com.dbc.pokesuits.dto.pokemon.PokemonDTO;
+import com.dbc.pokesuits.exceptions.RegraDeNegocioException;
 import com.dbc.pokesuits.model.entity.Pokemon;
 import com.dbc.pokesuits.repository.PokemonRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,7 +39,7 @@ public class PokemonService {
 		return pokemonDTO;
 	}
 
-	public PokemonDTO RemoverPokemon(int id) {
+	public PokemonDTO RemoverPokemon(int id) throws RegraDeNegocioException {
 		
 		Pokemon pokemonRemovido = pokemonRepository.delete(id);
 		
@@ -47,7 +48,7 @@ public class PokemonService {
 		return pokemonDTO;
 	}
 
-	public PokemonDTO editarPokemon(PokemonCreateDTO createDTO, Integer id) {
+	public PokemonDTO editarPokemon(PokemonCreateDTO createDTO, Integer id) throws RegraDeNegocioException {
 		Pokemon PokemonConvertido = objectMapper.convertValue(createDTO, Pokemon.class);
 		
 		Pokemon pokemonAtualizado = pokemonRepository.update(id, PokemonConvertido);

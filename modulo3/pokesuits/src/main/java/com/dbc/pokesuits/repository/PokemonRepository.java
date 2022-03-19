@@ -12,6 +12,7 @@ import com.dbc.pokesuits.enums.Dificuldades;
 import com.dbc.pokesuits.enums.Raridades;
 import com.dbc.pokesuits.enums.TipoPokemon;
 import com.dbc.pokesuits.enums.Utils;
+import com.dbc.pokesuits.exceptions.RegraDeNegocioException;
 import com.dbc.pokesuits.model.entity.Pokemon;
 
 @Repository
@@ -48,10 +49,10 @@ public class PokemonRepository {
         return listPokemons;
     }
 
-    public Pokemon update(Integer id, Pokemon pokemon){
+    public Pokemon update(Integer id, Pokemon pokemon) throws RegraDeNegocioException{
     	
     	Optional<Pokemon> pokemonById = this.getByid(id);
-    	if(pokemonById.isEmpty())throw new ExceptionInInitializerError("fdfd");
+    	if(pokemonById.isEmpty())throw new RegraDeNegocioException("Não Existe um Pokemon com o ID Passado");
     	Pokemon pokemonRecuperado = pokemonById.get();
     	
     	listPokemons.remove(pokemonRecuperado);
@@ -72,10 +73,10 @@ public class PokemonRepository {
         return pokemonRecuperado;
     }
 
-    public Pokemon delete(Integer id){
+    public Pokemon delete(Integer id) throws RegraDeNegocioException{
     	
     	Optional<Pokemon> pokemonById = this.getByid(id);
-    	if(pokemonById.isEmpty())throw new ExceptionInInitializerError("fdfd");
+    	if(pokemonById.isEmpty())throw new RegraDeNegocioException("Não Existe um Pokemon com o ID Passado");
     	Pokemon pokemonRecuperado = pokemonById.get();
     	
         listPokemons.remove(pokemonRecuperado);
