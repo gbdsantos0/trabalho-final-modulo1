@@ -2,7 +2,10 @@ package com.dbc.pokesuits.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +26,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(path = "/pokemon")
+@Validated
 public class PokemonController {
 	@Autowired
 	private PokemonService pokemonService;
@@ -45,7 +49,7 @@ public class PokemonController {
             @ApiResponse(code = 500, message = "Devolve a ecxessao gerada"),
     })
 	@PostMapping
-	public PokemonDTO AdicionarPokemon(@RequestBody PokemonCreateDTO pokemon){
+	public PokemonDTO AdicionarPokemon(@Valid @RequestBody PokemonCreateDTO pokemon){
 		return pokemonService.AdicionarPokemon(pokemon);
 	}
 	
@@ -68,7 +72,7 @@ public class PokemonController {
             @ApiResponse(code = 500, message = "Devolve a ecxessao gerada"),
     })
 	@PutMapping
-	public PokemonDTO editarPokemon(@RequestBody PokemonCreateDTO createDTO, Integer id) throws RegraDeNegocioException {
+	public PokemonDTO editarPokemon(@Valid @RequestBody PokemonCreateDTO createDTO, Integer id) throws RegraDeNegocioException {
 		return pokemonService.editarPokemon(createDTO, id);
 	}
 	

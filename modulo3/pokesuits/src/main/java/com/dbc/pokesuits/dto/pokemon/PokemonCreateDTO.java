@@ -23,31 +23,31 @@ import lombok.NoArgsConstructor;
 public class PokemonCreateDTO {
 	
 	@NotEmpty
-	@ApiModelProperty(name = "Raça do Pokemon Ex.: Bulbassauro")
+	@ApiModelProperty(value = "Raça do Pokemon Ex.: Bulbassauro")
 	private String racaPokemon;
 	@Min(0)@Max(500)
-	@ApiModelProperty(name = "Peso do Pokemon")
+	@ApiModelProperty(value = "Peso do Pokemon")
 	private Double peso;
 	@NotNull
-	@ApiModelProperty(name = "Sexo do Pokemon")
+	@ApiModelProperty(value = "Sexo do Pokemon")
 	private Utils sexo;
-	@ApiModelProperty(name = "Apelido do Pokemon")
+	@ApiModelProperty(value = "Apelido do Pokemon")
     private String nome;
     @NotNull@Min(0)@Max(500)
-    @ApiModelProperty(name = "Nivel do Pokemon")
+    @ApiModelProperty(value = "Nivel do Pokemon")
     private Integer level;
     @NotNull
-    @ApiModelProperty(name = "Nivel de Dificuldade de a Captura do Pokemon")
+    @ApiModelProperty(value = "Nivel de Dificuldade de a Captura do Pokemon")
     private Dificuldades dificuldade;
     @NotNull
-    @ApiModelProperty(name = "Tipo de Pokemon Ex.: INSETO, ELÉTRICO ... ")
+    @ApiModelProperty(value = "Tipo de Pokemon Ex.: INSETO, ELÉTRICO ... ")
     private TipoPokemon tipo1;
-    @ApiModelProperty(name = "Segundo Tipo do Pokemon")
+    @ApiModelProperty(value = "Segundo Tipo do Pokemon")
     private TipoPokemon tipo2;
-    @ApiModelProperty(name = "Chance De Aparição do Pokemon")
+    @ApiModelProperty(value = "Chance De Aparição do Pokemon")
     private Raridades raridade;
     @NotNull
-    @ApiModelProperty(name = "Id que Indica a qual mochila o Pokemon Pertence")
+    @ApiModelProperty(value = "Id que Indica a qual mochila o Pokemon Pertence")
     private Integer idMochila;
 	
 	
