@@ -3,11 +3,19 @@ package com.dbc.pokesuits.model.cenario;
 import java.util.List;
 
 import com.dbc.pokesuits.enums.TiposTerreno;
-import com.dbc.pokesuits.model.entity.PokemonBase;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
 public class Cenario{
-    private final TiposTerreno terreno = null;
-    private final int levelMedio = 0;
-    private final List<PokemonBase> pokemonsDisponiveis = null;
+    private Integer idCenario;
+    private TiposTerreno terreno;
+    private Integer levelMedio;
+    private List<Integer> idPokemonsDisponiveis;
 
 }

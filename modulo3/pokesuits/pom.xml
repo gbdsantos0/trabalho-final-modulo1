@@ -5,7 +5,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.5.6</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.dbc</groupId>
 	<artifactId>pokesuits</artifactId>
@@ -53,11 +53,7 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>3.0.0</version>
 		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-		</dependency>
-
+		
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
