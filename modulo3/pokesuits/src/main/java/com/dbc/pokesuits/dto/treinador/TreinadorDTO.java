@@ -1,4 +1,4 @@
-package com.dbc.pokesuits.dto;
+package com.dbc.pokesuits.dto.treinador;
 
 
 import io.swagger.annotations.ApiModelProperty;

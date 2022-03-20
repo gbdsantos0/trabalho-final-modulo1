@@ -1,7 +1,7 @@
 package com.dbc.pokesuits.controller;
 
-import com.dbc.pokesuits.dto.TreinadorCreateDTO;
-import com.dbc.pokesuits.dto.TreinadorDTO;
+import com.dbc.pokesuits.dto.treinador.TreinadorCreateDTO;
+import com.dbc.pokesuits.dto.treinador.TreinadorDTO;
 import com.dbc.pokesuits.service.TreinadorService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

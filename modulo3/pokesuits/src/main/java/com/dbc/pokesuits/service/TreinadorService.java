@@ -1,7 +1,7 @@
 package com.dbc.pokesuits.service;
 
-import com.dbc.pokesuits.dto.TreinadorCreateDTO;
-import com.dbc.pokesuits.dto.TreinadorDTO;
+import com.dbc.pokesuits.dto.treinador.TreinadorCreateDTO;
+import com.dbc.pokesuits.dto.treinador.TreinadorDTO;
 import com.dbc.pokesuits.model.entity.Treinador;
 import com.dbc.pokesuits.repository.TreinadorRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,9 +1,7 @@
 package com.dbc.pokesuits.repository;
 
-import com.dbc.pokesuits.dto.MochilaCreateDTO;
 import com.dbc.pokesuits.exceptions.InvalidCenarioException;
 import com.dbc.pokesuits.model.objetos.Mochila;
-import io.swagger.models.auth.In;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

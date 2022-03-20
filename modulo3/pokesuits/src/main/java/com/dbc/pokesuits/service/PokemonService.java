@@ -21,14 +21,14 @@ public class PokemonService {
 	@Autowired
 	private ObjectMapper objectMapper;
 	
-	public List<PokemonDTO> ListarPokemons() {
+	public List<PokemonDTO> listarPokemons() {
 		return pokemonRepository.list()
 				.stream()
 				.map(pokemon -> objectMapper.convertValue(pokemon, PokemonDTO.class))
 				.collect(Collectors.toList());
 	}
 
-	public PokemonDTO AdicionarPokemon(PokemonCreateDTO createDTO) {
+	public PokemonDTO adicionarPokemon(PokemonCreateDTO createDTO) {
 		
 		Pokemon PokemonConvertido = objectMapper.convertValue(createDTO, Pokemon.class);
 		
@@ -39,7 +39,7 @@ public class PokemonService {
 		return pokemonDTO;
 	}
 
-	public PokemonDTO RemoverPokemon(int id) throws RegraDeNegocioException {
+	public PokemonDTO removerPokemon(int id) throws RegraDeNegocioException {
 		
 		Pokemon pokemonRemovido = pokemonRepository.delete(id);
 		
