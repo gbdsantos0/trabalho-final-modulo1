@@ -43,13 +43,9 @@ public class UserRepository {
     	if(userById.isEmpty())throw new RegraDeNegocioException("Não Existe esse usuario");
     	User userRecuperado = userById.get();
     	
-    	listUsers.remove(userRecuperado);
-    	
     	userRecuperado.setEmail(user.getEmail());
     	userRecuperado.setNome(user.getNome());
     	userRecuperado.setUsername(user.getUsername());
-        
-    	listUsers.add(userRecuperado);
         
         return userRecuperado;
     }

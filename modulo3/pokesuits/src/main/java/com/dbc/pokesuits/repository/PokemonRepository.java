@@ -36,11 +36,11 @@ public class PokemonRepository {
 	
 	public Optional<Pokemon> getByid(Integer id) {
     	return 	 listPokemons.stream()
-                .filter(poke -> poke.getId().equals(id))
+                .filter(poke -> poke.getIdPokemon().equals(id))
                 .findFirst();
     }
     public Pokemon create(Pokemon pokemon){
-    	pokemon.setId(COUNTER.incrementAndGet());
+    	pokemon.setIdPokemon(COUNTER.incrementAndGet());
         listPokemons.add(pokemon);
     	return pokemon;
     }
@@ -55,8 +55,6 @@ public class PokemonRepository {
     	if(pokemonById.isEmpty())throw new RegraDeNegocioException("Não Existe um Pokemon com o ID Passado");
     	Pokemon pokemonRecuperado = pokemonById.get();
     	
-    	listPokemons.remove(pokemonRecuperado);
-    	
         pokemonRecuperado.setDificuldade(pokemon.getDificuldade());
         pokemonRecuperado.setIdMochila(pokemon.getIdMochila());
         pokemonRecuperado.setLevel(pokemon.getLevel());
@@ -67,8 +65,6 @@ public class PokemonRepository {
         pokemonRecuperado.setSexo(pokemon.getSexo());
         pokemonRecuperado.setTipo1(pokemon.getTipo1());
         pokemonRecuperado.setTipo2(pokemon.getTipo2());
-        
-        listPokemons.add(pokemonRecuperado);
         
         return pokemonRecuperado;
     }
