@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/cenario")
@@ -27,7 +28,7 @@ public class CenarioController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-    @PostMapping("/alterarCenario/${idCenario}")
+    @PostMapping("/alterarCenario/{idCenario}")
     public CenarioDTO alterarCenario(@PathVariable("idCenario") Integer idCenario) throws Exception{
         CenarioDTO cenarioDTO = cenarioService.alterarCenario(idCenario);
         log.info("Cenário alterado");
@@ -53,10 +54,10 @@ public class CenarioController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-    @PostMapping("/capturar/${nomePokebola}")//TODO ADICIONAR REQUESTINFO PARA CASO DE NAO CONSEGUIR CAPTURAR
-    public PokemonDTO capturarPokemon(@Valid @RequestBody PokemonCreateDTO pokemonCreateDTO, @PathVariable("nomePokebola") String nomePokebola) throws Exception{//todo adicionar o treinadorDTO
-        PokemonDTO pokemonDTO = cenarioService.capturar(pokemonCreateDTO, nomePokebola, null);
-        log.info("Pokemon Capturado com sucesso");
+    @PostMapping("/capturar/{idTreinador}/{pokebola}")//TODO ADICIONAR REQUESTINFO PARA CASO DE NAO CONSEGUIR CAPTURAR
+    public PokemonDTO capturarPokemon(@PathVariable("pokebola") String nomePokebola, @PathVariable("idTreinador") Integer idTreinador) throws Exception{//todo adicionar o treinadorDTO
+        PokemonDTO pokemonDTO = cenarioService.capturar(nomePokebola, idTreinador);
+        log.info("Pokemon capturado com sucesso");
         return pokemonDTO;
     }
 }

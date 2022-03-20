@@ -17,23 +17,29 @@ public class CenarioRepository {
     private static AtomicInteger COUNTER = new AtomicInteger();
 
     public CenarioRepository(){
-        listaCenarios.add(Cenario.builder()
+        listaCenarios.add(Cenario.builder()//CHAO (NENHUM POKEMON)
+                .idCenario(COUNTER.incrementAndGet())
+                .terreno(TiposTerreno.CHAO)
+                .levelMedio(1)
+                .idPokemonsDisponiveis(List.of())
+                .build());
+        listaCenarios.add(Cenario.builder()//GRAMA (BULBASAUR E EVOS)
                 .idCenario(COUNTER.incrementAndGet())
                 .terreno(TiposTerreno.GRAMA)
                 .levelMedio(4)
                 .idPokemonsDisponiveis(Arrays.asList(1,2,3))
                 .build());
-        listaCenarios.add(Cenario.builder()
+        listaCenarios.add(Cenario.builder()//AGUA (SQUIRTLE E EVOLUCOES)
                 .idCenario(COUNTER.incrementAndGet())
                 .terreno(TiposTerreno.AGUA)
                 .levelMedio(10)
                 .idPokemonsDisponiveis(Arrays.asList(7,8,9))
                 .build());
-        listaCenarios.add(Cenario.builder()
+        listaCenarios.add(Cenario.builder()//CAVERNA (CHARMANDER E EVOS + GEODUDE E EVOS)
                 .idCenario(COUNTER.incrementAndGet())
                 .terreno(TiposTerreno.CAVERNA)
                 .levelMedio(7)
-                .idPokemonsDisponiveis(Arrays.asList(1,2,3))
+                .idPokemonsDisponiveis(Arrays.asList(4,5,6,74,75,76))
                 .build());
     }
 
