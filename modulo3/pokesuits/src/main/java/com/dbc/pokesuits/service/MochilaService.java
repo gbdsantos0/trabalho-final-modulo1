@@ -1,15 +1,19 @@
 package com.dbc.pokesuits.service;
 
+
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dbc.pokesuits.dto.MochilaDTO;
+import com.dbc.pokesuits.dto.mochila.MochilaDTO;
 import com.dbc.pokesuits.exceptions.InvalidCenarioException;
 import com.dbc.pokesuits.model.objetos.Mochila;
 import com.dbc.pokesuits.repository.MochilaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 @Service
 public class MochilaService {
@@ -19,6 +23,12 @@ public class MochilaService {
     @Autowired
     private ObjectMapper objectMapper;
 
+
+    public List<MochilaDTO> listAll(){
+        return mochilaRepository.list().stream()
+                .map(m -> objectMapper.convertValue(m,MochilaDTO.class))
+                .collect(Collectors.toList());
+    }
 
     public MochilaDTO adicionarPokebola(Integer id,String tipoPokebola, Integer quantidadeAdicionada)throws Exception{
         Mochila mochila = mochilaRepository.getById(id);

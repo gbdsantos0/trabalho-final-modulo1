@@ -39,7 +39,7 @@ public class PokemonController {
     })
 	@GetMapping
 	public List<PokemonDTO> ListarPokemons(){
-		return pokemonService.ListarPokemons();
+		return pokemonService.listarPokemons();
 	}
 	
 	@ApiOperation(value = "Recebe um Pokemon")
@@ -50,7 +50,7 @@ public class PokemonController {
     })
 	@PostMapping
 	public PokemonDTO AdicionarPokemon(@Valid @RequestBody PokemonCreateDTO pokemon){
-		return pokemonService.AdicionarPokemon(pokemon);
+		return pokemonService.adicionarPokemon(pokemon);
 	}
 	
 	
@@ -62,7 +62,7 @@ public class PokemonController {
     })
 	@DeleteMapping(path = "/{id}")
 	public void RemoverPokemon(@PathVariable("id") int id) throws RegraDeNegocioException {
-		pokemonService.RemoverPokemon(id);
+		pokemonService.removerPokemon(id);
 	}
 	
 	@ApiOperation(value = "Recebe um id e um pokemon")

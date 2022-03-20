@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dbc.pokesuits.dto.TreinadorDTO;
 import com.dbc.pokesuits.dto.cenario.CenarioDTO;
 import com.dbc.pokesuits.dto.pokemon.PokemonCreateDTO;
 import com.dbc.pokesuits.dto.pokemon.PokemonDTO;
 import com.dbc.pokesuits.dto.pokemonbase.PokemonBaseDTO;
+import com.dbc.pokesuits.dto.treinador.TreinadorDTO;
 import com.dbc.pokesuits.enums.Raridades;
 import com.dbc.pokesuits.enums.Utils;
 import com.dbc.pokesuits.exceptions.InvalidCenarioException;
@@ -52,7 +52,6 @@ public class CenarioService {
 
 
     public PokemonDTO capturar(String tipoPokebola, Integer idTreinador) throws Exception{
-        //TODO CAPTurar pokemon
         Random r = new Random();
         TreinadorDTO treinadorDTO = treinadorService.getById(idTreinador);
 
@@ -88,7 +87,7 @@ public class CenarioService {
             //alterar idMochila para qual o pokemon pertence agora
             ultimoPokemonEncontrado.setIdMochila(treinadorDTO.getIdMochila());
             //adicionar o pokemon na lista de pokemons
-            PokemonDTO pokemonDTO = pokemonService.AdicionarPokemon(ultimoPokemonEncontrado);//todo corrigir nomes dos métodos(estão começando com uppercase)
+            PokemonDTO pokemonDTO = pokemonService.adicionarPokemon(ultimoPokemonEncontrado);
             //limpando ultimo encontro
             ultimoPokemonEncontrado = null;
             contador = 0;
@@ -115,6 +114,8 @@ public class CenarioService {
         PokemonBaseDTO pokemonBaseDTO;
         pokemonBaseDTO = this.selecionarPokemon();
         int randLevel = r.nextInt(8)+cenarioRepository.listAll().get(cenarioAtual-1).getLevelMedio()-4;//variacao de 4 levels pra cima ou pra baixo
+        contador = 0;
+
         //garantir que não ha niveis nogativos
         if(randLevel<1){
             randLevel=1;

@@ -1,4 +1,4 @@
-package com.dbc.pokesuits.dto;
+package com.dbc.pokesuits.dto.mochila;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
