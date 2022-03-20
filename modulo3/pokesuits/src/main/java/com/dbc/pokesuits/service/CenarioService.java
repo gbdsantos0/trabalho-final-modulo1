@@ -1,5 +1,6 @@
 package com.dbc.pokesuits.service;
 
+import com.dbc.pokesuits.dto.TreinadorDTO;
 import com.dbc.pokesuits.dto.cenario.CenarioDTO;
 import com.dbc.pokesuits.dto.pokemon.PokemonCreateDTO;
 import com.dbc.pokesuits.dto.pokemon.PokemonDTO;
@@ -12,15 +13,18 @@ import com.dbc.pokesuits.model.interfaces.Pokebola;
 import com.dbc.pokesuits.model.pokebolas.*;
 import com.dbc.pokesuits.repository.CenarioRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
+@Log
 public class CenarioService {
     @Autowired
     private CenarioRepository cenarioRepository;
@@ -30,15 +34,29 @@ public class CenarioService {
     private PokemonBaseService pokemonBaseService;
     @Autowired
     private PokemonService pokemonService;
+    @Autowired
+    private TreinadorService treinadorService;
+    @Autowired
+    private MochilaService mochilaService;
 
+    //todo sempre lembrar de setar como null após pokemon fugir, ser capturado ou o treinador sair do encontro
     private PokemonCreateDTO ultimoPokemonEncontrado;
-    private Integer cenarioAtual=0;
+    //cenario atual
+    private Integer cenarioAtual=1;
+    //contador para chance de fugir
+    private int contador=0;
 
-    public PokemonDTO capturar(PokemonCreateDTO pokemonCreateDTO, String tipoPokebola, Treinador treinador) throws Exception{
+
+    public PokemonDTO capturar(String tipoPokebola, Integer idTreinador) throws Exception{
         //TODO CAPTurar pokemon
         Random r = new Random();
+        TreinadorDTO treinadorDTO = treinadorService.getById(idTreinador);
 
         Pokebola pokebola;
+
+        if(ultimoPokemonEncontrado==null){
+            throw new InvalidCenarioException("Nenhum pokemon encontrado para capturar");
+        }
 
         switch (tipoPokebola.toLowerCase(Locale.ROOT)){
             case "greatball":
@@ -59,14 +77,33 @@ public class CenarioService {
             default:
                 throw new InvalidCenarioException("Tipo de pokebola inválida, favor utilizar uma das disponíveis (PokeBall, GreatBall, NetBall, HeavyBall ou MasterBall)");
         }
-
-
-        if(r.nextInt(100) <= pokebola.calcularChance(pokemonCreateDTO)){
-            //pokemonCreateDTO.setIdMochila(treinador.getIdMochila());//todo corrigir metodo
-            PokemonDTO pokemonDTO = pokemonService.AdicionarPokemon(pokemonCreateDTO);//todo corrigir nomes dos métodos(estão começando com uppercase)
+        //jogar pokebola
+        mochilaService.usarPokebola(treinadorDTO.getIdMochila(),tipoPokebola);
+        //testar chance
+        if(r.nextInt(100) <= pokebola.calcularChance(ultimoPokemonEncontrado)){
+            //alterar idMochila para qual o pokemon pertence agora
+            ultimoPokemonEncontrado.setIdMochila(treinadorDTO.getIdMochila());
+            //adicionar o pokemon na lista de pokemons
+            PokemonDTO pokemonDTO = pokemonService.AdicionarPokemon(ultimoPokemonEncontrado);//todo corrigir nomes dos métodos(estão começando com uppercase)
+            //limpando ultimo encontro
+            ultimoPokemonEncontrado = null;
+            contador = 0;
+            log.info("Pokemon capturado com sucesso");
             return pokemonDTO;
+        }else {
+            if (r.nextDouble(100) > (30 - ultimoPokemonEncontrado.getDificuldade().getChance())+(contador * 2)) {
+                //contagem para chance do pokemon escapar
+                contador++;
+                log.info("Pokemon não capturado");
+            } else {
+                //pokemon fugiu
+                ultimoPokemonEncontrado = null;
+                contador = 0;
+                log.info("Pokemon escapou");
+            }
         }
-        throw new InvalidCenarioException("Pokemon não capturado");
+
+        throw new InvalidCenarioException("Pokemon não capturado");//todo informar alguma outra coisa ao inves de uma excessao?
     };
 
     public PokemonCreateDTO gerarPokemon() throws Exception{
@@ -78,7 +115,8 @@ public class CenarioService {
         if(randLevel<1){
             randLevel=1;
         }
-        return PokemonCreateDTO.builder()
+
+        ultimoPokemonEncontrado = PokemonCreateDTO.builder()
                 //raca conforme a base
                 .racaPokemon(pokemonBaseDTO.getRacaPokemon())
                 //peso no intervalo de peso do pokemon
@@ -95,10 +133,11 @@ public class CenarioService {
                 .tipo2(pokemonBaseDTO.getTipo2())
                 .raridade(pokemonBaseDTO.getRaridade())
                 .build();
+        return ultimoPokemonEncontrado;
     }
 
     public PokemonBaseDTO selecionarPokemon() throws Exception{
-        if(cenarioRepository.listAll().isEmpty()){
+        if(cenarioRepository.getById(cenarioAtual).getIdPokemonsDisponiveis().isEmpty()){
             throw new InvalidCenarioException("Lista de pokemons do cenário atual vazia");
         }
 

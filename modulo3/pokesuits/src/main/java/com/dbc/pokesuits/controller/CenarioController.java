@@ -1,18 +1,21 @@
 package com.dbc.pokesuits.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.dbc.pokesuits.dto.cenario.CenarioDTO;
 import com.dbc.pokesuits.dto.pokemon.PokemonCreateDTO;
 import com.dbc.pokesuits.dto.pokemon.PokemonDTO;
-import com.dbc.pokesuits.model.entity.Treinador;
 import com.dbc.pokesuits.service.CenarioService;
+
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.java.Log;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/cenario")
@@ -53,10 +56,10 @@ public class CenarioController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-    @PostMapping("/capturar/{nomepokebola}")//TODO ADICIONAR REQUESTINFO PARA CASO DE NAO CONSEGUIR CAPTURAR
-    public PokemonDTO capturarPokemon(@Valid @RequestBody PokemonCreateDTO pokemonCreateDTO, @PathVariable("nomepokebola") String nomePokebola) throws Exception{//todo adicionar o treinadorDTO
-        PokemonDTO pokemonDTO = cenarioService.capturar(pokemonCreateDTO, nomePokebola, null);
-        log.info("Pokemon Capturado com sucesso");
+    @PostMapping("/capturar/{idtreinador}/{pokebola}")//TODO ADICIONAR REQUESTINFO PARA CASO DE NAO CONSEGUIR CAPTURAR
+    public PokemonDTO capturarPokemon(@PathVariable("pokebola") String nomePokebola, @PathVariable("idtreinador") Integer idTreinador) throws Exception{//todo adicionar o treinadorDTO
+        PokemonDTO pokemonDTO = cenarioService.capturar(nomePokebola, idTreinador);
+        log.info("Pokemon capturado com sucesso");
         return pokemonDTO;
     }
 }
