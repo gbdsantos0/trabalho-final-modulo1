@@ -42,11 +42,11 @@ public class UserRepository {
     	Optional<User> userById = this.getByid(id);
     	if(userById.isEmpty())throw new RegraDeNegocioException("Não Existe esse usuario");
     	User userRecuperado = userById.get();
-    	
+
     	userRecuperado.setEmail(user.getEmail());
     	userRecuperado.setNome(user.getNome());
     	userRecuperado.setUsername(user.getUsername());
-        
+
         return userRecuperado;
     }
 

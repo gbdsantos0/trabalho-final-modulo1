@@ -1,13 +1,14 @@
 package com.dbc.pokesuits.model.entity;
 
-import javax.validation.constraints.NotNull;
-
 import com.dbc.pokesuits.enums.Utils;
-
+import com.dbc.pokesuits.model.entity.Entidade;
+import com.dbc.pokesuits.model.objetos.Mochila;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor

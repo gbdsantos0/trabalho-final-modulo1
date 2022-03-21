@@ -1,23 +1,19 @@
 package com.dbc.pokesuits.controller;
 
-import java.net.http.HttpResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.dbc.pokesuits.dto.cenario.CenarioDTO;
 import com.dbc.pokesuits.dto.pokemon.PokemonCreateDTO;
 import com.dbc.pokesuits.dto.pokemon.PokemonDTO;
+import com.dbc.pokesuits.model.entity.Treinador;
 import com.dbc.pokesuits.service.CenarioService;
-
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/cenario")
@@ -32,8 +28,8 @@ public class CenarioController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-    @PostMapping("/alterarcenario/{idcenario}")
-    public CenarioDTO alterarCenario(@PathVariable("idcenario") Integer idCenario) throws Exception{
+    @PostMapping("/alterarCenario/{idCenario}")
+    public CenarioDTO alterarCenario(@PathVariable("idCenario") Integer idCenario) throws Exception{
         CenarioDTO cenarioDTO = cenarioService.alterarCenario(idCenario);
         log.info("Cenário alterado");
         return cenarioDTO;
@@ -45,7 +41,7 @@ public class CenarioController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-    @GetMapping("/gerarpokemon")
+    @GetMapping("/gerarPokemon")
     public PokemonCreateDTO gerarPokemon() throws Exception{
         PokemonCreateDTO pokemonCreateDTO = cenarioService.gerarPokemon();
         log.info("Pokemon gerado com sucesso pelo cenário");
@@ -58,10 +54,23 @@ public class CenarioController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-    @PostMapping("/capturar/{idtreinador}/{pokebola}")//TODO ADICIONAR REQUESTINFO PARA CASO DE NAO CONSEGUIR CAPTURAR
-    public PokemonDTO capturarPokemon(@PathVariable("pokebola") String nomePokebola, @PathVariable("idtreinador") Integer idTreinador) throws Exception{//todo adicionar o treinadorDTO
+    @PostMapping("/capturar/{idTreinador}/{pokebola}")//TODO ADICIONAR REQUESTINFO PARA CASO DE NAO CONSEGUIR CAPTURAR
+    public PokemonDTO capturarPokemon(@PathVariable("pokebola") String nomePokebola, @PathVariable("idTreinador") Integer idTreinador) throws Exception{//todo adicionar o treinadorDTO
         PokemonDTO pokemonDTO = cenarioService.capturar(nomePokebola, idTreinador);
         log.info("Pokemon capturado com sucesso");
         return pokemonDTO;
+    }
+
+    @ApiOperation(value = "Mostra o cenário atual")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retorna o cenário atual"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
+    @GetMapping
+    public CenarioDTO cenarioAtual() throws Exception{
+        CenarioDTO cenarioDTO = cenarioService.cenarioAtual();
+        log.info("Cenário retornado");
+        return cenarioDTO;
     }
 }

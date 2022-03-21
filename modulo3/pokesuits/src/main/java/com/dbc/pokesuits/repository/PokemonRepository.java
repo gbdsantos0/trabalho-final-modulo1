@@ -54,7 +54,7 @@ public class PokemonRepository {
     	Optional<Pokemon> pokemonById = this.getByid(id);
     	if(pokemonById.isEmpty())throw new RegraDeNegocioException("Não Existe um Pokemon com o ID Passado");
     	Pokemon pokemonRecuperado = pokemonById.get();
-    	
+
         pokemonRecuperado.setDificuldade(pokemon.getDificuldade());
         pokemonRecuperado.setIdMochila(pokemon.getIdMochila());
         pokemonRecuperado.setLevel(pokemon.getLevel());
@@ -65,7 +65,7 @@ public class PokemonRepository {
         pokemonRecuperado.setSexo(pokemon.getSexo());
         pokemonRecuperado.setTipo1(pokemon.getTipo1());
         pokemonRecuperado.setTipo2(pokemon.getTipo2());
-        
+
         return pokemonRecuperado;
     }
 

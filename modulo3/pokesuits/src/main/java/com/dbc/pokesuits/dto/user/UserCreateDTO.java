@@ -3,6 +3,8 @@ package com.dbc.pokesuits.dto.user;
 import java.util.ArrayList;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 import com.dbc.pokesuits.config.validation.ValidPassword;
@@ -25,10 +27,10 @@ public class UserCreateDTO {
 	@Email
 	@ApiModelProperty(value = "Email Do Usuário")
 	private String email;
-	@ValidPassword
+	@NotEmpty@Min(6)@Max(15)
 	@ApiModelProperty(value = "Senha Do Usuário")
 	private Integer password;
-	@NotEmpty
+	@ValidPassword
 	@ApiModelProperty(value = "Username do Usuário")
 	private String username;
 	@ApiModelProperty(value = "IDs dos Treinadores Pokemon")
