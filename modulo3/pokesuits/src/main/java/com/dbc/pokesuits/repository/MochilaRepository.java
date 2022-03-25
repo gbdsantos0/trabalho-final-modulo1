@@ -1,14 +1,12 @@
 package com.dbc.pokesuits.repository;
 
+import com.dbc.pokesuits.exceptions.InvalidCenarioException;
+import com.dbc.pokesuits.model.objetos.Mochila;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import org.springframework.stereotype.Repository;
-
-import com.dbc.pokesuits.exceptions.InvalidCenarioException;
-import com.dbc.pokesuits.model.objetos.Mochila;
 
 @Repository
 public class MochilaRepository {
@@ -29,6 +27,12 @@ public class MochilaRepository {
                 .build());
     }
 
+//public Mochila create(Mochila mochila){
+//        mochila.setIdMochila(COUNTER.incrementAndGet());
+//        listaMochilas.add(mochila);
+//        return mochila;
+
+
     public List<Mochila> list(){
         return listaMochilas;
     }
@@ -44,13 +48,15 @@ public class MochilaRepository {
                 .filter(mochila -> mochila.getIdMochila()==(id))
                 .findFirst()
                 .orElseThrow(()->new InvalidCenarioException("Mochila não encontrada!"));
-        
+//        listaMochilas.remove(mochilaRecuperada);
         mochilaRecuperada.setQuantidadeGreatBalls(mochilaAtualizada.getQuantidadeGreatBalls());
         mochilaRecuperada.setQuantidadeHeavyBalls(mochilaAtualizada.getQuantidadeHeavyBalls());
         mochilaRecuperada.setQuantidadeMasterBalls(mochilaAtualizada.getQuantidadeMasterBalls());
         mochilaRecuperada.setQuantidadeNetBalls(mochilaAtualizada.getQuantidadeNetBalls());
         mochilaRecuperada.setQuantidadePokeBalls(mochilaAtualizada.getQuantidadePokeBalls());
-        
+//        listaMochilas.add(mochilaRecuperada);
+
+
         return mochilaRecuperada;
     }
 
