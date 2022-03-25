@@ -27,7 +27,7 @@ public class UserCreateDTO {
 	private String email;
 	@ValidPassword
 	@ApiModelProperty(value = "Senha Do Usuário")
-	private Integer password;
+	private String password;
 	@NotEmpty
 	@ApiModelProperty(value = "Username do Usuário")
 	private String username;

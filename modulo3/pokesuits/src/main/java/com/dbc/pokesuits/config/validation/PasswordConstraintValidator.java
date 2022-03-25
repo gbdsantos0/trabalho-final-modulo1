@@ -15,6 +15,8 @@ import org.passay.PasswordValidator;
 import org.passay.RuleResult;
 import org.passay.WhitespaceRule;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword, String> {
 
     @Override

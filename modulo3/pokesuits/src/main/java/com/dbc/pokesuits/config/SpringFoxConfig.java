@@ -29,11 +29,11 @@ public class SpringFoxConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("PokeSuits REST API")
-                .description("Um exemplo de aplicação Spring Boot REST API")
-                .version("1.0.0")
+                .description("Aplicação Spring Boot REST API")
+                .version("7.0.0")
                 .license("Apache License Version 2.0")
                 .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
-                .contact(new Contact("Maicon", "https://www.dbccompany.com.br/", "maicon.gerardi@dbccompany.com.br"))
+                .contact(new Contact("João", "https://www.dbccompany.com.br/", "joao.martins@dbccompany.com.br"))
                 .build();
     }
 }
