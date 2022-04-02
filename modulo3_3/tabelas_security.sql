@@ -21,10 +21,10 @@ create sequence IF NOT EXISTS seq_regra
  start 1;
  
 insert into REGRA
-values (nextval('seq_regra'), 'RULE_ADMIN');
+values (nextval('seq_regra'), 'ROLE_ADMIN');
 
 insert into REGRA
-values (nextval('seq_regra'), 'RULE_LEAGUE_CHAMPION');
+values (nextval('seq_regra'), 'ROLE_LEAGUE_CHAMPION');
 
 insert into REGRA
-values (nextval('seq_regra'), 'RULE_USER');
+values (nextval('seq_regra'), 'ROLE_USER');
