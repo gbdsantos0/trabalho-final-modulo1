@@ -1,3 +1,5 @@
+set schema 'vem_ser';
+
 create table REGRA (
   id_regra numeric not null,
   nome text not null,
