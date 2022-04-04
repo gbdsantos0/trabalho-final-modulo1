@@ -1,0 +1,1 @@
+https://pokesuits.herokuapp.com/swagger-ui/#/
