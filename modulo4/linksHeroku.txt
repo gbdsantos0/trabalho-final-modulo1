@@ -1,0 +1,2 @@
+https://pokesuits.herokuapp.com/
+https://pokesuits-base.herokuapp.com/
