@@ -3,6 +3,7 @@ package com.dbc.emailhandler.service;
 import java.util.List;
 import java.util.UUID;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
@@ -17,8 +18,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.util.concurrent.ListenableFutureCallback;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class ValidatedUserProducerService {
 	
@@ -45,5 +48,17 @@ public class ValidatedUserProducerService {
 				.build();
 		
 		ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(message);
+
+		future.addCallback(new ListenableFutureCallback<>() {
+			@Override
+			public void onFailure(Throwable ex) {
+				log.error("Erro ao enviar mensagem para o kafka: {}", message, ex);
+			}
+
+			@Override
+			public void onSuccess(SendResult<String, String> result) {
+				log.info("Log enviado para o kafka com a mensagem: {}", message);
+			}
+		});
 	}
 }

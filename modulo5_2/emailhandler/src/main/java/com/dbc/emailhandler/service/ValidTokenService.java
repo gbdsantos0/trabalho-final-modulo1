@@ -2,9 +2,11 @@ package com.dbc.emailhandler.service;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.dbc.emailhandler.exception.BusinessRuleException;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -43,9 +45,19 @@ public class ValidTokenService {
 		ValidationTokenEntity save = tokenRepository.save(ValidationTokenEntity.builder()
 				.dataExpiracao(LocalDateTime.now().plus(3,ChronoUnit.MINUTES))
 				.email(emailUser.getEmail())
-				.Username(emailUser.getUsername()).build());
+				.username(emailUser.getUsername()).build());
 		
-		emailService.sendEmail(new UserDTO(emailUser.getUsername(), emailUser.getUsername(), save.getId()), emailUser.getOperation(), emailUser.getEmail());
+		emailService.sendEmail(new UserDTO(emailUser.getName(), emailUser.getUsername(), save.getId()), emailUser.getOperation(), emailUser.getEmail());
+	}
+
+	public void validateUser(String token) throws Exception {
+		ValidationTokenEntity tokenEntity = tokenRepository.findById(token).orElseThrow(() -> new BusinessRuleException("Token inválido"));
+		ValidatedUserDTO validatedUserDTO = ValidatedUserDTO.builder()
+				.username(tokenEntity.getUsername())
+				.valid(true)
+				.build();
+
+		producerService.sendMessage(Arrays.asList(validatedUserDTO));
 	}
 	
 }

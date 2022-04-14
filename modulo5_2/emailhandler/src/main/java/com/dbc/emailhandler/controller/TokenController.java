@@ -19,9 +19,8 @@ public class TokenController {
 	private final ValidTokenService tokenService;
 	
 	@PostMapping("/validar/{token}")
-	public String vailidarToken(@PathVariable("token") String token) {
-		System.out.println(token);
-		return null;
+	public void vailidarToken(@PathVariable("token") String token) throws Exception {
+		tokenService.validateUser(token);
 	}
 	
 	@GetMapping("/test")
