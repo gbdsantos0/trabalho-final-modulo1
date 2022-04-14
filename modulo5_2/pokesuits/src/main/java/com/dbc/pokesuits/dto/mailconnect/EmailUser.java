@@ -3,7 +3,8 @@ package com.dbc.pokesuits.dto.mailconnect;
 import lombok.Data;
 
 @Data
-public class validatedUser {
+public class EmailUser {
     private String username;
-    private Boolean valid;
+    private String email;
+    private Operation operation;
 }
