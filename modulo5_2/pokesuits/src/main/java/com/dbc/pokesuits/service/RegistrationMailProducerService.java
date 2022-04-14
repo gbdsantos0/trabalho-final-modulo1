@@ -27,7 +27,7 @@ public class RegistrationMailProducerService {
     @Value("${kafka.email-user.topic}")
     private String topic;
 
-    public void send(String message) {
+    private void send(String message) {
         Message<String> builtMessage = MessageBuilder.withPayload(message)
                 .setHeader(KafkaHeaders.TOPIC, topic)
                 .setHeader(KafkaHeaders.MESSAGE_KEY, UUID.randomUUID().toString())

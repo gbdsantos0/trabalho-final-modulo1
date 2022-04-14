@@ -6,6 +6,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.dbc.pokesuits.dto.mailconnect.EmailUserDTO;
+import com.dbc.pokesuits.dto.mailconnect.Operation;
+import com.dbc.pokesuits.dto.mailconnect.ValidatedUserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -30,6 +33,7 @@ import lombok.extern.log4j.Log4j2;
 public class UserService {
 	private final UserRepository userRepository;
 	private final RegraService regraService;
+	private final RegistrationMailProducerService registrationMailProducerService;
 
 	public UserDTO userLogado(Integer idUser) throws RegraDeNegocioException {
 		log.info("Chamado metodo tranformarDto do User");
@@ -65,19 +69,45 @@ public class UserService {
 		userEntity.setNome(createDTO.getNome());
 		userEntity.setPassword(new BCryptPasswordEncoder().encode(createDTO.getPassword()));
 		userEntity.setRegras(regraEntitySet);
+		userEntity.setActive(false);
 
 		UserEntity userAtualizado = userRepository.save(userEntity);
+
+		EmailUserDTO emailUserDTO = EmailUserDTO.builder()
+				.username(userEntity.getUsername())
+				.name(userEntity.getNome())
+				.email(userEntity.getEmail())
+				.operation(Operation.REGISTER)
+				.build();
+
+		registrationMailProducerService.sendConfirmationMail(emailUserDTO);
 		log.info("Criado o User de ID: " + userAtualizado.getId());
 	}
 
 	public void removerUser(int id) throws RegraDeNegocioException {
 		log.info("Chamado metodo RemoverUser;");
 		
-		getById(id);
+		UserEntity userEntity = getById(id);
+
+		userEntity.setActive(false);
+
+		userRepository.save(userEntity);
 		
-		userRepository.deleteById(id);
 		log.info("Removido o User de ID: " + id);
 
+	}
+
+	public void activateUser(String username, boolean activate) throws RegraDeNegocioException {
+		UserEntity userEntity = findByUsername(username).orElseThrow(()->new RegraDeNegocioException("Usuário não encontrado"));
+		if(activate){
+			userEntity.setActive(true);
+
+			userRepository.save(userEntity);
+			log.info("Usuário ativo no sistema com o id: " + userEntity.getId());
+		}else{
+			userRepository.deleteById(userEntity.getId());
+			log.info("Usuário removido do sistema com o id: " + userEntity.getId());
+		}
 	}
 
 	public UserDTO editarUser(UserEditDto editDTO, Integer id) throws RegraDeNegocioException {
