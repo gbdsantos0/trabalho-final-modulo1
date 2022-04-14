@@ -92,7 +92,7 @@ public class UserService {
 		userEntity.setActive(false);
 
 		userRepository.save(userEntity);
-		
+
 		log.info("Removido o User de ID: " + id);
 
 	}
