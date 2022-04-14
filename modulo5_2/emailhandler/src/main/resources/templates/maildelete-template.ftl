@@ -32,8 +32,7 @@
               <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
                 <tr>
                   <td style="padding:0 0 36px 0;color:#153643;">
-                    <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">${name} your adress was deleted!!!</h1>
-                    <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"> the ${endereco} adress was deleted</p>
+                    <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">${name} your account was deleted!!!</h1>
                     <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">if it wasn't you<a href="http://www.example.com" style="color:#ee4c50;text-decoration:underline;">click here</a></p>
                   </td>
                 </tr>

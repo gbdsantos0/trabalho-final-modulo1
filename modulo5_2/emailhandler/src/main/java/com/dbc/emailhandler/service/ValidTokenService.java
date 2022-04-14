@@ -58,6 +58,8 @@ public class ValidTokenService {
 				.build();
 
 		producerService.sendMessage(Arrays.asList(validatedUserDTO));
+
+		tokenRepository.deleteById(token);
 	}
 	
 }
