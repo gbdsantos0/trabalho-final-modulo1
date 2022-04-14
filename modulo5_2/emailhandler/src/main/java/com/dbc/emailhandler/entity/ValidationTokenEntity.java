@@ -16,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-@Document("TokenEntity")
+@Document("token_entity")
 public class ValidationTokenEntity {
 	
 	@Id

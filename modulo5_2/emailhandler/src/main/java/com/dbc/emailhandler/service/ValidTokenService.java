@@ -25,7 +25,7 @@ public class ValidTokenService {
 	private final ValidatedUserProducerService producerService;
 	
 	
-	@Scheduled(fixedRate = 3600000)
+	@Scheduled(fixedRate = 60000)
 	private void checkExpirationDate() throws JsonProcessingException {
 		List<ValidationTokenEntity> findAllByDataExpiracaoLessThanEqual = tokenRepository.findAllByDataExpiracaoLessThanEqual(LocalDateTime.now());
 		
@@ -33,7 +33,6 @@ public class ValidTokenService {
 			return ValidatedUserDTO.builder().username(tok.getUsername()).valid(false).build();
 		}).collect(Collectors.toList());
 		
-		//TODO aqui lucas :)
 		producerService.sendMessage(collect);
 		
 		tokenRepository.deleteAll(findAllByDataExpiracaoLessThanEqual);
@@ -42,7 +41,7 @@ public class ValidTokenService {
 	public void sendVerificationEmail(EmailUserDTO emailUser) {
 		
 		ValidationTokenEntity save = tokenRepository.save(ValidationTokenEntity.builder()
-				.dataExpiracao(LocalDateTime.now().plus(1,ChronoUnit.HOURS))
+				.dataExpiracao(LocalDateTime.now().plus(3,ChronoUnit.MINUTES))
 				.email(emailUser.getEmail())
 				.Username(emailUser.getUsername()).build());
 		
