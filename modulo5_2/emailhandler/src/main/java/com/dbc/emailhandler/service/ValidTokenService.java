@@ -13,6 +13,7 @@ import com.dbc.emailhandler.dto.UserDTO;
 import com.dbc.emailhandler.dto.ValidatedUserDTO;
 import com.dbc.emailhandler.entity.ValidationTokenEntity;
 import com.dbc.emailhandler.repository.ValidationTokenRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,10 +22,11 @@ import lombok.RequiredArgsConstructor;
 public class ValidTokenService {
 	private final ValidationTokenRepository tokenRepository;
 	private final EmailService emailService;
+	private final ValidatedUserProducerService producerService;
 	
 	
 	@Scheduled(fixedRate = 3600000)
-	private void checkExpirationDate() {
+	private void checkExpirationDate() throws JsonProcessingException {
 		List<ValidationTokenEntity> findAllByDataExpiracaoLessThanEqual = tokenRepository.findAllByDataExpiracaoLessThanEqual(LocalDateTime.now());
 		
 		List<ValidatedUserDTO> collect = findAllByDataExpiracaoLessThanEqual.stream().map(tok->{
@@ -32,6 +34,7 @@ public class ValidTokenService {
 		}).collect(Collectors.toList());
 		
 		//TODO aqui lucas :)
+		producerService.sendMessage(collect);
 		
 		tokenRepository.deleteAll(findAllByDataExpiracaoLessThanEqual);
 	}
