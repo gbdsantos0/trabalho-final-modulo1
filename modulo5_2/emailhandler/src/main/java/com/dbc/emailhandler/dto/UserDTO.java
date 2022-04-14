@@ -5,12 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Builder
-public class ValidatedUserDTO {
-
-    private String username;
-    private Boolean valid;
+public class UserDTO {
+	
+	private String nome;
+	private String username;
+	private String token;
 }
