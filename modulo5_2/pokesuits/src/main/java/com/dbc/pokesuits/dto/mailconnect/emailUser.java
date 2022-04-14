@@ -6,5 +6,5 @@ import lombok.Data;
 public class emailUser {
     private String username;
     private String email;
-    private Operacao operacao;
+    private Operation operation;
 }

@@ -1,5 +1,5 @@
 package com.dbc.pokesuits.dto.mailconnect;
 
-public enum Operacao {
+public enum Operation {
     REGISTER, DELETE
 }
