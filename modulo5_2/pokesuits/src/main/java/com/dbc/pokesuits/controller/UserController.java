@@ -47,7 +47,7 @@ public class UserController {
             @ApiResponse(code = 500, message = "Devolve a ecxessao gerada"),
     })
 	@DeleteMapping
-	public void removerUserLogado() throws RegraDeNegocioException {
+	public void removerUserLogado() throws Exception {
 		Object userb = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
 		userService.removerUser(Integer.parseInt((String) userb));
 	}

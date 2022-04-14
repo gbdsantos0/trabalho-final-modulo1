@@ -27,7 +27,10 @@ public class RegistrationMailProducerService {
     @Value("${kafka.email-user.topic}")
     private String topic;
 
-    private void send(String message) {
+    @Value("${kafka.email-user-delete.topic}")
+    private String deleteTopic;
+
+    private void send(String message, String topic) {
         Message<String> builtMessage = MessageBuilder.withPayload(message)
                 .setHeader(KafkaHeaders.TOPIC, topic)
                 .setHeader(KafkaHeaders.MESSAGE_KEY, UUID.randomUUID().toString())
@@ -51,6 +54,11 @@ public class RegistrationMailProducerService {
 
     public void sendConfirmationMail(EmailUserDTO emailUserDTO) throws JsonProcessingException {
         String message = objectMapper.writeValueAsString(emailUserDTO);
-        this.send(message);
+        this.send(message, this.topic);
+    }
+
+    public void sendDeleteMail(EmailUserDTO emailUserDTO) throws JsonProcessingException {
+        String message = objectMapper.writeValueAsString(emailUserDTO);
+        this.send(message, this.deleteTopic);
     }
 }

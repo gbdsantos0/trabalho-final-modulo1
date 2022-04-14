@@ -60,7 +60,7 @@ public class AdminController {
             @ApiResponse(code = 500, message = "Devolve a ecxessao gerada"),
     })
 	@DeleteMapping(path = "/deletar-user/{id_user}")
-	public void removerUser(@PathVariable("id_user") int idUser) throws RegraDeNegocioException {
+	public void removerUser(@PathVariable("id_user") int idUser) throws Exception {
 		userService.removerUser(idUser);
 	}
 	
