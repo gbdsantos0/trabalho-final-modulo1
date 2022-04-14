@@ -1,6 +1,8 @@
 package com.dbc.pokesuits.security;
 
 import com.dbc.pokesuits.entity.UserEntity;
+import com.dbc.pokesuits.exceptions.RegraDeNegocioException;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -32,8 +34,12 @@ public class TokenService {
     @Value("${jwt.secret}")
     private String secret;
 
-    public String getToken(Authentication authentication){//GERA UM TOKEN A PARTIR DO USUARIO E SENHA
+    public String getToken(Authentication authentication) throws RegraDeNegocioException{//GERA UM TOKEN A PARTIR DO USUARIO E SENHA
         UserEntity usuario = (UserEntity) authentication.getPrincipal();
+        
+        if (!usuario.isEnabled()) {
+        	throw new RegraDeNegocioException("Usuário não está ativo.");
+        }
 
         Date now = new Date();//data atual
         Date exp = new Date(now.getTime()+Long.parseLong(expiration));//data de expiracao
