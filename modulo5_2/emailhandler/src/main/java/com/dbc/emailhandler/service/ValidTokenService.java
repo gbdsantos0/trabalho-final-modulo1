@@ -31,8 +31,9 @@ public class ValidTokenService {
 			return ValidatedUserDTO.builder().username(tok.getUsername()).valid(false).build();
 		}).collect(Collectors.toList());
 		
+		//TODO aqui lucas :)
 		
-		
+		tokenRepository.deleteAll(findAllByDataExpiracaoLessThanEqual);
 	}
 	
 	public void sendVerificationEmail(EmailUserDTO emailUser) {
