@@ -1,82 +1,115 @@
 package com.dbc.emailhandler.service;
 
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Component;
-import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.IOException;
+//import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
-@RequiredArgsConstructor
-public class EmailService {
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+
+import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
+import br.com.dbc.vemser.pessoaapi.dto.EnderecoDTO;
+import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class EmailService { 
+
+	
     private final freemarker.template.Configuration fmConfiguration;
+    
+    private static final String MAIL_TO = "smigle242@gmail.com";
 
     @Value("${spring.mail.username}")
     private String from;
     private final JavaMailSender emailSender;
-
-    public void sendSimpleMessage() {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(from);
-        message.setTo("maicon.gerardi@gmail.com");
-        message.setSubject("subject");
-        message.setText("teste\n minha mensagem \n\nAtt,\nMaicon.");
-        emailSender.send(message);
-    }
-
-    public void sendWithAttachment() throws MessagingException {
-        MimeMessage message = emailSender.createMimeMessage();
-
-        MimeMessageHelper helper = new MimeMessageHelper(message,
-                true);
-
-        helper.setFrom(from);
-        helper.setTo("maicon.gerardi@dbccompany.com.br");
-        helper.setSubject("subject");
-        helper.setText("teste\n minha mensagem \n\nAtt,\nMaicon.");
-
-        File file1 = new File("imagem.jpg");
-        FileSystemResource file
-                = new FileSystemResource(file1);
-        helper.addAttachment(file1.getName(), file);
-
-        emailSender.send(message);
-    }
-
-    public void sendEmail() {
-        MimeMessage mimeMessage = emailSender.createMimeMessage();
+	private File dirPath = new File("src/main/resources/templates");
+    
+    
+    public void sendEmail(PessoaDTO pessoaDTO, String type) {
+    	MimeMessage mimeMessage = emailSender.createMimeMessage();
         try {
 
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 
             mimeMessageHelper.setFrom(from);
-            mimeMessageHelper.setTo("maicon.gerardi@gmail.com");
-            mimeMessageHelper.setSubject("subject");
-            mimeMessageHelper.setText(geContentFromTemplate(), true);
+            mimeMessageHelper.setTo(MAIL_TO);
+            mimeMessageHelper.setSubject("TESTE");
+            mimeMessageHelper.setText(geContentFromTemplate(pessoaDTO, type), true);
 
             emailSender.send(mimeMessageHelper.getMimeMessage());
         } catch (MessagingException | IOException | TemplateException e) {
             e.printStackTrace();
         }
     }
-
-    public String geContentFromTemplate() throws IOException, TemplateException {
+    
+    public String geContentFromTemplate(PessoaDTO pessoaDTO, String type) throws IOException, TemplateException {
         Map<String, Object> dados = new HashMap<>();
-        dados.put("nome", "MeuNome");
-        Template template = fmConfiguration.getTemplate("email-template.ftl");
+        Template template = null;
+        dados.put("name", pessoaDTO.getNome());
+        fmConfiguration.setDirectoryForTemplateLoading(dirPath);
+        if(type.equalsIgnoreCase("create")) {
+        	template = fmConfiguration.getTemplate("/emailpessoacreate-template.ftl");
+        }else if(type.equalsIgnoreCase("update")){
+        	template = fmConfiguration.getTemplate("/emailpessoaupdate-template.ftl");
+        }else if(type.equalsIgnoreCase("delete")){
+        	template = fmConfiguration.getTemplate("/emailpessoadelete-template.ftl");
+        }
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
+        return html;
+    }
+    
+    public void sendEmail(EnderecoDTO enderecoDTO, PessoaDTO pessoaDTO, String type) {
+    	MimeMessage mimeMessage = emailSender.createMimeMessage();
+        try {
+
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+
+            mimeMessageHelper.setFrom(from);
+            mimeMessageHelper.setTo(MAIL_TO);
+            mimeMessageHelper.setSubject("TESTE");
+            mimeMessageHelper.setText(geContentFromTemplate(enderecoDTO, pessoaDTO, type), true);
+
+            emailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (MessagingException | IOException | TemplateException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public String geContentFromTemplate(EnderecoDTO enderecoDTO, PessoaDTO pessoaDTO, String type) throws IOException, TemplateException {
+        Map<String, Object> dados = new HashMap<>();
+        dados.put("name", pessoaDTO.getNome());
+        fmConfiguration.setDirectoryForTemplateLoading(dirPath);
+        Template template = null;
+        if(type.equalsIgnoreCase("create")) {
+        	template = fmConfiguration.getTemplate("/emailenderecocreate-template.ftl");
+        	dados.put("endereco", enderecoDTO.getLogadouro());
+        }else if(type.equalsIgnoreCase("update")){
+        	template = fmConfiguration.getTemplate("/emailenderecoupdate-template.ftl");
+        }else if(type.equalsIgnoreCase("delete")){
+        	dados.put("endereco", enderecoDTO.getLogadouro());
+        	template = fmConfiguration.getTemplate("/emailenderecodelete-template.ftl");
+        }
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
+        return html;
+    }
+    
+    public String geContentFromTemplate(ContatoDTO contatoDTO, PessoaDTO pessoaDTO, String path) throws IOException, TemplateException {
+        Map<String, Object> dados = new HashMap<>();
+        dados.put("nome", pessoaDTO.getNome());
+        fmConfiguration.setDirectoryForTemplateLoading(dirPath);
+        Template template = fmConfiguration.getTemplate(path);
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;
     }
