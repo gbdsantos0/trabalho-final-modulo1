@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import com.dbc.pokesuits.dto.mailconnect.EmailUserDTO;
 import com.dbc.pokesuits.dto.mailconnect.Operation;
 import com.dbc.pokesuits.dto.mailconnect.ValidatedUserDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -84,7 +85,7 @@ public class UserService {
 		log.info("Criado o User de ID: " + userAtualizado.getId());
 	}
 
-	public void removerUser(int id) throws RegraDeNegocioException {
+	public void removerUser(int id) throws Exception {
 		log.info("Chamado metodo RemoverUser;");
 		
 		UserEntity userEntity = getById(id);
@@ -92,6 +93,15 @@ public class UserService {
 		userEntity.setActive(false);
 
 		userRepository.save(userEntity);
+
+		EmailUserDTO emailUserDTO = EmailUserDTO.builder()
+				.username(userEntity.getUsername())
+				.name(userEntity.getNome())
+				.email(userEntity.getEmail())
+				.operation(Operation.DELETE)
+				.build();
+
+		registrationMailProducerService.sendDeleteMail(emailUserDTO);
 
 		log.info("Removido o User de ID: " + id);
 
