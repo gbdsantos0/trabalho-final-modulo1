@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dbc.pokesuits.dto.user.LoginDTO;
 import com.dbc.pokesuits.dto.user.LoginExecutadoDTO;
 import com.dbc.pokesuits.dto.user.UserCreateDTO;
+import com.dbc.pokesuits.exceptions.RegraDeNegocioException;
 import com.dbc.pokesuits.security.TokenService;
 import com.dbc.pokesuits.service.UserService;
 
@@ -38,7 +39,7 @@ public class AuthController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção")
     })
     @PostMapping()
-    public String auth(@RequestBody @Valid LoginDTO loginDTO) {
+    public String auth(@RequestBody @Valid LoginDTO loginDTO) throws RegraDeNegocioException {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                 new UsernamePasswordAuthenticationToken(
                         loginDTO.getUsername(),
@@ -59,17 +60,9 @@ public class AuthController {
     @PostMapping("/sign-up")
     public LoginExecutadoDTO signUp(@RequestBody @Valid UserCreateDTO userCreateDTO) throws Exception{
         userService.criaUser(userCreateDTO);
+        
         LoginExecutadoDTO loginExecutadoDTO = new LoginExecutadoDTO();
         loginExecutadoDTO.setLogin(userCreateDTO.getUsername());
-
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                new UsernamePasswordAuthenticationToken(userCreateDTO.getUsername(), userCreateDTO.getPassword());//gera UPAT de login
-
-        Authentication authenticate = authenticationManager.authenticate(usernamePasswordAuthenticationToken);//autentica com o UPAT
-
-        String token = tokenService.getToken(authenticate);//retorna o token a partir do Authentication
-
-        loginExecutadoDTO.setToken(token);
 
         return loginExecutadoDTO;
     }
