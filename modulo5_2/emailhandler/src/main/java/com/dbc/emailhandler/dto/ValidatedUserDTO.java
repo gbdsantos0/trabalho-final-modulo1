@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class ValidatedUser {
+public class ValidatedUserDTO {
+
     private String username;
     private Boolean valid;
 }

@@ -10,8 +10,4 @@ public class LoginExecutadoDTO {
     @NotNull
     @NotEmpty
     private String login;
-
-    @NotNull
-    @NotEmpty
-    private String token;
 }

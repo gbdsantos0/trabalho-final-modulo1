@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.dbc.emailhandler.dto.EmailUser;
+import com.dbc.emailhandler.dto.EmailUserDTO;
 import com.dbc.emailhandler.dto.UserDTO;
-import com.dbc.emailhandler.dto.ValidatedUser;
+import com.dbc.emailhandler.dto.ValidatedUserDTO;
 import com.dbc.emailhandler.entity.ValidationTokenEntity;
 import com.dbc.emailhandler.repository.ValidationTokenRepository;
 
@@ -27,13 +27,15 @@ public class ValidTokenService {
 	private void checkExpirationDate() {
 		List<ValidationTokenEntity> findAllByDataExpiracaoLessThanEqual = tokenRepository.findAllByDataExpiracaoLessThanEqual(LocalDateTime.now());
 		
-		findAllByDataExpiracaoLessThanEqual.stream().map(tok->{
-			return ValidatedUser.builder().username(tok.getUsername()).valid(false).build();
+		List<ValidatedUserDTO> collect = findAllByDataExpiracaoLessThanEqual.stream().map(tok->{
+			return ValidatedUserDTO.builder().username(tok.getUsername()).valid(false).build();
 		}).collect(Collectors.toList());
+		
+		
 		
 	}
 	
-	public void sendVerificationEmail(EmailUser emailUser) {
+	public void sendVerificationEmail(EmailUserDTO emailUser) {
 		
 		ValidationTokenEntity save = tokenRepository.save(ValidationTokenEntity.builder()
 				.dataExpiracao(LocalDateTime.now().plus(1,ChronoUnit.HOURS))

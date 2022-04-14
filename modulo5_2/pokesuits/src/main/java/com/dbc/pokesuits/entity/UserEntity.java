@@ -49,6 +49,8 @@ public class UserEntity implements UserDetails {
 	private String password;
 	@Column(name = "username")
 	private String username;
+	@Column(name = "active")
+	private boolean active;
 	
 	@JsonIgnore
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
@@ -90,7 +92,7 @@ public class UserEntity implements UserDetails {
 	}
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return this.active;
 	}
 	
 }
