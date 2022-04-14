@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class EmailUserConsumerService {
 
+	private final ValidTokenService validTokenService;
 	private final ObjectMapper mapper;
 	
 	@KafkaListener(
@@ -29,5 +30,6 @@ public class EmailUserConsumerService {
 	public void consume(@Payload String message, @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key)
 			throws JsonMappingException, JsonProcessingException {
 		EmailUserDTO emailUserDTO = this.mapper.readValue(message, EmailUserDTO.class);
+		this.validTokenService.sendVerificationEmail(emailUserDTO);
 	}
 }

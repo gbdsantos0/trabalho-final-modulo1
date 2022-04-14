@@ -1,5 +1,6 @@
 package com.dbc.emailhandler.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -27,8 +28,14 @@ public class ValidatedUserProducerService {
 	@Value("${kafka.validated-user.topic}")
 	private String topic;
 	
-	public void sendMessage(ValidatedUserDTO validatedUserDTO) throws JsonProcessingException {
-		this.sendMessage(this.mapper.writeValueAsString(validatedUserDTO));
+	public void sendMessage(List<ValidatedUserDTO> validatedUserDTO) throws JsonProcessingException {
+		validatedUserDTO.forEach(validatedUser -> {
+			try {
+				this.sendMessage(this.mapper.writeValueAsString(validatedUser));
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
+		});	
 	}
 	
 	private void sendMessage(String msg) {
