@@ -108,7 +108,7 @@ public class UserService {
 	}
 
 	public void activateUser(String username, boolean activate) throws RegraDeNegocioException {
-		UserEntity userEntity = findByUsername(username).orElseThrow(()->new RegraDeNegocioException("Usuário não encontrado"));
+		UserEntity userEntity = findByUsername(username).orElseThrow(()->new RegraDeNegocioException("Usuário não encontrado: "+ username));
 		if(activate){
 			userEntity.setActive(true);
 

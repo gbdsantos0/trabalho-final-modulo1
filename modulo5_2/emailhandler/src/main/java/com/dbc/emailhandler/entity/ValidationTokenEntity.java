@@ -21,7 +21,7 @@ public class ValidationTokenEntity {
 	
 	@Id
 	private String id;
-	private String Username;
+	private String username;
 	private String email;
 	private LocalDateTime dataExpiracao;
 	
