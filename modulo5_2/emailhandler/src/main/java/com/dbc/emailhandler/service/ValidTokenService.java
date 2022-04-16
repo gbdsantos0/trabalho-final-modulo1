@@ -41,7 +41,7 @@ public class ValidTokenService {
 	public void sendVerificationEmail(EmailUserDTO emailUser) {
 		
 		ValidationTokenEntity save = tokenRepository.save(ValidationTokenEntity.builder()
-				.dataExpiracao(LocalDateTime.now().plus(3,ChronoUnit.MINUTES))
+				.dataExpiracao(LocalDateTime.now().plus(1,ChronoUnit.MINUTES))
 				.email(emailUser.getEmail())
 				.Username(emailUser.getUsername()).build());
 		

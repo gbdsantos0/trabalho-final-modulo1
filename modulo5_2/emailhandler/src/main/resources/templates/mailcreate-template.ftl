@@ -34,7 +34,7 @@
                   <td style="padding:0 0 36px 0;color:#153643;">
                     <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Hello ${name}</h1>
                     <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Verify your account using the link below.</p>
-                    <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="localhost:8080/token/validar/${key}" style="color:#ee4c50;text-decoration:underline;">click here</a></p>
+                    <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="http://localhost:8080/token/validar/${key}" style="color:#ee4c50;text-decoration:underline;">click here</a></p>
                   </td>
                 </tr>
                 <tr>
