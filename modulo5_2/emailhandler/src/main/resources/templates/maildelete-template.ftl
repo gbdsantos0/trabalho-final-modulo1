@@ -33,7 +33,13 @@
                 <tr>
                   <td style="padding:0 0 36px 0;color:#153643;">
                     <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">${name} your account was deleted!!!</h1>
-                    <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">if it wasn't you<a href="http://www.example.com" style="color:#ee4c50;text-decoration:underline;">click here</a></p>
+                    <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">if it wasn't you
+                      <form method="post" target="_blank" action="http://localhost:8080/token/validar/${key}" class="inline">
+                            <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+                            <button type="submit" name="submit_param" value="submit_value" class="link-button">
+                              click here
+                            </button>
+                        </form>
                   </td>
                 </tr>
               </table>
@@ -45,7 +51,7 @@
                 <tr>
                   <td style="padding:0;width:50%;" align="left">
                     <p style="margin:0;font-size:14px;line-height:16px;font-family:Arial,sans-serif;color:#ffffff;">
-                      &reg; Someone, Somewhere 2021<br/><a href="http://www.example.com" style="color:#ffffff;text-decoration:underline;">Unsubscribe</a>
+                      &reg; Pokesuit, LocalHost ${dataatual}<br/><a href="http://www.example.com" style="color:#ffffff;text-decoration:underline;">Unsubscribe</a>
                     </p>
                   </td>
                   <td style="padding:0;width:50%;" align="right">

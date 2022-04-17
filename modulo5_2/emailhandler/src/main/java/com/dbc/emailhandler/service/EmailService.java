@@ -58,10 +58,10 @@ public class EmailService {
         Template template = null;
         dados.put("name", user.getNome());
         dados.put("dataatual", LocalDateTime.now().getYear());
+        dados.put("key", user.getToken());
         
         fmConfiguration.setDirectoryForTemplateLoading(dirPath);
         if(operation.equals(Operation.REGISTER)) {
-        	dados.put("key", user.getToken());
         	template = fmConfiguration.getTemplate("/mailcreate-template.ftl");
         }else if(operation.equals(Operation.DELETE)){
         	template = fmConfiguration.getTemplate("/maildelete-template.ftl");

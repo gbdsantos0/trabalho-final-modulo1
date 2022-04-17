@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class KafkaConsumerConfig {
 	
-    private static final String EARLIEST = "earliest";
+//    private static final String EARLIEST = "earliest";
     private static final String LATEST = "latest";
 
     @Value(value = "${kafka.bootstrap-servers}")

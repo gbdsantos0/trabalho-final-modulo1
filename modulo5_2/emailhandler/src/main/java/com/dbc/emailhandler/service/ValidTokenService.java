@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.dbc.emailhandler.dto.EmailUserDTO;
+import com.dbc.emailhandler.dto.Operation;
 import com.dbc.emailhandler.dto.UserDTO;
 import com.dbc.emailhandler.dto.ValidatedUserDTO;
 import com.dbc.emailhandler.entity.ValidationTokenEntity;
@@ -43,7 +44,7 @@ public class ValidTokenService {
 	public void sendVerificationEmail(EmailUserDTO emailUser) {
 		
 		ValidationTokenEntity save = tokenRepository.save(ValidationTokenEntity.builder()
-				.dataExpiracao(LocalDateTime.now().plus(1,ChronoUnit.MINUTES))
+				.dataExpiracao(LocalDateTime.now().plus(emailUser.getOperation().equals(Operation.DELETE)?3:1,ChronoUnit.MINUTES))
 				.email(emailUser.getEmail())
 				.username(emailUser.getUsername()).build());
 		

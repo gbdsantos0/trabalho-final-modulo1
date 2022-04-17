@@ -1,13 +1,10 @@
 package com.dbc.emailhandler.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dbc.emailhandler.dto.EmailUserDTO;
-import com.dbc.emailhandler.dto.Operation;
 import com.dbc.emailhandler.service.ValidTokenService;
 
 import lombok.RequiredArgsConstructor;
@@ -22,10 +19,4 @@ public class TokenController {
 	public void vailidarToken(@PathVariable("token") String token) throws Exception {
 		tokenService.validateUser(token);
 	}
-	
-	@GetMapping("/test")
-	public void testar() {
-		tokenService.sendVerificationEmail(EmailUserDTO.builder().email("joaovjcode@gmail.com").name("joao").username("joao").operation(Operation.REGISTER).build());
-	}
-	
 }

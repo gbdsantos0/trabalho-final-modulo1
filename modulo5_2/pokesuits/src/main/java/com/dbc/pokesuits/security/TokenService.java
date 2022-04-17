@@ -52,6 +52,7 @@ public class TokenService {
                 .setIssuer("pessoa-api")
                 .setSubject(usuario.getId().toString())
                 .claim(CHAVE_REGRAS, regras)
+                .claim("IS_ENABLE", usuario.isEnabled())
                 .setIssuedAt(now)
                 .setExpiration(exp)
                 .signWith(SignatureAlgorithm.HS256, secret)
@@ -70,8 +71,8 @@ public class TokenService {
                     .getBody();
 
             String user = body.getSubject();
-
-            if(user!=null){//todo medo
+            
+            if(user!=null){
                 List<String> regras = new ArrayList<>();
                 for(Object o: body.get(CHAVE_REGRAS, List.class))regras.add(o.toString());
                 List<SimpleGrantedAuthority> roles = regras.stream()

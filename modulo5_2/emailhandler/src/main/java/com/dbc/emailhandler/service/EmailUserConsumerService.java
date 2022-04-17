@@ -30,6 +30,8 @@ public class EmailUserConsumerService {
 	public void consume(@Payload String message, @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key)
 			throws JsonMappingException, JsonProcessingException {
 		EmailUserDTO emailUserDTO = this.mapper.readValue(message, EmailUserDTO.class);
+		log.info("#### received operation -> '{}' ",emailUserDTO.getOperation());
+		
 		this.validTokenService.sendVerificationEmail(emailUserDTO);
 	}
 }
