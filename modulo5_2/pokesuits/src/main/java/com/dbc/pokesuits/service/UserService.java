@@ -90,20 +90,25 @@ public class UserService {
 		
 		UserEntity userEntity = getById(id);
 
-		userEntity.setActive(false);
+		if(userEntity.isActive()){
+			userEntity.setActive(false);
 
-		userRepository.save(userEntity);
+			userRepository.save(userEntity);
 
-		EmailUserDTO emailUserDTO = EmailUserDTO.builder()
-				.username(userEntity.getUsername())
-				.name(userEntity.getNome())
-				.email(userEntity.getEmail())
-				.operation(Operation.DELETE)
-				.build();
+			EmailUserDTO emailUserDTO = EmailUserDTO.builder()
+					.username(userEntity.getUsername())
+					.name(userEntity.getNome())
+					.email(userEntity.getEmail())
+					.operation(Operation.DELETE)
+					.build();
 
-		registrationMailProducerService.sendDeleteMail(emailUserDTO);
+			registrationMailProducerService.sendDeleteMail(emailUserDTO);
 
-		log.info("Removido o User de ID: " + id);
+			log.info("Removido o User de ID: " + id);
+
+		}else{
+			throw new RegraDeNegocioException("Pedido de remoção já efetuado!");
+		}
 
 	}
 
