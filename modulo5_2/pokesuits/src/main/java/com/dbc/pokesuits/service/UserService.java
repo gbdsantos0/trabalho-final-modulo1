@@ -6,10 +6,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.dbc.pokesuits.dto.mailconnect.EmailUserDTO;
-import com.dbc.pokesuits.dto.mailconnect.Operation;
-import com.dbc.pokesuits.dto.mailconnect.ValidatedUserDTO;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.dbc.pokesuits.dto.mailconnect.EmailUserDTO;
+import com.dbc.pokesuits.dto.mailconnect.Operation;
 import com.dbc.pokesuits.dto.user.UserCreateDTO;
 import com.dbc.pokesuits.dto.user.UserDTO;
 import com.dbc.pokesuits.dto.user.UserEditDto;
