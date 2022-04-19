@@ -16,6 +16,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
+import com.dbc.emailhandler.dto.EmailUserDTO;
 import com.dbc.emailhandler.dto.Operation;
 import com.dbc.emailhandler.dto.UserDTO;
 
@@ -52,6 +53,22 @@ public class EmailService {
             e.printStackTrace();
         }
     }
+    public void sendEmail(EmailUserDTO emailUser) {
+    	MimeMessage mimeMessage = emailSender.createMimeMessage();
+        try {
+
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+
+            mimeMessageHelper.setFrom(from);
+            mimeMessageHelper.setTo(emailUser.getEmail());
+            mimeMessageHelper.setSubject("Mochila");
+            mimeMessageHelper.setText(geContentFromTemplate(emailUser), true);
+
+            emailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (MessagingException | IOException | TemplateException e) {
+            e.printStackTrace();
+        }
+    }
     
     public String geContentFromTemplate(UserDTO user, Operation operation) throws IOException, TemplateException {
         Map<String, Object> dados = new HashMap<>();
@@ -66,6 +83,17 @@ public class EmailService {
         }else if(operation.equals(Operation.DELETE)){
         	template = fmConfiguration.getTemplate("/maildelete-template.ftl");
         }
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
+        return html;
+    }
+    
+    public String geContentFromTemplate(EmailUserDTO emailUser) throws IOException, TemplateException {
+        Map<String, Object> dados = new HashMap<>();
+        
+        dados.put("name", emailUser.getName());
+        
+        fmConfiguration.setDirectoryForTemplateLoading(dirPath);
+        Template template = fmConfiguration.getTemplate("/mailcreate-template.ftl");
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;
     }

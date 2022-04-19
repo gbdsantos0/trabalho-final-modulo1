@@ -1,5 +1,6 @@
 package com.dbc.pokesuits.service;
 
+import com.dbc.pokesuits.dto.MochilaUserDto;
 import com.dbc.pokesuits.dto.mailconnect.EmailUserDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,7 +26,9 @@ public class RegistrationMailProducerService {
     private final ObjectMapper objectMapper;
 
     @Value("${kafka.email-user.topic}")
-    private String topic;
+    private String topicConfirm;
+    @Value("${kafka.email-mochila-user.topic}")
+    private String topicMochila;
 
 
     private void send(String message, String topic) {
@@ -52,11 +55,15 @@ public class RegistrationMailProducerService {
 
     public void sendConfirmationMail(EmailUserDTO emailUserDTO) throws JsonProcessingException {
         String message = objectMapper.writeValueAsString(emailUserDTO);
-        this.send(message, this.topic);
+        this.send(message, this.topicConfirm);
     }
 
     public void sendDeleteMail(EmailUserDTO emailUserDTO) throws JsonProcessingException {
         String message = objectMapper.writeValueAsString(emailUserDTO);
-        this.send(message, this.topic);
+        this.send(message, this.topicConfirm);
+    }
+    public void sendMochilaMail(MochilaUserDto dto) throws JsonProcessingException {
+        String message = objectMapper.writeValueAsString(dto);
+        this.send(message, this.topicMochila);
     }
 }

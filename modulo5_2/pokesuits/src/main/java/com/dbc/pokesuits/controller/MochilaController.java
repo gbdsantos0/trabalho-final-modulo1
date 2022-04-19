@@ -3,6 +3,7 @@ package com.dbc.pokesuits.controller;
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -48,7 +49,13 @@ public class MochilaController {
         Object userb = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return this.mochilaService.getMochilaLogado(Integer.parseInt((String) userb));
     }
-
+    
+    @Scheduled(fixedDelay = 10000)
+    public void enviarEmailMochila() throws Exception {
+        Object userb = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        this.mochilaService.sendEmailMochilaLogado(Integer.parseInt((String) userb));
+    }
+    
     @ApiOperation(value = "Adiciona uma mochila ao treinador do uisuario logado")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Cadastra uma mochila em um treinador e a devolve!"),

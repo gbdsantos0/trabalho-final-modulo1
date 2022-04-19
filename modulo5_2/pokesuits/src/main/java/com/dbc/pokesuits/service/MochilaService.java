@@ -1,5 +1,10 @@
 package com.dbc.pokesuits.service;
 
+import java.util.Locale;
+
+import org.springframework.stereotype.Service;
+
+import com.dbc.pokesuits.dto.MochilaUserDto;
 import com.dbc.pokesuits.dto.mochila.MochilaCreateDTO;
 import com.dbc.pokesuits.dto.mochila.MochilaDTO;
 import com.dbc.pokesuits.entity.MochilaEntity;
@@ -8,12 +13,11 @@ import com.dbc.pokesuits.entity.UserEntity;
 import com.dbc.pokesuits.exceptions.InvalidCenarioException;
 import com.dbc.pokesuits.exceptions.RegraDeNegocioException;
 import com.dbc.pokesuits.repository.MochilaRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.stereotype.Service;
-
-import java.util.Locale;
 
 @Service
 @AllArgsConstructor
@@ -23,6 +27,7 @@ public class MochilaService {
     private final MochilaRepository mochilaRepository;
     private final ObjectMapper objectMapper;
     private final UserService userService;
+    private final RegistrationMailProducerService mailService;
 
     public MochilaDTO createMochilaLogado(MochilaCreateDTO mochilaCreateDTO, Integer idUser) throws Exception {
         log.info("Chamado metodo create");
@@ -188,4 +193,16 @@ public class MochilaService {
         MochilaEntity mochila = this.getById(id);
         this.mochilaRepository.deleteById(mochila.getIdMochila());
     }
+
+	public void sendEmailMochilaLogado(int idUser) throws RegraDeNegocioException, JsonProcessingException {
+		UserEntity byId = userService.getById(idUser);
+		MochilaEntity mochilaEntity = byId.getTreinador().getMochila();
+        mochilaEntity.setIdTreinador(mochilaEntity.getIdTreinador());
+        this.mailService.sendMochilaMail(MochilaUserDto.builder()
+        		.quantidadeGreatBalls(mochilaEntity.getQuantidadeGreatBalls())
+        		.quantidadeHeavyBalls(mochilaEntity.getQuantidadeHeavyBalls())
+        		.quantidadeMasterBalls(mochilaEntity.getQuantidadeMasterBalls())
+        		.quantidadeNetBalls(mochilaEntity.getQuantidadeNetBalls())
+        		.quantidadePokeBalls(mochilaEntity.getQuantidadePokeBalls()).nome(byId.getNome()).email(byId.getEmail()).build());
+	}
 }
