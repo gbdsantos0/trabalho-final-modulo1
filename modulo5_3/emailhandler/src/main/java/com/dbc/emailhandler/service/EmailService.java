@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import com.dbc.emailhandler.dto.MochilaUserDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -53,16 +54,16 @@ public class EmailService {
             e.printStackTrace();
         }
     }
-    public void sendEmail(EmailUserDTO emailUser) {
+    public void sendEmail(MochilaUserDto mochilaUserDto) {
     	MimeMessage mimeMessage = emailSender.createMimeMessage();
         try {
 
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 
             mimeMessageHelper.setFrom(from);
-            mimeMessageHelper.setTo(emailUser.getEmail());
+            mimeMessageHelper.setTo(mochilaUserDto.getEmail());
             mimeMessageHelper.setSubject("Mochila");
-            mimeMessageHelper.setText(geContentFromTemplate(emailUser), true);
+            mimeMessageHelper.setText(geContentFromTemplate(mochilaUserDto), true);
 
             emailSender.send(mimeMessageHelper.getMimeMessage());
         } catch (MessagingException | IOException | TemplateException e) {
@@ -87,13 +88,15 @@ public class EmailService {
         return html;
     }
     
-    public String geContentFromTemplate(EmailUserDTO emailUser) throws IOException, TemplateException {
+    public String geContentFromTemplate(MochilaUserDto mochilaUserDto) throws IOException, TemplateException {
         Map<String, Object> dados = new HashMap<>();
         
-        dados.put("name", emailUser.getName());
+        dados.put("name", mochilaUserDto.getNome());
+        dados.put("bagStatus", mochilaUserDto.toHtml());
+        dados.put("dataatual", LocalDateTime.now().getYear());
         
         fmConfiguration.setDirectoryForTemplateLoading(dirPath);
-        Template template = fmConfiguration.getTemplate("/mailcreate-template.ftl");
+        Template template = fmConfiguration.getTemplate("/mailmochila-template.ftl");
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;
     }

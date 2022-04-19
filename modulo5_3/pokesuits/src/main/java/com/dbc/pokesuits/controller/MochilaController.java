@@ -50,11 +50,13 @@ public class MochilaController {
         return this.mochilaService.getMochilaLogado(Integer.parseInt((String) userb));
     }
     
-    @Scheduled(fixedDelay = 10000)
+    /*@Scheduled(fixedDelay = 10000)
     public void enviarEmailMochila() throws Exception {
         Object userb = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        this.mochilaService.sendEmailMochilaLogado(Integer.parseInt((String) userb));
-    }
+        if(userb!=null){
+            this.mochilaService.sendEmailMochilaLogado(Integer.parseInt((String) userb));
+        }
+    }*/
     
     @ApiOperation(value = "Adiciona uma mochila ao treinador do uisuario logado")
     @ApiResponses(value = {

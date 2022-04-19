@@ -41,11 +41,11 @@ public class TreinadorEntity{
     private Utils sexo;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "treinador", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "treinador", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private MochilaEntity mochila;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne()
     @JoinColumn(name = "id_user", referencedColumnName = "id_user")
     private UserEntity user;
 }

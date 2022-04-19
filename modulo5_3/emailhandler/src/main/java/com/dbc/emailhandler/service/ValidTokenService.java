@@ -6,13 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.dbc.emailhandler.dto.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.dbc.emailhandler.dto.EmailUserDTO;
-import com.dbc.emailhandler.dto.Operation;
-import com.dbc.emailhandler.dto.UserDTO;
-import com.dbc.emailhandler.dto.ValidatedUserDTO;
 import com.dbc.emailhandler.entity.ValidationTokenEntity;
 import com.dbc.emailhandler.exception.BusinessRuleException;
 import com.dbc.emailhandler.repository.ValidationTokenRepository;
@@ -51,8 +48,8 @@ public class ValidTokenService {
 		emailService.sendEmail(new UserDTO(emailUser.getName(), emailUser.getUsername(), save.getId()), emailUser.getOperation(), emailUser.getEmail());
 	}
 	
-	public void sendMochilaEmail(EmailUserDTO emailUser) {
-		emailService.sendEmail(emailUser);
+	public void sendMochilaEmail(MochilaUserDto mochilaUserDto) {
+		emailService.sendEmail(mochilaUserDto);
 	}
 
 	public void validateUser(String token) throws Exception {

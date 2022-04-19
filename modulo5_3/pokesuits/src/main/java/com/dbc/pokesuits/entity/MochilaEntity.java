@@ -45,11 +45,11 @@ public class MochilaEntity {
     private int quantidadePokeBalls;
 
     @JsonIgnore
-    @OneToMany(mappedBy="mochilaPokemon", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy="mochilaPokemon", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<PokemonEntity> pokemons;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "id_treinador", referencedColumnName = "id_treinador")
     private TreinadorEntity treinador;
 }

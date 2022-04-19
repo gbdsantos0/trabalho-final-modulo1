@@ -25,7 +25,8 @@ public class EmailUserConsumerService {
 	@KafkaListener(
 			topics = "${kafka.email-user.topic}",
 			groupId = "${kafka.client-id}",
-            containerFactory = "listenerContainerFactory"
+            containerFactory = "listenerContainerFactory",
+			clientIdPrefix = "email-user"
 	)
 	public void consume(@Payload String message, @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key)
 			throws JsonMappingException, JsonProcessingException {

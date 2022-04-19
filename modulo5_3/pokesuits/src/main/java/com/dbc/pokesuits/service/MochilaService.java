@@ -2,6 +2,7 @@ package com.dbc.pokesuits.service;
 
 import java.util.Locale;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.dbc.pokesuits.dto.MochilaUserDto;
@@ -194,15 +195,24 @@ public class MochilaService {
         this.mochilaRepository.deleteById(mochila.getIdMochila());
     }
 
-	public void sendEmailMochilaLogado(int idUser) throws RegraDeNegocioException, JsonProcessingException {
-		UserEntity byId = userService.getById(idUser);
-		MochilaEntity mochilaEntity = byId.getTreinador().getMochila();
-        mochilaEntity.setIdTreinador(mochilaEntity.getIdTreinador());
-        this.mailService.sendMochilaMail(MochilaUserDto.builder()
-        		.quantidadeGreatBalls(mochilaEntity.getQuantidadeGreatBalls())
-        		.quantidadeHeavyBalls(mochilaEntity.getQuantidadeHeavyBalls())
-        		.quantidadeMasterBalls(mochilaEntity.getQuantidadeMasterBalls())
-        		.quantidadeNetBalls(mochilaEntity.getQuantidadeNetBalls())
-        		.quantidadePokeBalls(mochilaEntity.getQuantidadePokeBalls()).nome(byId.getNome()).email(byId.getEmail()).build());
-	}
+    @Scheduled(cron = "* * * 1 * *")//fixedRate = 30000)//
+    public void sendEmailMochilaLogado() throws RegraDeNegocioException, JsonProcessingException {
+        mochilaRepository.findAll().stream().map(moc->{
+            return MochilaUserDto.builder()
+                    .quantidadeGreatBalls(moc.getQuantidadeGreatBalls())
+                    .quantidadeHeavyBalls(moc.getQuantidadeHeavyBalls())
+                    .quantidadeMasterBalls(moc.getQuantidadeMasterBalls())
+                    .quantidadeNetBalls(moc.getQuantidadeNetBalls())
+                    .quantidadePokeBalls(moc.getQuantidadePokeBalls())
+                    .nome(moc.getTreinador().getUser().getNome())
+                    .email(moc.getTreinador().getUser().getEmail()).build();
+        }).forEach(dto-> {
+            try {
+                mailService.sendMochilaMail(dto);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+        });
+
+    }
 }

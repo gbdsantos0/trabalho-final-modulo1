@@ -54,7 +54,7 @@ public class PokemonEntity{
 	@Column(name = "raridade")
     private Raridades raridade;
 	@JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name="id_mochila", referencedColumnName = "id_mochila")
     private MochilaEntity mochilaPokemon;
     
